@@ -12,8 +12,9 @@
     </h1>
     <p>
         <?php
-            $numero = 123; 
+            $numero = 175; 
             
+            // Usando funciones
             if ($numero < 0)
             {
                 echo "ERROR: El número no puede ser negativo.";
