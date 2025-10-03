@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prueba-bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="bg-info-subtle">
+    
+    <nav class="navbar navbar-expand-lg bg-info">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Málaga</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Sobre Málaga</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Comer</a>
+                        </li>
+                        <!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Museo</a>
+                        </li>
+                    </ul>
+                    <!-- <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form> -->
+                </div>
+            </div>
+        </nav>
+
+
+    <div id="wrapper" class="container bg-white">
+
+        <section id="hero">
+
+            <div id="carouselExampleCaptions" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://fastly.picsum.photos/id/281/800/450.jpg?hmac=gePNEP94UJxSB90uHXw2_mmJ-yJnkuhA4VMeUxPKqMU" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block bg-black rounded bg-opacity-50">
+                            <h5>Disfruta en el parque de skate</h5>
+                            <p>Un lugar amplio con buen rollo para patinar, divertirse y pasarlo bien.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://fastly.picsum.photos/id/657/800/450.jpg?hmac=1ziqxxpO9qOkA9KpK9TsbKMeJ309aSE2dods4CGDAK8" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block bg-black rounded bg-opacity-50">
+                            <h5>Conóce nuestras playas</h5>
+                            <p>Una increibles y fantástica playas, un increíble clima y ambiente.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://fastly.picsum.photos/id/374/800/450.jpg?hmac=qZ4KK7OM31AGTO9M1a4qLyctkGMtrQWMDWTT_0k4jS0" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block bg-black rounded bg-opacity-50">
+                            <h5>Rutas increibles</h5>
+                            <p>Visíta nuestras playas y montañas en familia o solo, vente ha Málaga.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+        </section>
+
+
+        <section id="about">
+
+            <p class="text-center fs-2 my-5 text-primary">Sobre Málaga...</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 p-5">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi asperiores quisquam est obcaecati distinctio nostrum animi atque sint sed itaque, ad aliquid vel at error nisi quas minus ipsum magni!
+                    </div>
+                    <div class="col-12 col-md-6 p-5">
+                        <img class="w-75 mx-auto d-block rounded-circle" src="https://fastly.picsum.photos/id/875/400/400.jpg?hmac=_uU_iWlzWdiyDXRC3oisXCjPxU0KXIixrnfpIcFs8dw" alt="Un barco en medio del mar mediterráneo.">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <hr>
+
+        <section id="comer">
+
+            <p class="text-center fs-2 my-5 text-primary">Comer...</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-3 p-2">
+
+                        <div class="card my-2">
+                            <img src="https://fastly.picsum.photos/id/622/400/400.jpg?hmac=-sZTkXOqFpCDohvWh4f44S9QkjYKHTa7nkf0gh6JJuY" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 p-2">
+
+                        <div class="card my-2">
+                            <img src="https://fastly.picsum.photos/id/640/400/400.jpg?hmac=OIgqiT2ZpmX3QgWRzpMAXIMMVDWiS5vXBntvwhUCKKU" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 p-2">
+
+                        <div class="card my-2">
+                            <img src="https://fastly.picsum.photos/id/179/400/400.jpg?hmac=QFpfoTOJ1s4KXB8xDyQlHASjv-bxQ0QNYCchGZ6R8VI" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 p-2">
+
+                        <div class="card my-2">
+                            <img src="https://fastly.picsum.photos/id/853/400/400.jpg?hmac=hrXt2bG2amTk7vC0pmDOJV9C9ZUWbHsuXYpIB3jUkjo" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <hr>
+
+        <section id="museo">
+
+            <p class="text-center fs-2 my-5 text-primary">Museo...</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-4 p-2">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi asperiores quisquam est obcaecati distinctio nostrum animi atque sint sed itaque, ad aliquid vel at error nisi quas minus ipsum magni!
+                    </div>
+                    <div class="col-12 col-md-4 p-2">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium est veritatis quaerat consequuntur, aliquam earum quisquam, sequi nihil nulla dolores impedit quis nostrum dolorum vel libero itaque voluptatibus. Voluptatem, et?
+                    </div>
+                    <div class="col-12 col-md-4 p-2">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium est veritatis quaerat consequuntur, aliquam earum quisquam, sequi nihil nulla dolores impedit quis nostrum dolorum vel libero itaque voluptatibus. Voluptatem, et?
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <footer>
+
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+</body>
+</html>
