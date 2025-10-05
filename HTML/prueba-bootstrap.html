@@ -17,10 +17,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Sobre Málaga</a>
+                            <a class="nav-link" aria-current="page" href="#hero">Sobre Málaga</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Comer</a>
+                            <a class="nav-link" href="#comer">Comer</a>
                         </li>
                         <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -37,7 +37,7 @@
                             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                         </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Museo</a>
+                            <a class="nav-link" aria-current="page" href="#museo">Museo</a>
                         </li>
                     </ul>
                     <!-- <form class="d-flex" role="search">
@@ -53,7 +53,7 @@
 
         <section id="hero">
 
-            <div id="carouselExampleCaptions" class="carousel slide">
+            <div id="carouselExampleCaptions" class="carousel slide pt-2">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -178,23 +178,41 @@
             <p class="text-center fs-2 my-5 text-primary">Museo...</p>
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-md-4 p-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi asperiores quisquam est obcaecati distinctio nostrum animi atque sint sed itaque, ad aliquid vel at error nisi quas minus ipsum magni!
+                    <div class="col-12 col-md-6 p-2">
+                        <div class="ratio ratio-16x9">
+                            <iframe 
+                                src="https://www.youtube.com/embed/n9XcK1jwF28" 
+                                title="Los museos de Málaga en 360º | Reportaje 360 VR | SUR.es" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                            ></iframe>
+                        </div>
                     </div>
-                    <div class="col-12 col-md-4 p-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium est veritatis quaerat consequuntur, aliquam earum quisquam, sequi nihil nulla dolores impedit quis nostrum dolorum vel libero itaque voluptatibus. Voluptatem, et?
-                    </div>
-                    <div class="col-12 col-md-4 p-2">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium est veritatis quaerat consequuntur, aliquam earum quisquam, sequi nihil nulla dolores impedit quis nostrum dolorum vel libero itaque voluptatibus. Voluptatem, et?
+                    <div class="col-12 col-md-6 p-2">
+                        <div class="ratio ratio-16x9">
+                            <iframe 
+                                src="https://www.youtube.com/embed/dPJetTfNuOs" 
+                                title="GUÍA COMPLETA ▶ Qué ver en la PROVINCIA de MÁLAGA (ESPAÑA) 🇪🇸 🌏Turismo y viajes a Andalucía" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                            ></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </section>
 
+        <hr>
 
-        <footer>
-
+        <footer id="footer">
+            <div class="container pb-1 mt-5">
+                <div class="bg-info rounded bg-opacity-50 m-2">
+                     <p class="text-center p-2">Todos los derechos reservado © <br> by: Francisco Aybar</p>
+                </div>
+            </div>
         </footer>
     </div>
 
