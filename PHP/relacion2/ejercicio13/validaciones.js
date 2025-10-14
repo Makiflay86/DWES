@@ -5,6 +5,45 @@
     @autor: Francisco Aybar Romero
 */
 
+
+
+document.getElementById('form1').addEventListener('submit', function(event) 
+{
+    event.preventDefault();
+    validarFormularioNota();
+});
+/* En vez de poner return onsubmit() en el html lo llamamos aquí */
+
+
+
+document.getElementById('nota1').addEventListener('change', function()
+{
+    limpiarError('nota1');
+});
+/* En vez de poner return onchange() en el html lo llamamos aquí */
+
+document.getElementById('nota2').addEventListener('change', function()
+{
+    limpiarError('nota2');
+});
+
+document.getElementById('falta').addEventListener('change', function()
+{
+    limpiarError('falta');
+});
+
+document.getElementById('nombre').addEventListener('change', function()
+{
+    limpiarError('nombre');
+});
+
+document.getElementById('correo').addEventListener('change', function()
+{
+    limpiarError('correo');
+});
+
+
+
 function validarFormularioNota() 
 {
     var nota1 = parseFloat(document.getElementById('nota1').value);
@@ -24,29 +63,42 @@ function validarFormularioNota()
 
     if (!Number.isInteger(nota1) || nota1 < 1 || nota1 > 10)
     {
+        marcarError('nota1'); /* Le paso el ID de cada campo a una función */
         correcto = false;
-        alert("La nota 1 debe ser entera entre 1 y 10")
     }
     if (!Number.isInteger(nota2) || nota2 < 1 || nota2 > 10)
     {
+        marcarError('nota2');
         correcto = false;
-        alert("La nota 2 debe ser entera entre 1 y 10")
     }
     if (!Number.isInteger(falta) || falta < 0)
     {
+        marcarError('falta');
         correcto = false;
-        alert("La falta debe ser entera mayor que 0")
     }
     if (nombre.trim() == "")
     {
+        marcarError('nombre');
         correcto = false;
-        alert("El nombre es obligatorio");
     }
 
-    return correcto
+    if (correcto) document.getElementById('form1').submit();
     /* Si han ido bien todas la comprobaciones, se devuelve al punto de llamada TRUE sino, 
        se devuelve FALSE */
-    
+}
 
 
+
+function marcarError(identificador)
+{
+    document.getElementById(identificador + 'Help').style.visibility="visible";
+    document.getElementById(identificador).style.borderColor="#ff0000";
+}
+
+
+
+function limpiarError(identificador)
+{
+    document.getElementById(identificador + 'Help').style.visibility="hidden";
+    document.getElementById(identificador).style.borderColor="#dee2e6";
 }
