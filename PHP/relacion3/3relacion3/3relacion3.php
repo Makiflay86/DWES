@@ -16,12 +16,12 @@
                 
                 <div class="mb-3">
                     <label class="form-label" for="numero1">Introduce número 1: </label>
-                    <input class="form-control" type="number" step="1" min="0" placeholder="0" name="numero1" id="numero1">
+                    <input class="form-control" type="number" step="1" min="1" placeholder="0" name="numero1" id="numero1">
                 </div>
                 
                 <div class="mb-3">
                     <label class="form-label" for="numero2">Introduce número 2: </label>
-                    <input class="form-control" type="number" step="1" min="0" placeholder="0" name="numero2" id="numero2">
+                    <input class="form-control" type="number" step="1" min="1" placeholder="0" name="numero2" id="numero2">
                 </div>
                 
                 <input class="form-control" type="submit" value="Enviar">
@@ -48,37 +48,42 @@
                     }
                 }
 
-                if (isset($_GET["numero1"]))
+
+                function divisionEuclidea($dividendo, $divisor)
                 {
-                    $numero = $_GET["numero1"];
-                    $numero2 = $_GET["numero2"];
-                    
-                    echo `<p class="col-2">`;
+                    if ($dividendo < $divisor) 
+                        {
+                        return [0, $dividendo]; // cociente, resto
 
-                    echo "<table class='text-center'>";
-                    while ($numero != $numero2)
+                    } else 
                     {
-                        echo "<tr>";
-                        echo "<td>";
-
-                        echo "$numero ";
-                        echo "$numero2";
-                        
-                        echo "<td>";
-                        echo "</tr>";
-                        if ($numero > $numero2)
-                        {
-                            $numero = MCD($numero, $numero2);
-
-                        } else 
-                        {
-                            $numero2 = MCD($numero, $numero2);
-                        }
+                        list($cociente, $resto) = divisionEuclidea($dividendo - $divisor, $divisor);
+                        return [$cociente + 1, $resto];
                     }
-                    echo "</table>";
-
-                    echo `</p>`;
                 }
+                
+                
+                if (isset($_GET["numero1"]) && isset($_GET["numero2"])) 
+                {
+                    $n1 = intval($_GET["numero1"]);
+                    $n2 = intval($_GET["numero2"]);
+
+                    echo "<p class='col-8'>";
+                    echo "<h4 class='text-success'>Resultados:</h4>";
+
+                    $mcd = MCD($n1, $n2);
+                    echo "<p>El MCD de $n1 y $n2 es: <strong>$mcd</strong></p>";
+
+                    list($cociente, $resto) = divisionEuclidea($n1, $n2);
+                    echo "<p>División euclídea de $n1 ÷ $n2:</p>";
+                    echo "<ul>";
+                    echo "<li>Cociente: $cociente</li>";
+                    echo "<li>Resto: $resto</li>";
+                    echo "</ul>";
+                    echo "</p>";
+                }
+
+
             ?>
         </div>
 
