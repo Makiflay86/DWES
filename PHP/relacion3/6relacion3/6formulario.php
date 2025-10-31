@@ -20,7 +20,7 @@
             
             <div class="mb-3">
                 <label class="form-label" for="tiradas">Introduce el número de tiradas: <span class="text-danger"> *</span></label>
-                <input class="form-control" type="text" placeholder="5" name="tiradas" id="tiradas">
+                <input class="form-control" type="text" placeholder="1" name="tiradas" id="tiradas">
                 <div id="tiradasHelp" class="form-text text-danger">Escribe un número de tiradas.</div>
             </div>
 
