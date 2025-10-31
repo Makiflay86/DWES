@@ -18,29 +18,38 @@
                 $correo = $_GET['correo'];
                 $falta = intval($_GET['falta']);
 
-                $notaFinal = (($nota1 + $nota2) / 2) - (0.25 * $falta);
-
-                switch ($notaFinal)
+                if ($falta >= 40)
                 {
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                        $color = "text-bg-danger";
-                        break;
-                    case 5:
-                    case 6:
-                        $color = "text-bg-warning";
-                        break;
-                    case 7:
-                    case 8:
-                        $color = "text-bg-success-emphasis";
-                        break;
-                    case 9:
-                    case 10:
-                        $color = "text-bg-success";
-                        break;
+                    $notaFinal = 0;
+                    $color = "text-bg-danger";
+
+                } else 
+                {
+                    $notaFinal = (($nota1 + $nota2) / 2) - (0.25 * $falta);
+    
+                    switch ($notaFinal)
+                    {
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            $color = "text-bg-danger";
+                            break;
+                        case 5:
+                        case 6:
+                            $color = "text-bg-warning";
+                            break;
+                        case 7:
+                        case 8:
+                            $color = "text-bg-success-emphasis";
+                            break;
+                        case 9:
+                        case 10:
+                            $color = "text-bg-success";
+                            break;
+                    }
                 }
+
 
                 echo "La nota final de '", $nombre, "' es un: ", $notaFinal;
             ?>

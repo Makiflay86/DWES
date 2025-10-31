@@ -42,9 +42,9 @@ document.getElementById('correo').addEventListener('change', function()
     limpiarError('correo');
 });
 
-document.getElementById('test').addEventListener('change', function()
+document.getElementById('docIdDni').addEventListener('change', function()
 {
-    limpiarError('test');
+    limpiarError('docIdDni');
 });
 
 
@@ -63,7 +63,15 @@ function validarFormularioNota()
     var correo = document.getElementById('correo').value;
     /* Debe tener el formato de un email(correo) */
 
-    var test = document.getElementById('test').value;
+    var docIdDni = document.getElementById('docIdDni').value;
+    var docIdNie = document.getElementById('docIdNie').value;
+    var docIdTie = document.getElementById('docIdTie').value;
+
+    var dni = document.getElementById('dni').checked;
+    var nie = document.getElementById('nie').checked;
+    /* var tie = document.getElementById('tie').checked; No hace falta*/
+
+
 
     var correcto = true; /* Hipótesis inicial */
 
@@ -87,11 +95,25 @@ function validarFormularioNota()
         marcarError('nombre');
         correcto = false;
     }
-    if (test.trim() == "")
+    if (docIdDni.trim() == "" || docIdNie.trim() == "" || docIdTie.trim() == "")
     {
-        marcarError('test');
-        correcto = false;
+        if (dni)
+        {
+            marcarError('docId');
+            correcto = false;
+
+        } else  if(nie)
+        {
+            marcarError('docId');
+            correcto = false;
+
+        } else 
+        {
+            marcarError('docId');
+            correcto = false;
+        }
     }
+    
 
     if (correcto) document.getElementById('form1').submit();
     /* Si han ido bien todas la comprobaciones, se devuelve al punto de llamada TRUE sino, 

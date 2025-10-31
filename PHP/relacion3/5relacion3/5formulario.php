@@ -30,10 +30,10 @@
                 <div id="correoHelp" class="form-text text-danger">El correo debe llevar un @, un prefijo y una extensión.</div>
             </div>
 
-            <!-- <div class="mb-3">
-                <label class="form-label" for="docId">Introduce el documento de identificación(dni, nie o tie): </label>
+            <div class="mb-3">
+                <label class="form-label" for="docIdDni">Introduce el documento de identificación(dni, nie o tie): </label>
 
-                <br><input type="radio" name="opcion" id="dni">
+                <br><input type="radio" name="opcion" id="dni" checked>
                 <label for="dni">DNI</label><br>
 
                 <input type="radio" name="opcion" id="nie">
@@ -41,16 +41,11 @@
                 
                 <input type="radio" name="opcion" id="tie">
                 <label for="tie">TIE</label>
-                <div id="docIdOpcHelp" class="form-text text-danger">Eligé un opción.</div>
 
-                <input class="form-control" type="text" placeholder="DNI: 01234567L" name="docId" id="docId">
+                <input class="form-control" type="text" placeholder="DNI: 01234567L" name="docIdDni" id="docIdDni">
+                <input hidden class="form-control" type="text" placeholder="NIE: X1234567X" name="docIdNie" id="docIdNie">
+                <input hidden class="form-control" type="text" placeholder="TIE: E00235566" name="docIdTie" id="docIdTie">
                 <div id="docIdHelp" class="form-text text-danger">El documento de identificación.</div>
-            </div> -->
-
-            <div class="mb-3">
-                <label class="form-label" for="test">TEST: <span class="text-danger"> *</span></label>
-                <input class="form-control" type="text" placeholder="testing" name="test" id="test">
-                <div id="testHelp" class="form-text text-danger">This is a test.</div>
             </div>
             
             <div class="mb-3">
