@@ -12,7 +12,7 @@
             visibility: hidden;
         }
     </style>
-</head> 
+</head>
 <body>
     <section class="container border border-warning rounded shadow mt-5 p-5 col-4">
         <form id="form1" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
@@ -61,17 +61,34 @@
                     echo "<br><br>";
 
                     echo "<h4>Los dos arrays juntos</h4>";
-                    $array3 = array_merge($array1, $array2);
+                    $array3 = swap($array1, $array2);
 
                     for ($i = 0; $i < count($array3); $i++)
                     {
                         echo "$array3[$i] ";
                     }
 
+                    echo "<br><br>";
 
-                    
-                    
+                    echo "<h4>Array combinado al revés</h4>";
+                    $array_al_reves = reverseArray($array3);
 
+                    for ($i = 0; $i < count($array_al_reves); $i++)
+                    {
+                        echo "$array_al_reves[$i] ";
+                    }
+                }
+
+                /* Función para junta las dos arrays */
+                function swap($array1, $array2)
+                {
+                    return array_merge($array1, $array2);
+                }
+
+                /* Pasar un array y te devuelve el array pero ordenado al reves */
+                function reverseArray($array)
+                {
+                    return array_reverse($array);
                 }
             ?>
         </div>
