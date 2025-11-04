@@ -35,15 +35,43 @@
 
         <div class="text-center my-5">
             <?php
-                if (isset($_POST["texto"]))
+                if (isset($_POST["texto"]) || isset($_POST["texto2"]))
                 {
-                    $texto = $_POST["texto"];
-                    echo "<h4>Texto original</h4>";
-                    echo "<p>$texto</p>";
+                    $texto1 = $_POST["texto"];
+                    $texto2 = $_POST["texto2"];
+
+                    $array1 = explode(" ", $texto1);
+                    $array2 = explode(" ", $texto2);
+
                     
-                    $texto_al_reves = strrev($texto);
-                    echo "<h4>Texto al revés</h4>";
-                    echo "<p>$texto_al_reves</p>";
+                    echo "<h4>Texto 1 - Array1</h4>";
+                    for ($i = 0; $i < count($array1); $i++)
+                    {
+                        echo "$array1[$i] ";
+                    }
+
+                    echo "<br><br>";
+
+                    echo "<h4>Texto 2 - Array2</h4>";
+                    for ($i = 0; $i < count($array2); $i++)
+                    {
+                        echo "$array2[$i] ";
+                    }
+
+                    echo "<br><br>";
+
+                    echo "<h4>Los dos arrays juntos</h4>";
+                    $array3 = array_merge($array1, $array2);
+
+                    for ($i = 0; $i < count($array3); $i++)
+                    {
+                        echo "$array3[$i] ";
+                    }
+
+
+                    
+                    
+
                 }
             ?>
         </div>
