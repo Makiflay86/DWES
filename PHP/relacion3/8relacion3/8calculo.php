@@ -14,83 +14,36 @@
     </style>
 </head>
 <body>
-    <section class="container border border-warning rounded shadow mt-5 p-5 col-4 w-75">
-        <?php
-            $tirada = $_GET["tiradas"];
-
-            $arrayNumSinTrucar = [];
-            $arrayNumTrucado = [];
-
-
-            // Bucle para tirar el dado tantas veces como se había indicado
-            for ($i = 0; $i < $tirada; $i++)
-            {
-                $arrayNumSinTrucar[$i] = cara();
-            }
-            for ($i = 0; $i < $tirada; $i++)
-            {
-                $arrayNumTrucado[$i] = caraTrucada();
-            }
-
-            
-            $countSinTrucar = array_count_values($arrayNumSinTrucar);
-            $countTrucado = array_count_values($arrayNumTrucado);
-
-            ksort($countSinTrucar);
-            ksort($countTrucado);
-            
-            
+    <section class="container border border-warning rounded shadow mt-5 p-5 col-4">
+        <div class="text-center">
+            <?php
+                $texto = $_POST["texto"];
+                $convertir = $_POST["convertir"];
 
 
-            // Número random entre 1 y 6
-            function cara()
-            {
-                return (rand(1,6));
-            }
-            function caraTrucada()
-            {
-                $num = rand(1,9);
+                echo "<h4>Texto original</h4>";
+                echo "<p>$texto</p>";
 
-                if ($num >= 6)
+
+                echo "<h4>Texto convertido</h4>";
+                if ($convertir == "mayusculas") 
                 {
-                    $num = 6;
-                }
+                    echo "<p>", strtoupper($texto), "</p>";
 
-                return $num;
-            }
+                } else if ($convertir == "minusculas") 
+                {
+                    echo "<p>", strtolower($texto), "</p>";
 
-
-
-            // Mostrar los datos
-            // Dados sin trucar
-            echo "<h4>Tirada de los dados sin trucar</h4>";
-
-            foreach ($arrayNumSinTrucar as $n)
-            {
-                echo "$n ";
-            }
-            echo "<br><br><h4>Conteo de los dados sin trucar</h4>";
-            foreach ($countSinTrucar as $l => $t)
-            {
-                echo "La cara $l ha sacado $t veces.<br>";
-            }
-
-
-            // Dados trucados
-            echo "<br><br><h4>Tirada de los dados trucados</h4>";
-            foreach ($arrayNumTrucado as $n2)
-            {
-                echo "$n2 ";
-            }
-            echo "<br><br><h4>Conteo de los dados trucados</h4>";
-            foreach ($countTrucado as $l2 => $t2)
-            {
-                echo "La cara $l2 ha sacado $t2 veces.<br>";
-            }
-        ?>
+                } else 
+                {
+                    echo "<p>", strtoupper($texto), "</p>";
+                    echo "<p>", strtolower($texto), "</p>";
+                } 
+            ?>
+        </div>
 
         <div class="mt-5">
-            <a href="../6relacion3/6formulario.php"><input type="button" class="btn btn-primary" value="<- Volver"></a>
+            <a href="../8relacion3/8formulario.php"><input type="button" class="btn btn-primary" value="<- Volver"></a>
         </div>
 
     </section>

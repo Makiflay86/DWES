@@ -1,28 +1,28 @@
 document.getElementById('form1').addEventListener('submit', function(event) 
 {
     event.preventDefault();
-    validarFormularioNota();
+    validarFormulario();
 });
 /* En vez de poner return onsubmit() en el html lo llamamos aquí */
 
 
 
-document.getElementById('tiradas').addEventListener('change', function()
+document.getElementById('texto').addEventListener('change', function()
 {
-    limpiarError('tiradas');
+    limpiarError('texto');
 });
 
 
 
-function validarFormularioNota() 
+function validarFormulario() 
 {
-    var tiradas = parseInt(document.getElementById('tiradas').value);
+    var texto = document.getElementById('texto');
     
     var correcto = true; 
 
-    if (!Number.isInteger(tiradas))
+    if (texto.value.length == 0)
     {
-        marcarError('tiradas');
+        marcarError('texto');
         correcto = false;
     }
     

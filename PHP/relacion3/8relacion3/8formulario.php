@@ -15,15 +15,38 @@
 </head>
 <body>
     <section class="container border border-warning rounded shadow mt-5 p-5 col-4">
-        <form id="form1" action="6calculo.php">
-            <h3 class="text-center  text-info-emphasis">Tirada de dados</h3>
+        <form id="form1" action="./8calculo.php" method="post">
+            <h3 class="text-center  text-info-emphasis">Convertidor de texto</h3>
             
             <div class="mb-3">
-                <label class="form-label" for="tiradas">Introduce el número de tiradas: <span class="text-danger"> *</span></label>
-                <input class="form-control" type="text" placeholder="1" name="tiradas" id="tiradas">
-                <div id="tiradasHelp" class="form-text text-danger">Escribe un número de tiradas.</div>
+                <label class="form-label" for="texto">Introduce el texto: <span class="text-danger"> *</span></label>
+                <input class="form-control" type="text" placeholder="Muy buenas tardes!" name="texto" id="texto">
+                <div id="textoHelp" class="form-text text-danger">Escribe un texto válido.</div>
             </div>
 
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="convertir" id="mayusculas" value="mayusculas">
+                    <label class="form-check-label" for="mayusculas">
+                        Mayúsculas
+                    </label>
+                </div>
+    
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="convertir" id="minusculas" value="minusculas">
+                    <label class="form-check-label" for="minusculas">
+                        Minúsculas
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="convertir" id="ambas" value="ambas" checked>
+                    <label class="form-check-label" for="ambas">
+                        Ambas
+                    </label>
+                </div>
+            </div>
+            
             <input class="form-control btn btn-primary" type="submit" value="Enviar">
         </form>
     </section>
