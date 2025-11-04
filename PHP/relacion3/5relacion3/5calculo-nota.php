@@ -49,7 +49,7 @@
                             break;
                     }
                 }
-
+ 
 
                 echo "La nota final de '", $nombre, "' es un: ", $notaFinal;
             ?>

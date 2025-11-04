@@ -44,8 +44,52 @@ document.getElementById('correo').addEventListener('change', function()
 
 document.getElementById('docIdDni').addEventListener('change', function()
 {
-    limpiarError('docIdDni');
+    limpiarErrorRadio('docIdDni', 'docIdHelp');
 });
+
+document.getElementById('docIdNie').addEventListener('change', function()
+{
+    limpiarErrorRadio('docIdNie', 'docIdHelp');
+});
+
+document.getElementById('docIdTie').addEventListener('change', function()
+{
+    limpiarErrorRadio('docIdTie', 'docIdHelp');
+});
+
+
+
+const radioDni = document.getElementById('dni');
+const radioNie = document.getElementById('nie');
+const radioTie = document.getElementById('tie');
+const inputDni = document.getElementById('docIdDni');
+const inputNie = document.getElementById('docIdNie');
+const inputTie = document.getElementById('docIdTie');
+
+function actualizarVisibilidadDocumento() 
+{
+    inputDni.hidden = true;
+    inputNie.hidden = true;
+    inputTie.hidden = true;
+
+    if (radioDni.checked) 
+    {
+        inputDni.hidden = false;
+
+    } else if (radioNie.checked) 
+    {
+        inputNie.hidden = false;
+
+    } else if (radioTie.checked) 
+    {
+        inputTie.hidden = false;
+    }
+}
+
+radioDni.addEventListener('change', actualizarVisibilidadDocumento);
+radioNie.addEventListener('change', actualizarVisibilidadDocumento);
+radioTie.addEventListener('change', actualizarVisibilidadDocumento);
+
 
 
 function validarFormularioNota() 
@@ -66,7 +110,6 @@ function validarFormularioNota()
     var docIdDni = document.getElementById('docIdDni').value;
     var docIdNie = document.getElementById('docIdNie').value;
     var docIdTie = document.getElementById('docIdTie').value;
-
     var dni = document.getElementById('dni').checked;
     var nie = document.getElementById('nie').checked;
     /* var tie = document.getElementById('tie').checked; No hace falta*/
@@ -74,6 +117,8 @@ function validarFormularioNota()
 
 
     var correcto = true; /* Hipótesis inicial */
+
+
 
     if (!Number.isInteger(nota1) || nota1 < 1 || nota1 > 10)
     {
@@ -95,26 +140,83 @@ function validarFormularioNota()
         marcarError('nombre');
         correcto = false;
     }
-    if (docIdDni.trim() == "" || docIdNie.trim() == "" || docIdTie.trim() == "")
+    if (correo.trim() == "" || !/\S+@\S+\.[a-zA-Z]+/.test(correo))
     {
-        if (dni)
-        {
-            marcarError('docId');
-            correcto = false;
+        marcarError('correo');
+        correcto = false;
+    }
 
-        } else  if(nie)
+    
+    /* Validación del correo, dependiendo de cual eliga */
+    if (dni) 
+    {
+        const dniRegex = /^\d{8}[a-zA-Z]$/;
+        if (!dniRegex.test(docIdDni)) 
         {
-            marcarError('docId');
+            marcarErrorRadio('docIdDni', 'docIdHelp');
             correcto = false;
 
         } else 
         {
-            marcarError('docId');
-            correcto = false;
+            const numero = docIdDni.substr(0, 8);
+            const letra = docIdDni.substr(8, 1).toUpperCase();
+            const letrasValidas = "TRWAGMYFPDXBNJZSQVHLCKE";
+            const letraCalculada = letrasValidas.charAt(numero % 23);
+
+            if (letra !== letraCalculada) 
+            {
+                marcarErrorRadio('docIdDni', 'docIdHelp');
+                correcto = false;
+            }
         }
+    } else if (nie) 
+    {
+        const nieRegex = /^[XYZxyz]\d{7}[a-zA-Z]$/;
+        if (!nieRegex.test(docIdNie)) 
+        {
+            marcarErrorRadio('docIdNie', 'docIdHelp');
+            correcto = false;
+        } else 
+        {
+            const nieUpper = docIdNie.toUpperCase();
+            let primeraLetra = nieUpper.charAt(0);
+            let numeroStr = nieUpper.substr(1, 7);
+
+            if (primeraLetra === 'X') 
+            {
+                numeroStr = '0' + numeroStr;
+
+            } else if (primeraLetra === 'Y') 
+            {
+                numeroStr = '1' + numeroStr;
+
+            } else // Z
+            { 
+                numeroStr = '2' + numeroStr;
+            }
+            
+            const letra = nieUpper.charAt(8);
+            const letrasValidas = "TRWAGMYFPDXBNJZSQVHLCKE";
+            const letraCalculada = letrasValidas.charAt(parseInt(numeroStr) % 23);
+
+            if (letra !== letraCalculada) 
+            {
+                marcarErrorRadio('docIdNie', 'docIdHelp');
+                correcto = false;
+            }
+        }
+    } else // TIE
+    { 
+        if (docIdTie.trim() == "") 
+        {
+            marcarErrorRadio('docIdTie', 'docIdHelp');
+            correcto = false;
+        } 
     }
     
+    
 
+    
     if (correcto) document.getElementById('form1').submit();
     /* Si han ido bien todas la comprobaciones, se devuelve al punto de llamada TRUE sino, 
        se devuelve FALSE */
@@ -127,6 +229,11 @@ function marcarError(identificador)
     document.getElementById(identificador + 'Help').style.visibility="visible";
     document.getElementById(identificador).style.borderColor="#ff0000";
 }
+function marcarErrorRadio(idInput, idHelp)
+{
+    document.getElementById(idHelp).style.visibility="visible";
+    document.getElementById(idInput).style.borderColor="#ff0000";
+}
 
 
 
@@ -134,4 +241,9 @@ function limpiarError(identificador)
 {
     document.getElementById(identificador + 'Help').style.visibility="hidden";
     document.getElementById(identificador).style.borderColor="#dee2e6";
+}
+function limpiarErrorRadio(idInput, idHelp)
+{
+    document.getElementById(idHelp).style.visibility="hidden";
+    document.getElementById(idInput).style.borderColor="#dee2e6";
 }

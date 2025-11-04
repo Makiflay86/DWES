@@ -31,7 +31,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="docIdDni">Introduce el documento de identificación(dni, nie o tie): </label>
+                <label class="form-label" for="docId">Introduce el documento de identificación(dni, nie o tie): </label>
 
                 <br><input type="radio" name="opcion" id="dni" checked>
                 <label for="dni">DNI</label><br>
@@ -42,10 +42,10 @@
                 <input type="radio" name="opcion" id="tie">
                 <label for="tie">TIE</label>
 
-                <input class="form-control" type="text" placeholder="DNI: 01234567L" name="docIdDni" id="docIdDni">
-                <input hidden class="form-control" type="text" placeholder="NIE: X1234567X" name="docIdNie" id="docIdNie">
+                <input class="form-control mt-2" type="text" placeholder="DNI: 01234567L" name="docIdDni" id="docIdDni">
+                <input hidden class="form-control" type="text" placeholder="NIE: Y1234567X" name="docIdNie" id="docIdNie">
                 <input hidden class="form-control" type="text" placeholder="TIE: E00235566" name="docIdTie" id="docIdTie">
-                <div id="docIdHelp" class="form-text text-danger">El documento de identificación.</div>
+                <div id="docIdHelp" class="form-text text-danger">El formato del documento de identificación no es válido.</div>
             </div>
             
             <div class="mb-3">
