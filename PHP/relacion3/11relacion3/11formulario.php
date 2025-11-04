@@ -12,7 +12,7 @@
             visibility: hidden;
         }
     </style>
-</head>
+</head> 
 <body>
     <section class="container border border-warning rounded shadow mt-5 p-5 col-4">
         <form id="form1" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
