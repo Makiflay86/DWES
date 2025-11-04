@@ -15,8 +15,8 @@
 </head>
 <body>
     <section class="container border border-warning rounded shadow mt-5 p-5 col-4">
-        <form id="form1" action="./9calculo.php" method="post">
-            <h3 class="text-center  text-info-emphasis">Convertidor de texto</h3>
+        <form id="form1" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+            <h3 class="text-center  text-info-emphasis">La palabra más larga</h3>
             
             <div class="mb-3">
                 <label class="form-label" for="texto">Introduce el texto: <span class="text-danger"> *</span></label>
@@ -26,6 +26,31 @@
             
             <input class="form-control btn btn-primary" type="submit" value="Enviar">
         </form>
+
+        <div class="text-center my-5">
+            <?php
+                if (isset($_POST["texto"]))
+                {
+                    $texto = $_POST["texto"];
+                    echo "<h4>Texto original</h4>";
+                    echo "<p>$texto</p>";
+                    
+                    $palabras = preg_split('/\s+/', $texto);
+                    $palabraMasLarga = "";
+
+                    foreach ($palabras as $palabra) 
+                    {
+                        if (strlen($palabra) > strlen($palabraMasLarga)) 
+                        {
+                            $palabraMasLarga = $palabra;
+                        }
+                    }
+
+                    echo "<h4>La palabra más larga</h4>";
+                    echo "<p>", $palabraMasLarga, "</p>";
+                }
+            ?>
+        </div>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
