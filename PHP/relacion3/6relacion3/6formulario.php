@@ -24,7 +24,7 @@
                 <div id="tiradasHelp" class="form-text text-danger">Escribe un número de tiradas.</div>
             </div>
 
-            <input class="form-control" type="submit" value="Enviar">
+            <input class="form-control btn btn-primary" type="submit" value="Enviar">
         </form>
     </section>
 

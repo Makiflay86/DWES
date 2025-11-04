@@ -14,15 +14,12 @@
     </style>
 </head>
 <body>
-    <section class="container border border-warning rounded shadow mt-5 p-5 col-4">
+    <section class="container border border-warning rounded shadow mt-5 p-5 col-4 w-75">
         <?php
             $tirada = $_GET["tiradas"];
 
             $arrayNumSinTrucar = [];
-            $countSinTrucar = array_count_values($arrayNumSinTrucar);
-
             $arrayNumTrucado = [];
-            $countTrucado = array_count_values($arrayNumTrucado);
 
 
             // Bucle para tirar el dado tantas veces como se había indicado
@@ -34,6 +31,14 @@
             {
                 $arrayNumTrucado[$i] = caraTrucada();
             }
+
+            
+            $countSinTrucar = array_count_values($arrayNumSinTrucar);
+            $countTrucado = array_count_values($arrayNumTrucado);
+
+            ksort($countSinTrucar);
+            ksort($countTrucado);
+            
             
 
 
@@ -57,6 +62,7 @@
 
 
             // Mostrar los datos
+            // Dados sin trucar
             echo "<h4>Tirada de los dados sin trucar</h4>";
 
             foreach ($arrayNumSinTrucar as $n)
@@ -66,11 +72,11 @@
             echo "<br><br><h4>Conteo de los dados sin trucar</h4>";
             foreach ($countSinTrucar as $l => $t)
             {
-                echo `La cara $l ha sacado $t veces.<br>`;
+                echo "La cara $l ha sacado $t veces.<br>";
             }
 
 
-
+            // Dados trucados
             echo "<br><br><h4>Tirada de los dados trucados</h4>";
             foreach ($arrayNumTrucado as $n2)
             {
@@ -79,7 +85,7 @@
             echo "<br><br><h4>Conteo de los dados trucados</h4>";
             foreach ($countTrucado as $l2 => $t2)
             {
-                echo `La cara $l2 ha sacado $t2 veces.<br>`;
+                echo "La cara $l2 ha sacado $t2 veces.<br>";
             }
         ?>
 

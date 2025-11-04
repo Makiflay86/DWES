@@ -1,12 +1,3 @@
-/* 
-    Validaciones para el formulario del ejercicio 5 de la relación 3
-    
-    Versión 2
-    @autor: Francisco Aybar Romero
-*/
-
-
-
 document.getElementById('form1').addEventListener('submit', function(event) 
 {
     event.preventDefault();
