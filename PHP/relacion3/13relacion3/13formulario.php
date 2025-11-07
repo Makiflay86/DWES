@@ -31,17 +31,42 @@
             <?php
                 if (isset($_POST["texto"]))
                 {
-                    $texto1 = $_POST["texto"];
+                    $texto = $_POST["texto"];
 
-                    $array1 = explode(",", $texto1);
-                    
-                    echo "<h4>Texto - Array1</h4>";
-                    for ($i = 0; $i < count($array1); $i++)
+                    /* Mostrar el texto invertido */
+                    $texto_invertido = strrev($texto);
+                    $palindroma = "No";
+                    if ($texto_invertido == $texto)
                     {
-                        echo "$array1[$i], ";
+                        $palindroma = "Si";
                     }
+                    echo    '<div class="alert alert-primary my-3" role="alert">',
+                                "<h4>Texto Original</h4>", $texto,
+                                "<br><br><h4>Texto Invertido</h4>", $texto_invertido,
+                                "<br><br>¿Es palíndroma? -> ", $palindroma,
+                            '</div>';
 
-                    echo "<br><br>";
+
+                    /* Mostrar el texto invertido pero solo las palabras */
+                    $array_texto = explode(" ", $texto);
+                    $palabra_texto_invertido = "";
+                    foreach ($array_texto as $palabra)
+                    {
+                        $palabra = strrev($palabra);
+                        $palabra_texto_invertido .= "$palabra ";
+                    }
+                    
+                    echo    '<div class="alert alert-secondary my-3" role="alert">',
+                                "<h4>Texto Original</h4>", $texto,
+                                "<br><br><h4>Palabra del Texto Invertido</h4>", $palabra_texto_invertido,
+                            '</div>';
+
+
+                    /* Mostrar el texto todo en mayúsculas y en minúsculas */
+                    $texto_mayuscula = $texto.CASE_UPPER;
+                    $texto_minuscula = $texto.CASE_LOWER;
+
+                    
 
                 }
             ?>
