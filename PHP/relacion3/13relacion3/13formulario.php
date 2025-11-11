@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-    <section class="container border border-warning rounded shadow mt-5 p-5 col-4">
+    <section class="container border border-warning rounded shadow mt-5 mb-3 p-5 col-4">
         <form id="form1" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
             <h3 class="text-center  text-info-emphasis">Manejo de los alerts de bootstrap</h3>
             
@@ -63,11 +63,35 @@
 
 
                     /* Mostrar el texto todo en mayúsculas y en minúsculas */
-                    $texto_mayuscula = $texto.CASE_UPPER;
-                    $texto_minuscula = $texto.CASE_LOWER;
-
+                    $texto_mayuscula = strtoupper($texto);
+                    $texto_minuscula = strtolower($texto);
+                    echo    '<div class="alert alert-danger my-3" role="alert">',
+                                "<h4>Texto Original</h4>", $texto,
+                                "<br><br><h4>Mayúsculas</h4>", $texto_mayuscula,
+                                "<br><br><h4>Minúsculas</h4>", $texto_minuscula,
+                            '</div>';
                     
 
+                    /* Mostrar el texto el número de carácteres y el número de palabras */
+                    $caracteres = strlen($texto);
+                    $num_palabras = str_word_count($texto);
+                    echo    '<div class="alert alert-warning my-3" role="alert">',
+                                "<h4>Texto Original</h4>", $texto,
+                                "<br><br><h4>Carácteres (con los espacios)</h4>", $caracteres,
+                                "<br><br><h4>Nº Palabras</h4>", $num_palabras,
+                            '</div>';
+                    
+                    
+                    /* Mostrar el texto con crypt, md5 y sha1 */
+                    $crypt = crypt($texto, PASSWORD_BCRYPT);
+                    $md5 = md5($texto);
+                    $sh1 = sha1($texto);
+                    echo    '<div class="alert alert-success my-3" role="alert">',
+                                "<h4>Texto Original</h4>", $texto,
+                                "<br><br><h4>crypt</h4>", $crypt,
+                                "<br><br><h4>md5</h4>", $md5,
+                                "<br><br><h4>sh1</h4>", $sh1,
+                            '</div>';
                 }
             ?>
         </div>
