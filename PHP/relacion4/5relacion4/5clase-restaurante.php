@@ -42,18 +42,45 @@ use function PHPSTORM_META\map;
         }
 
 
+
+        /* Añadir más de un ratings */
+        public function addsRating($r = [])
+        {
+            /* Asegúrate de que el argumento sea un array. */
+            if (!is_array($r)) 
+            {
+                echo "Error: Se esperaba una lista (array) de ratings.<br>";
+
+            } else 
+            {
+                foreach ($r as $r) 
+                {
+                    if ($r < 1 || $r > 5) 
+                    {
+                        echo "El rating individual '$r' debe estar comprendido entre 1 y 5. No se ha añadido.<br>";
+
+                    } else 
+                    {
+                        $this->ratings[] = $r;
+                    }
+                }
+            }
+
+        }
+
+
+
         /* Calcular el rating medio */
         public function ratingMedio()
         {
-            $resultado = array_sum($this->ratings) / count($this->ratings);
-            
-            if (count($this->ratings) == 0) 
-            {
-                $resultado = null;
+            if (empty($this->ratings)) {
+                return 0;
             }
 
-            return $resultado;
+            $resultado = array_sum($this->ratings) / count($this->ratings);
+            return (round($resultado));
         }
+
 
 
         /* Mostrar rating */
@@ -83,10 +110,16 @@ use function PHPSTORM_META\map;
     $restaurante->addRating(3);
     $restaurante->toString();
     $restaurante->mostrarRating();
+    echo "El rating medios es: ", $restaurante->ratingMedio(), "<br>";
+    
 
     $r1 = new Restaurante("Mediterraneo", "Tapas");
-    $r1->toString();
-    $r1->mostrarRating();
+    $r1->toString(); 
+    $r1->mostrarRating(); /* Debe de da error, porque no tiene ratings añadidos */
 
     $r2 = new Restaurante("Gallo Pinto", "Checa");
     $r2->toString();
+    $r2->addRating(5);
+    $r2->addsRating([4,4,4,3,2]);
+    $r2->mostrarRating();
+    echo "El rating medios es: ", $r2->ratingMedio(), "<br>";
