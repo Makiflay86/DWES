@@ -23,6 +23,13 @@ use function PHPSTORM_META\map;
             self::$numeroRest++;
         }
 
+        /* Destructor */
+        public function __destruct() /* Se borran con unset(), cuando se termina el script se ejecuta */
+        {
+            self::$numeroRest--; /* Reducir el contador de los objetos creados, ya que se estan eliminando */
+            echo "El restaurante '", Restaurante::getNombre(), "' ha sido eliminado.<br>";
+        }
+
         /* Mostrar con get y setear con set el nombre */
         public function getNombre()
         {
@@ -175,4 +182,15 @@ use function PHPSTORM_META\map;
 
     echo "<br>==============================<br><br>";
 
+    Restaurante::totalRests();
+    echo "<br>";
+
+    echo "<br>==============================<br><br>";
+
+    unset($restaurante);
+    unset($r1);
+    unset($r2);
+
+    echo "<br>==============================<br><br>";
+    
     Restaurante::totalRests();
