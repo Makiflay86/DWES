@@ -60,10 +60,20 @@
                             break;
 
                         case "ds":
-                            unset($_SESSION["a"]);
-                            unset($_SESSION["b"]);
+                            /* unset($_SESSION["a"]);
+                            unset($_SESSION["b"]); */ /* Esto elimina la variable */
+                            $_SESSION["a"] = 0;
+                            $_SESSION["b"] = 0;
                             session_destroy();
-                            header("Location: " . $_SERVER['PHP_SELF']);
+                            echo ' 
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="visually-hidden">Loading...</span> 
+                                    </div>
+                                </div>
+                            ';/* EL maravilloso spinner de carga */
+                            header("refresh: 5;"); /* Esta esta una opción añadiendo 15 segundos antes del refresh */
+                            //header("Location: " . $_SERVER['PHP_SELF']); /* Una opción es poner esto */
                             break;
                     }
                 }
