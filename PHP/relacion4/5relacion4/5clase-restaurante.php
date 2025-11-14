@@ -17,6 +17,13 @@ use function PHPSTORM_META\map;
             $this->tipoCocina = $tipoCocina;
             $this->ratings = [];
         }
+        
+
+        /* Destructor */
+        public function __destruct()
+        {
+            echo "El restaurante '{$this->nombre}' ha sido eliminado.<br>";
+        }
 
 
         /* Mostrar los datos */
@@ -123,3 +130,5 @@ use function PHPSTORM_META\map;
     $r2->addsRating([4,4,4,3,2]);
     $r2->mostrarRating();
     echo "El rating medios es: ", $r2->ratingMedio(), "<br>";
+
+    echo "<br>";
