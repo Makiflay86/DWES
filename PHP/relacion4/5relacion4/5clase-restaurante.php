@@ -20,7 +20,7 @@ use function PHPSTORM_META\map;
         
 
         /* Destructor */
-        public function __destruct()
+        public function __destruct() /* Se borran con unset(), cuando se termina el script se ejecuta */
         {
             echo "El restaurante '{$this->nombre}' ha sido eliminado.<br>";
         }
