@@ -97,7 +97,7 @@
 
 
         /* Invertir el orden de color de las franjas */
-        public function invertirColores(): void
+        public function invertirColores()
         {
             $this->lista = array_reverse($this->lista);
             echo "¡Colores de la bandera de {$this->nombre} invertidos!<br>";
@@ -106,7 +106,7 @@
 
 
         /* Invertir la horientación de las franjas */
-        public function invertirOrientacion(): void
+        public function invertirOrientacion()
         {
             if ($this->orientacion === 'horizontal') {
                 $this->orientacion = 'vertical';
