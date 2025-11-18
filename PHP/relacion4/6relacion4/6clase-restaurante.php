@@ -4,11 +4,11 @@ use function PHPSTORM_META\map;
 
     class Restaurante
     {
-        private $nombre;
-        private $tipoCocina;
-        private $ratings; /* entre 1 y 5 */
+        private string $nombre;
+        private string $tipoCocina;
+        private array $ratings; /* entre 1 y 5 */
 
-        private static $numeroRest = 0;
+        private static int $numeroRest = 0;
         
 
 
@@ -22,13 +22,26 @@ use function PHPSTORM_META\map;
 
             self::$numeroRest++;
         }
+        /* Nos podemos ahorrar lo de arriba haciendo esto */
+        /* public function __construct
+        (
+            public string $nombre,
+            public string $tipoCocina,
+            public array $ratings = []
+        ) {
+            self::$numeroRest++;  
+          } */
+
+
 
         /* Destructor */
         public function __destruct() /* Se borran con unset(), cuando se termina el script se ejecuta */
         {
             self::$numeroRest--; /* Reducir el contador de los objetos creados, ya que se estan eliminando */
-            echo "El restaurante '", Restaurante::getNombre(), "' ha sido eliminado.<br>";
+            echo "El restaurante '", self::getNombre(), "' ha sido eliminado.<br>"; /* No hace falta poner nada aquí */
         }
+
+
 
         /* Mostrar con get y setear con set el nombre */
         public function getNombre()
@@ -59,16 +72,16 @@ use function PHPSTORM_META\map;
 
 
         /* Mostrar los datos */
-        public function toString()
+        public function toString() /* Con __toString() se ejecuta solo sin tener que llamarlo */
         {
             echo "
-                Restaurante: ", Restaurante::getNombre()," - Tipo de Cocina: ", Restaurante::getTipoCocina(), "<br>
+                Restaurante: ", self::getNombre()," - Tipo de Cocina: ", self::getTipoCocina(), "<br>
             ";
         }
 
 
         /* Añadir un rating */
-        public function addRating($r)
+        public function addRating($r) /* Tambien se puede usar array.push */
         {
             if ($r < 1 || $r > 5)
             {
@@ -83,7 +96,7 @@ use function PHPSTORM_META\map;
 
 
         /* Añadir más de un ratings */
-        public function addsRating($r = [])
+        public function addsRating($r = []) /* Tambien se puede usar array.merge */
         {
             /* Asegúrate de que el argumento sea un array. */
             if (!is_array($r)) 
@@ -112,11 +125,11 @@ use function PHPSTORM_META\map;
         /* Calcular el rating medio */
         public function ratingMedio()
         {
-            if (empty(Restaurante::getRatings())) {
+            if (empty(self::getRatings())) {
                 return 0;
             }
 
-            $resultado = array_sum(Restaurante::getRatings()) / count(Restaurante::getRatings());
+            $resultado = array_sum(self::getRatings()) / count(self::getRatings());
             return (round($resultado));
         }
 
@@ -125,14 +138,14 @@ use function PHPSTORM_META\map;
         /* Mostrar rating */
         public function mostrarRating()
         {
-            if (empty(Restaurante::getRatings()))
+            if (empty(self::getRatings()))
             {
                 echo "ERROR: Ratings esta vacío.<br>";
 
             } else 
             {
                 echo "Ratings: ";
-                foreach (Restaurante::getRatings() as $valor) 
+                foreach (self::getRatings() as $valor) 
                 {
                     echo " $valor ";
                 }
