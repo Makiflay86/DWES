@@ -4,9 +4,9 @@ use function PHPSTORM_META\map;
 
     class Restaurante
     {
-        public $nombre;
-        public $tipoCocina;
-        public $ratings; /* entre 1 y 5 */
+        public string $nombre;
+        public string $tipoCocina;
+        public array $ratings; /* entre 1 y 5 */
         
 
         /* Constructor con solo los parámetros del nombre y el tipo de cocina,
@@ -17,17 +17,24 @@ use function PHPSTORM_META\map;
             $this->tipoCocina = $tipoCocina;
             $this->ratings = [];
         }
+        /* Nos podemos ahorrar lo de arriba haciendo esto */
+        /* public function __construct
+        (
+            public string $nombre,
+            public string $tipoCocina,
+            public array $ratings = []
+        ) {} */
         
 
         /* Destructor */
         public function __destruct() /* Se borran con unset(), cuando se termina el script se ejecuta */
         {
-            echo "El restaurante '{$this->nombre}' ha sido eliminado.<br>";
+            echo "El restaurante '{$this->nombre}' ha sido eliminado.<br>"; /* No hace falta poner nada */
         }
 
 
         /* Mostrar los datos */
-        public function toString()
+        public function toString() /* Con __toString() se ejecuta solo sin tener que llamarlo */
         {
             echo "
                 Restaurante: $this->nombre - Tipo de Cocina: $this->tipoCocina <br>
