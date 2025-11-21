@@ -12,6 +12,6 @@ Para ver la lista de ejercicios de esta relación:
 2.  Accede al índice de esta carpeta a través de tu navegador:
 
     ```
-    http://localhost/php-exercises/relacion3/index.html
+    http://localhost/php/relacion3/index.html
     ```
     (O navegando directamente desde el enlace correspondiente en el `super-index.html` principal).
