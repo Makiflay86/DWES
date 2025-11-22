@@ -117,7 +117,7 @@
     class CuentaCredito extends CuentaBancaria
     {
         /* Depositar dinero en la cuenta */
-        public function depositarDinero($numCuenta, $cantidad)
+        public function depositarDinero($numCuenta, $cantidad) 
         {
             if (empty($numCuenta) || $numCuenta == null)
             {
