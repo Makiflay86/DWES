@@ -14,7 +14,7 @@
             <article class="mt-5 p-5 col-6 bg-primary-subtle rounded shadow">
                 <h3 class="mb-5 text-center text-info-emphasis">Calificaciones a partir de un número entero (switch)</h3>
 
-                <form id="form1" action="./14calculo.php"  class="bg-secondary-subtle p-3 rounded shadow">
+                <form id="form1" action="./14calculo.php" class="bg-secondary-subtle p-3 rounded shadow">
                     <div class="mb-3">
                         <label class="form-label" for="nota">Introduce la nota: <span class="text-danger"> *</span></label>
                         <input class="form-control" type="text" placeholder="10" name="nota" id="nota">
