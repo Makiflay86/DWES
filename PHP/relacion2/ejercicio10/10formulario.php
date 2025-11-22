@@ -6,8 +6,8 @@
     <title>Relación 2 - Ejercicio 10 - Formulario</title>
     <link rel="shortcut icon" href="../logo-ies-playamar.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
-<body>
+</head> 
+<body> 
     <div class="d-flex justify-content-center align-items-center mt-5">
         <form class="p-5 border border-warning rounded shadow bg-light" action="./10calculo.php" method="get">
             <h3 class="text-info-emphasis">Calculadora básica con 2 números y un operador</h3>
