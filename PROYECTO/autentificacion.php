@@ -23,20 +23,31 @@
         $usuario = htmlspecialchars($_REQUEST["login_email"]);
         $password = htmlspecialchars($_REQUEST["login_password"]);
     
-        echo "$usuario y $password"; /* ESTO PARA TESTEAR */
-
-
         /* nos queda: 
             - hacer la query
             - redireccionar a index si no está o la contraseña es erróne
             - redireccionar a inicio.php si todo es correcto 
         */
 
+        $querySQL = "SELECT * FROM usuarios WHERE idusuario = '$usuario'"; /* OJO con las comillas, que es muy exquisito */
+        $resultado = $mysqli->query($querySQL);
+        
+        if ($resultado->num_rows == 0) /* El usuario no existe */
+        {
+            $_SESSION['error'] = "Usuario incorrecto.";
+            header("Location:./index.php");
+
+        } else /* El usuario ha sido encontrado */
+        {
+            $_SESSION['error'] = "Usuario reconocido."; /* Esto es para testear hay que comprobar la password */
+            header("Location:./index.php");
+        }
+
 
 
     } else 
     {
-        $_SESSION['error'] = "Debes de hacer logint para acceder.";
+        $_SESSION['error'] = "Debes de hacer login para acceder.";
         header("Location:./index.php");
     }
 
