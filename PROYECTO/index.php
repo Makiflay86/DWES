@@ -31,23 +31,24 @@
                 <li class="second logo" data-tab="sign_up">
                     <a>Registrarse</a> 
                 </li>
+                <!-- Aquí se mostrara los errores desde dentro de la aplicación -->
+                <?php
+                    if (isset($_SESSION['error']))
+                    {
+                        echo '<div class="alert alert-danger" role="alert">';
+                        echo $_SESSION['error'];
+                        echo '</div>';
+
+                        /* $_SESSION["error"] = ""; contenido vacío, pero la variable sigue "set" */
+                        unset($_SESSION['error']);
+                    }
+                ?>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="login">
                     <!-- Formulario login -->
                     <form id="form1" action="autentificacion.php" method="post" class="form-horizontal login-form">
-                        <!-- Aquí se mostrara los errores desde dentro de la aplicación -->
-                        <?php
-                            if (isset($_SESSION['error']))
-                            {
-                                echo '<div class="alert alert-danger" role="alert">';
-                                echo $_SESSION['error'];
-                                echo '</div>';
-
-                                /* $_SESSION["error"] = ""; contenido vacío, pero la variable sigue "set" */
-                                unset($_SESSION['error']);
-                            }
-                        ?>
+                        
                         <div class="form-group relative mb-3">
                             <input class="form-control input-lg" id="login_email" name="login_email" placeholder="Correo electrónico" type="email"> <i class="fa fa-user"></i>
                             <div id="login_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
