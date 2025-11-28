@@ -15,6 +15,10 @@ body {
   height:100%;
   overflow:hidden;
 }
+.form-text 
+{
+    visibility: hidden;
+}
 label {
   margin-bottom: 0;
 }
@@ -130,8 +134,11 @@ ul.switcher li{
   border-radius: 0;
 }
 
-.login input[type="email"],
-.login input[type="password"],
+#login_email,
+#signup_email,
+#login_password,
+#signup_password,
+#repeat_password,
 .login input:focus {
   background-color: rgba(40, 52, 67, 0.75);
   border: 0px solid #4a525f;

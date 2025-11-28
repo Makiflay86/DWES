@@ -1,7 +1,10 @@
+<?php
+    session_start(); /* Pendiente de hacer segura */
+?>
 <!doctype html>
 <html lang="es-ES">
 <head>
-    <title>PROYECTO</title>
+    <title>Login</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="stylesheet" href="./style.css">
@@ -31,18 +34,33 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="login">
-                    <form class="form-horizontal login-form">
+                    <!-- Formulario login -->
+                    <form id="form1" action="autentificacion.php" method="post" class="form-horizontal login-form">
+                        <!-- Aquí se mostrara los errores desde dentro de la aplicación -->
+                        <?php
+                            if (isset($_SESSION['error']))
+                            {
+                                echo '<div class="alert alert-danger" role="alert">';
+                                echo $_SESSION['error'];
+                                echo '</div>';
+
+                                /* $_SESSION["error"] = ""; contenido vacío, pero la variable sigue "set" */
+                                unset($_SESSION['error']);
+                            }
+                        ?>
                         <div class="form-group relative mb-3">
-                            <input class="form-control input-lg" id="login_email" placeholder="Correo electrónico" required="" type="email"> <i class="fa fa-user"></i>
+                            <input class="form-control input-lg" id="login_email" name="login_email" placeholder="Correo electrónico" type="email"> <i class="fa fa-user"></i>
+                            <div id="login_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
                         </div>
                         <div class="form-group relative mb-3">
-                            <input class="form-control input-lg" id="login_password" placeholder="Contraseña" required="" type="password"> <i class="fa fa-lock"></i>
+                            <input class="form-control input-lg" id="login_password" name="login_password" placeholder="Contraseña" type="password"> <i class="fa fa-lock"></i>
+                            <div id="login_passwordHelp" class="form-text text-danger">La contraseña es obligatorio.</div>
                         </div>
                         <div class="form-group mb-3">
                             <button class="btn btn-success btn-lg btn-block" type="submit">Iniciar sesión</button>
                         </div>
                         <div class="checkbox checkbox-success">
-                            <input id="stay-sign" type="checkbox">
+                            <input id="stay-sign" name="stay-sign" type="checkbox">
                             <label for="stay-sign"> Mantener sesión</label>
                         </div>
                         <hr>
@@ -52,21 +70,22 @@
                     </form>
                 </div>
                 <div class="tab-pane" id="sign_up">
-                    <form class="form-horizontal login-form">
+                    <!-- Formulario Sign-Up -->
+                    <form id="form2" action="" method="post" class="form-horizontal login-form">
                         <div class="form-group relative mb-3">
-                            <input class="form-control input-lg" id="signup_email" placeholder="Correo electrónico" required="" type="email"> <i class="fa fa-user"></i>
+                            <input class="form-control input-lg" id="signup_email" name="signup_email" placeholder="Correo electrónico" type="email"> <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group relative mb-3">
-                            <input class="form-control input-lg" id="signup_password" placeholder="Contraseña" required="" type="password"> <i class="fa fa-lock"></i>
+                            <input class="form-control input-lg" id="signup_password" name="signup_password" placeholder="Contraseña" type="password"> <i class="fa fa-lock"></i>
                         </div>
                         <div class="form-group relative mb-3">
-                            <input class="form-control input-lg" id="repeat_password" placeholder="Repite la Contraseña" required="" type="password"> <i class="fa fa-lock"></i>
+                            <input class="form-control input-lg" id="repeat_password" name="repeat_password" placeholder="Repite la Contraseña" type="password"> <i class="fa fa-lock"></i>
                         </div>
                         <div class="form-group mb-3">
                             <button class="btn btn-success btn-lg btn-block" type="submit">Registrarse</button>
                         </div>
                         <div class="checkbox checkbox-success">
-                            <input id="agree-terms" type="checkbox">
+                            <input id="agree-terms" name="agree-terms" type="checkbox">
                             <label for="agree-terms"> Aceptar los terminos y condiciones</label>
                         </div>
                         <hr>
@@ -85,6 +104,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
     <script src="./script.js"></script>
+    <script src="./validaciones.js"></script>
 
     <script
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
