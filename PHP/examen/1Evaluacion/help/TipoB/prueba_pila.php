@@ -1,5 +1,5 @@
 <?php
-// Suponiendo que el código de la clase Pila está cargado
+require_once 'Pila.php';
 
 echo "<h2>Comprobación de la Clase Pila</h2>";
 
