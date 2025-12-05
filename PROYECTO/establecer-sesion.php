@@ -32,7 +32,7 @@ if (time() - $_SESSION['last_regeneration'] >= $regenerate_interval)
 
 
 
-/* Generamos la primera vez un token que garantiza haber ingresado correctamente, esto impide la suplantación */
+/* Generamos la primera vez un TOKEN que garantiza haber ingresado correctamente, esto impide la suplantación */
 if (empty($_SESSION['csrf_token'])) 
 {
 	// Creación de un CSRF Token

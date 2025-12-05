@@ -50,7 +50,8 @@
                 <div class="tab-pane active" id="login">
                     <!-- Formulario login -->
                     <form id="form1" action="autentificacion.php" method="post" class="form-horizontal login-form">
-                        
+                        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+
                         <div class="form-group relative mb-3">
                             <input class="form-control input-lg" id="login_email" name="login_email" placeholder="Correo electrónico" type="text"> <i class="fa fa-user"></i>
                             <div id="login_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
@@ -75,6 +76,8 @@
                 <div class="tab-pane" id="sign_up">
                     <!-- Formulario Sign-Up -->
                     <form id="form2" action="" method="post" class="form-horizontal login-form">
+                        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                        
                         <div class="form-group relative mb-3">
                             <input class="form-control input-lg" id="signup_email" name="signup_email" placeholder="Correo electrónico" type="email"> <i class="fa fa-user"></i>
                         </div>

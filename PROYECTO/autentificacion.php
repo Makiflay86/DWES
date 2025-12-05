@@ -3,10 +3,27 @@
 include "establecer-sesion.php";
 
 
+/* NO FUNCIONA, CREO QUE NO ES ASÍ */
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
+    // Comprobar si el token CSRF enviado en el formulario coincide con el token almacenado en la sesión
+    if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) 
+    {
+        $_SESSION['error'] = "TOKEN correcto.";
+        header("Location:./index.php");
+
+    } else 
+    {
+        $_SESSION['error'] = "TOKEN incorrecto.";
+        header("Location:./index.php");
+    }
+}
+
+
 if (isset($_REQUEST["login_email"]) && isset($_REQUEST["login_password"])) /* Esta comprobación es insegura */
 {
     /* ******Habría que comprobar CSRF token para dejar pasar a la aplicación****** */
-
+    
 
 
     /* Inicialización de parámetros de conexión */
@@ -77,3 +94,17 @@ if (isset($_REQUEST["login_email"]) && isset($_REQUEST["login_password"])) /* Es
 
 
 
+/* 
+TAREAS:
+    1. Generación de TOKEN CRSF y comprobación antes de dejar pasar
+    (autentificación antes de mandar a inicio), hay que pasarlo desde
+    el formulario de inicio de manera oculta. Al llegar a autentificación,
+    en vez de preguntar si tenemos nombre de usuario (isset) hay
+    que comparar ese TOKEN.
+    
+    2. Eliminar explicitamente la cookie de sesión al destruir la
+    sesión.
+
+    3. Buscar donde se modifican los parámetros de configuración de
+    php.ini
+*/
