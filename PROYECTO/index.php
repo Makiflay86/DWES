@@ -50,7 +50,7 @@
                     <form id="form1" action="autentificacion.php" method="post" class="form-horizontal login-form">
                         
                         <div class="form-group relative mb-3">
-                            <input class="form-control input-lg" id="login_email" name="login_email" placeholder="Correo electrónico" type="email"> <i class="fa fa-user"></i>
+                            <input class="form-control input-lg" id="login_email" name="login_email" placeholder="Correo electrónico" type="text"> <i class="fa fa-user"></i>
                             <div id="login_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
                         </div>
                         <div class="form-group relative mb-3">
