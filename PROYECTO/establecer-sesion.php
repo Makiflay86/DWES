@@ -8,3 +8,38 @@ session_set_cookie_params([
     'samesite' => 'Strict',                         // evita ataques CSRF. Otros valores son Lax o none (ver más abajo)
 ]);
 session_start();
+
+
+
+/* Regenerar el ID de sesión */
+// Define el intervalo en segundos (por ejemplo, 1200 segundos = 20 minutos)
+$regenerate_interval = 1200; /* O lo que tú estimes */
+
+// Almacena el tiempo de la última regeneración si no existe
+if (!isset($_SESSION['last_regeneration'])) 
+{
+    $_SESSION['last_regeneration'] = time();
+}
+
+// Verifica y regenera si es necesario
+if (time() - $_SESSION['last_regeneration'] >= $regenerate_interval) 
+{
+	// Regenera el ID de sesión y elimina los datos de la sesión antigua
+	session_regenerate_id(true);
+	// Actualiza el timestamp para el próximo intervalo
+	$_SESSION['last_regeneration'] = time();
+}
+
+
+
+/* Generamos la primera vez un token que garantiza haber ingresado correctamente, esto impide la suplantación */
+if (empty($_SESSION['csrf_token'])) 
+{
+	// Creación de un CSRF Token
+    /* Genera un string aleatorio de 64 bytes y luego le aplica un hashing */
+	$csrf_token = bin2hex(openssl_random_pseudo_bytes(64));
+
+	// Resguardo del CSRF Token en una sesión
+    /* Es extremadamente dificil simularlo o suplantarlo, ......por ahora */
+	$_SESSION['csrf_token'] = $csrf_token;
+}

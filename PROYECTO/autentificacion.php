@@ -3,8 +3,12 @@
 include "establecer-sesion.php";
 
 
-if (isset($_REQUEST["login_email"]) && isset($_REQUEST["login_password"]))
+if (isset($_REQUEST["login_email"]) && isset($_REQUEST["login_password"])) /* Esta comprobación es insegura */
 {
+    /* ******Habría que comprobar CSRF token para dejar pasar a la aplicación****** */
+
+
+
     /* Inicialización de parámetros de conexión */
     $host = "localhost";
     $usuario = "root"; /* Inseguro ********** */
