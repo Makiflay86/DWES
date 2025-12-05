@@ -1,6 +1,8 @@
 <?php
-    session_start(); /* Pendiente de hacer segura */
+    include "establecer-sesion.php";
 ?>
+
+
 <!doctype html>
 <html lang="es-ES">
 <head>

@@ -1,6 +1,6 @@
 <?php
 
-session_start(); /* Pendiente de hacer segura */
+include "establecer-sesion.php";
 
 
 if (isset($_REQUEST["login_email"]) && isset($_REQUEST["login_password"]))
