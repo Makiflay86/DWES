@@ -13,7 +13,7 @@ session_start();
 
 /* Regenerar el ID de sesión */
 // Define el intervalo en segundos (por ejemplo, 1200 segundos = 20 minutos)
-$regenerate_interval = 1200; /* O lo que tú estimes */
+$regenerate_interval = 1200; /* O lo que tú estimes */ 
 
 // Almacena el tiempo de la última regeneración si no existe
 if (!isset($_SESSION['last_regeneration'])) 

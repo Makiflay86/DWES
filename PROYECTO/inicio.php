@@ -34,6 +34,13 @@
                 <a class="btn btn-danger" href="./logout.php">Logout</a>
             </div>
 
+
+            <!-- Comprobar la regeneración de ID de sesión -->
+            <!-- <div class="text-center p-5">
+                <p>Session ID actual: <?php echo session_id(); ?></h2>
+                <p>Última regeneración: <?php echo date("H:i:s", $_SESSION['last_regeneration']); ?></p>
+            </div> -->
+
         </div>
     
 
