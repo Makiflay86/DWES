@@ -135,8 +135,10 @@ ul.switcher li{
 }
 
 #login_email,
-#signup_email,
 #login_password,
+#signup_nombre,
+#signup_apellidos,
+#signup_email,
 #signup_password,
 #repeat_password,
 .login input:focus {

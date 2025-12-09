@@ -53,7 +53,7 @@
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
                         <div class="form-group relative mb-3">
-                            <input class="form-control input-lg" id="login_email" name="login_email" placeholder="Correo electrónico" type="text"> <i class="fa fa-user"></i>
+                            <input class="form-control input-lg" id="login_email" name="login_email" placeholder="Correo electrónico" type="text"> <i class="fa fa-envelope"></i>
                             <div id="login_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
                         </div>
                         <div class="form-group relative mb-3">
@@ -76,16 +76,27 @@
                 <div class="tab-pane" id="sign_up">
                     <!-- Formulario Sign-Up -->
                     <form id="form2" action="" method="post" class="form-horizontal login-form">
-                        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         
                         <div class="form-group relative mb-3">
-                            <input class="form-control input-lg" id="signup_email" name="signup_email" placeholder="Correo electrónico" type="email"> <i class="fa fa-user"></i>
+                            <input class="form-control input-lg" id="signup_nombre" name="signup_nombre" placeholder="Nombre" type="text"> <i class="fa fa-user"></i>
+                            <div id="signup_nombreHelp" class="form-text text-danger">El nombre es obligatorio.</div>
+                        </div>
+                        <div class="form-group relative mb-3">
+                            <input class="form-control input-lg" id="signup_apellidos" name="signup_apellidos" placeholder="Apellidos" type="text"> <i class="fa fa-user"></i>
+                            <div id="signup_apellidosHelp" class="form-text text-danger">El apellido es obligatorio.</div>
+                        </div>
+                        <div class="form-group relative mb-3">
+                            <input class="form-control input-lg" id="signup_email" name="signup_email" placeholder="Correo electrónico" type="email"> <i class="fa fa-envelope"></i>
+                            <div id="signup_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
                         </div>
                         <div class="form-group relative mb-3">
                             <input class="form-control input-lg" id="signup_password" name="signup_password" placeholder="Contraseña" type="password"> <i class="fa fa-lock"></i>
+                            <div id="signup_passwordHelp" class="form-text text-danger">La contraseña es obligatorio.</div>
                         </div>
                         <div class="form-group relative mb-3">
                             <input class="form-control input-lg" id="repeat_password" name="repeat_password" placeholder="Repite la Contraseña" type="password"> <i class="fa fa-lock"></i>
+                            <div id="repeat_passwordHelp" class="form-text text-danger">La contraseña es obligatorio.</div>
                         </div>
                         <div class="form-group mb-3">
                             <button class="btn btn-success btn-lg btn-block" type="submit">Registrarse</button>
