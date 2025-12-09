@@ -1,9 +1,24 @@
 <?php
 
+
 include "establecer-sesion.php";
+
+
+/* Establecemos todas las $_SESSION a un array vacio es decir a nada */
 $_SESSION = [];
+
+
+/* Destruir las cookies de sesión */
+/* if (isset($_COOKIE[session_name()])) 
+{
+    $params = session_get_cookie_params();
+	setcookie(session_name(), '', 1, $params['path'], $params['domain'], $params['secure'], isset($params['httponly']));
+} */
+
+
+/* Destroimos la sesión */
 session_destroy();
 
-/* Habría que destruir explicitamente la cookie de sesión y otras cookies potencialmente peligrosas */
 
+/* Redirigimos al index.php para volver a logearse */
 header("Location:./index.php");

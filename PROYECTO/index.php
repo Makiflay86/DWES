@@ -50,7 +50,7 @@
                 <div class="tab-pane active" id="login">
                     <!-- Formulario login -->
                     <form id="form1" action="autentificacion.php" method="post" class="form-horizontal login-form">
-                        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
                         <div class="form-group relative mb-3">
                             <input class="form-control input-lg" id="login_email" name="login_email" placeholder="Correo electrónico" type="text"> <i class="fa fa-user"></i>
