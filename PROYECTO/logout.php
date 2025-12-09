@@ -9,11 +9,19 @@ $_SESSION = [];
 
 
 /* Destruir las cookies de sesión */
-/* if (isset($_COOKIE[session_name()])) 
+if (isset($_COOKIE[session_name()])) 
 {
     $params = session_get_cookie_params();
-	setcookie(session_name(), '', 1, $params['path'], $params['domain'], $params['secure'], isset($params['httponly']));
-} */
+	setcookie(
+        session_name(), 
+        '', 
+        time() - 1, 
+        $params['path'], 
+        $params['domain'], 
+        $params['secure'], 
+        $params['httponly']
+    );
+}
 
 
 /* Destroimos la sesión */
