@@ -49,35 +49,61 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
 {
     if (isset($_REQUEST["login_email"]) && isset($_REQUEST["login_password"])) /* Esta comprobación es insegura */
     {
+        /* Primera forma de acceder a la base de datos, MYSQLi */
         /* Inicialización de parámetros de conexión */
-        $host = "localhost";
-        $usuario = "login-php"; /* Inseguro ********** */
-        $password = "qwerty123#"; /* Inseguro ********** */
-        $baseDatos = "login-php";
+        /* $host = "localhost"; */
+        /* $usuario = "login-php"; */ /* Inseguro ********** */
+        /* $password = "qwerty123#"; */ /* Inseguro ********** */
+        /* $baseDatos = "login-php"; */
 
 
         /* Estableciendo conexión */
-        $mysqli = new mysqli($host, $usuario, $password, $baseDatos);
+        /* $mysqli = new mysqli($host, $usuario, $password, $baseDatos); */
 
 
-        if ($mysqli->connect_error)
-        {
+        /* if ($mysqli->connect_error)
+        { */
             /* die("Error de conexión: " . $mysqli->connect_errno); */
+            /* $_SESSION['error'] = "No se puede comprobar usuario, vuelva a intentarlo en unos minutos.";
+            header("Location:./index.php");
+            exit;
+        } */
+
+        $servidor = 'mysql:host=localhost;dbname=login-php';
+        $usuario = 'login-php';
+        $password = 'qwerty123#';
+
+        try 
+        {
+            $pdo = new PDO($servidor, $usuario, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            /* echo "Conexión OK con PDO"; */ // o lo que sea pertinente hacer aquí
+
+        } catch (PDOException $e) 
+        {
             $_SESSION['error'] = "No se puede comprobar usuario, vuelva a intentarlo en unos minutos.";
             header("Location:./index.php");
             exit;
         }
+
 
         /* Habría que comprobar si hubo un intento de XSS y contestar con un mensaje de error reprobatorio */
         $usuario = htmlspecialchars($_REQUEST["login_email"]);
         $password = htmlspecialchars($_REQUEST["login_password"]);
 
 
-        $querySQL = "SELECT * FROM usuarios WHERE idusuario = '$usuario'"; /* OJO con las comillas, que es muy exquisito */
-        $resultado = $mysqli->query($querySQL);
+        $comando = $pdo->prepare("SELECT * FROM usuarios WHERE idusuario = :idusuario ");
+        $comando->bindParam(':idusuario', $usuario);
         
+        $comando->execute();
 
-        if ($resultado->num_rows == 0) /* El usuario no existe */
+
+        /* Esto antiguo */
+        /* $querySQL = "SELECT * FROM usuarios WHERE idusuario = '$usuario'"; */ /* OJO con las comillas, que es muy exquisito */
+        /* $resultado = $mysqli->query($querySQL); */
+        
+        
+        if ($comando->rowCount() == 0) /* El usuario no existe */
         {
             $_SESSION['login_attempts']++;
             $_SESSION['error'] = "Usuario incorrecto.";
@@ -86,7 +112,8 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
 
         } else /* El usuario ha sido encontrado */
         {
-            $row = mysqli_fetch_object($resultado); /* Trata la fila como un objeto */
+            /* $row = mysqli_fetch_object($resultado); */ /* Trata la fila como un objeto */
+            $row = $comando->fetch(PDO::FETCH_OBJ); /* Con PDO también se puede tratar como objeto */
 
             /* Ahora hay que ver si la password introducida coincide */
             /* ***El objeto $row es de la cadena StdClass*** */
@@ -112,7 +139,8 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
 
 
             /* Libera la conexión con la base de datos (bbdd) */
-            $mysqli->close();
+            /* $mysqli->close(); */
+            $pdo = null;
         }
 
 
