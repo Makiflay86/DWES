@@ -118,7 +118,7 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
             /* Ahora hay que ver si la password introducida coincide */
             /* ***El objeto $row es de la cadena StdClass*** */
 
-            if ($row ->password == $password) /* La contraseña es correcta */
+            if (password_verify($password, $row->password)) /* La contraseña es correcta */
             {
                 $_SESSION['login_attempts'] = 0; /* Reinicia el contador de posibles fallos */
                 unset($_SESSION['lock_time']); /* Reinicia el cooldown */
