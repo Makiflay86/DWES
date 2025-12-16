@@ -1,0 +1,149 @@
+/* --- ESTILOS GENERALES Y FONDO ANIMADO --- */
+
+body {
+    /* Fondo con degradado de múltiples colores. 
+       '135deg' define la dirección diagonal del degradado. */
+    background: linear-gradient(
+        135deg,
+        #8e44ad, /* púrpura profundo */
+        #e91e63, /* magenta intenso */
+        #009688, /* turquesa/teal */
+        #1c1c1c, /* negro/gris oscuro */
+        #64b5f6, /* azul claro */
+        #f8bbd0  /* rosa claro */
+    );
+    
+    /* Duplica el tamaño del fondo para permitir el movimiento de la animación
+       sin que se vean los bordes o cortes bruscos. */
+    background-size: 400% 400%;
+    
+    /* Aplica la animación 'fondoMovimiento'.
+       20s: Duración de la animación (movimiento lento y sutil).
+       ease: Velocidad de interpolación suave.
+       infinite: Repite la animación indefinidamente. */
+    animation: fondoMovimiento 20s ease infinite;
+    
+    /* Asegura que el fondo ocupe toda la altura de la ventana (necesario para el centrado de la tarjeta). */
+    min-height: 100vh;
+}
+
+/* Define la secuencia de la animación del fondo */
+@keyframes fondoMovimiento {
+    /* Inicio: Muestra la primera mitad del fondo ampliado */
+    0% { background-position: 0% 50%; }
+    /* Mitad: Se desplaza hacia la derecha (100% en X) */
+    50% { background-position: 100% 50%; }
+    /* Fin: Vuelve a la posición inicial (0% en X) */
+    100% { background-position: 0% 50%; }
+}
+
+
+/* --- ESTILOS DE LOS CAMPOS DE FORMULARIO CON ICONOS --- */
+
+/* Contenedor relativo que permite posicionar los iconos de forma absoluta */
+.field-wrapper {
+    position: relative;
+}
+
+/* Estilos aplicados directamente al input/form-control */
+.field-wrapper .form-control {
+    /* Padding izquierdo para dejar espacio al icono (2.75rem > 0.9rem del icono) */
+    padding-left: 2.75rem; 
+    /* Padding derecho para dejar espacio al botón del ojo (mostrar/ocultar contraseña) */
+    padding-right: 2.75rem; 
+    /* Borde completamente redondeado para lograr el estilo 'pill' (cápsula) */
+    border-radius: 999px; 
+}
+
+/* Posicionamiento y centrado vertical compartido para todos los elementos internos (iconos y botón) */
+.field-icon-left,
+.field-icon-right,
+.toggle-password {
+    position: absolute;
+    /* Mueve el elemento a la mitad de la altura del wrapper */
+    top: 50%;
+    /* Compensa la mitad de la altura del elemento para centrarlo verticalmente */
+    transform: translateY(-50%);
+    /* Color de los iconos y botones (gris neutro) */
+    color: #6c757d; 
+    /* Asegura que los iconos estén sobre el input */
+    z-index: 3;
+}
+
+/* Estilos específicos para el icono de la izquierda (ej. sobre, candado) */
+.field-icon-left {
+    /* Posiciona el icono a 0.9rem del borde izquierdo del input */
+    left: 0.9rem; 
+    font-size: 1.1rem;
+    /* CRUCIAL: Permite que el ratón haga clic 'a través' del icono para enfocar el input */
+    pointer-events: none; 
+}
+
+/* Estilos específicos para el botón del ojo (mostrar/ocultar contraseña) */
+.toggle-password {
+    /* Posiciona el botón a 0.9rem del borde derecho del input */
+    right: 0.9rem; 
+    background: transparent;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    font-size: 1.1rem;
+    /* Cambia el cursor para indicar que es un elemento interactivo */
+    cursor: pointer;
+}
+
+/* Ajuste específico para inputs grandes de Bootstrap (opcional, asegura altura fija) */
+.form-control.form-control-lg {
+    height: 48px;
+}
+
+
+/* --- ESTILOS DE LA TARJETA DE LOGIN/REGISTRO --- */
+
+.login-card {
+    /* Ancho máximo de la tarjeta, manteniendo la responsividad (width: 100%) */
+    max-width: 450px;
+    width: 100%;
+    border-radius: 1rem;
+    /* Color de texto por defecto dentro de la tarjeta (blanco para contraste) */
+    color: #fff; 
+    
+    /* Configuración del fondo de imagen de la tarjeta */
+    background-image: url('https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ');
+    background-size: cover; /* Asegura que la imagen cubra todo el área */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat;
+    background-color: transparent;
+    
+    position: relative;
+    /* Oculta cualquier parte de la imagen de fondo que sobresalga de los bordes redondeados */
+    overflow: hidden;
+}
+
+/* Pseudo-elemento para crear una capa oscura sobre la imagen de fondo */
+.login-card::before {
+    content: "";
+    position: absolute;
+    /* Cubre completamente el área de la tarjeta */
+    inset: 0; 
+    /* Fondo semi-transparente oscuro (70% negro) para asegurar la legibilidad del texto blanco */
+    background: rgba(0,0,0,0.7); 
+    /* Se coloca debajo del contenido real de la tarjeta */
+    z-index: 0;
+}
+
+/* Asegura que todos los elementos internos de la tarjeta (textos, formularios) 
+   estén por encima de la capa oscura definida en ::before */
+.login-card > * {
+    position: relative;
+    z-index: 1; 
+}
+
+
+/* --- GESTIÓN DE VISTAS (LOGIN VS REGISTRO) --- */
+
+/* Por defecto, la sección de registro está oculta al cargar la página. 
+   La función JS 'showSection' se encarga de cambiar esto. */
+#register-section {
+    display: none;
+}

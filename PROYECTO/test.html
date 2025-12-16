@@ -1,15 +1,13 @@
 <!doctype html>
 <html lang="es-ES">
     <head>
-        <title>TEST LOGIN</title>
-        <!-- Required meta tags -->
+        <title>LOGIN & REGISTRO</title>
         <meta charset="utf-8" />
         <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
 
-        <!-- Bootstrap CSS v5.2.1 -->
         <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -18,193 +16,141 @@
         />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-        <style>
-            body {
-                background: linear-gradient(
-                    135deg,
-                    #8e44ad,   /* púrpura profundo */
-                    #e91e63,   /* magenta intenso */
-                    #009688,   /* turquesa/teal */
-                    #1c1c1c,   /* negro/gris oscuro */
-                    #64b5f6,   /* azul claro */
-                    #f8bbd0    /* rosa claro */
-                );
-                background-size: 400% 400%;
-                animation: fondoMovimiento 20s ease infinite;
-                min-height: 100vh;
-            }
-
-            @keyframes fondoMovimiento {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
-            }
-            
-            .field-wrapper {
-                position: relative;
-            }
-
-            .field-wrapper .form-control {
-                padding-left: 2.75rem;  /* espacio para icono izquierdo */
-                padding-right: 2.75rem; /* espacio para icono derecho/ojito */
-                border-radius: 999px;   /* pill */
-            }
-
-            .field-icon-left,
-            .field-icon-right,
-            .toggle-password {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                color: #6c757d;           /* tono neutro */
-                z-index: 3;
-            }
-
-            .field-icon-left {
-                left: 0.9rem;             /* separa del borde izquierdo */
-                font-size: 1.1rem;
-                pointer-events: none;     /* no bloquea el foco del input */
-            }
-
-            .field-icon-right {
-                right: 0.9rem;            /* si necesitas un icono fijo a la derecha */
-                font-size: 1.1rem;
-                pointer-events: none;
-            }
-
-            .toggle-password {
-                right: 0.9rem;            /* botón del ojito a la derecha */
-                background: transparent;
-                border: none;
-                padding: 0;
-                line-height: 1;
-                font-size: 1.1rem;
-            }
-
-            /* Ajuste fino para form-control-lg (altura mayor) */
-            .form-control.form-control-lg {
-                height: 48px;
-            }
-
-            .login-card {
-                max-width: 450px;
-                width: 100%;
-                border-radius: 1rem;
-                color: #fff; /* texto blanco para contraste */
-                background-image: url('https://images.unsplash.com/photo-1567359781514-3b964e2b04d6?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-color: transparent;
-                position: relative;
-                overflow: hidden;
-            }
-
-            /* Opcional: capa oscura para mejorar legibilidad */
-            .login-card::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: rgba(0,0,0,0.7); /* oscurece la imagen */
-                z-index: 0;
-            }
-
-            .login-card > * {
-                position: relative;
-                z-index: 1; /* asegura que el contenido esté por encima del overlay */
-            }
-
-        </style>
-        
+        <!-- ***** Importamos estilos propios ***** -->
+        <link rel="stylesheet" href="./css/style.css">
     </head>
 
     <body class="bg-light">
         
-        <!-- Contenedor centrado -->
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            <div class="card shadow p-5 login-card">    
-            <h2 class="text-center mb-4">Iniciar Sesión</h2>
             
-            <!-- Alert -->
-            <div class="alert alert-danger" role="alert">
-                Usuario incorrecto, esto con php
-            </div>
-
-            <!-- Formulario -->
-            <form action="autentificacion.php" method="POST">
+            <button class="btn btn-secondary position-absolute top-0 end-0 m-3" id="theme-toggle" onclick="toggleTheme()">
+                <i class="bi bi-moon-fill" id="theme-icon"></i> 
+            </button>
+            
+            <div class="card shadow p-5 login-card">  
+                <h2 class="text-center mb-4" id="form-title">Iniciar Sesión</h2>
                 
-                <!-- Correo -->
-                <div class="mb-3">
-                    <label for="login_email" class="form-label">Correo electrónico</label>
-                    <div class="field-wrapper">
-                        <i class="bi bi-envelope-fill field-icon-left"></i>
-                        <input type="email"
-                            class="form-control form-control-lg"
-                            id="login_email"
-                            name="login_email"
-                            placeholder="ejemplo@correo.com"
-                            required>
+                
+
+                <!-- ***** Alert, los errores de la app ***** -->
+                <div class="alert alert-danger" role="alert">
+                    Usuario incorrecto, esto con php
+                </div>
+
+
+
+                <!-- ***** LOGIN ***** -->
+                <div id="login-section">
+                    <form action="#" method="POST"> 
+
+                        <!-- Correo electrónico -->
+                        <div class="mb-3">
+                            <label for="login_email" class="form-label">Correo electrónico</label>
+                            <div class="field-wrapper">
+                                <i class="bi bi-envelope-fill field-icon-left"></i>
+                                <input type="email" class="form-control form-control-lg" id="login_email" name="login_email" placeholder="ejemplo@correo.com" required>
+                            </div>
+                        </div>
+
+                        <!-- Contraseña -->
+                        <div class="mb-3">
+                            <label for="login_password" class="form-label">Contraseña</label>
+                            <div class="field-wrapper">
+                                <i class="bi bi-lock-fill field-icon-left"></i>
+                                <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" placeholder="********" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('login_password', 'toggleIconLogin')">
+                                    <i id="toggleIconLogin" class="bi bi-eye-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Botón submit -->
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+                        </div>
+                    </form>
+
+                    <!-- Si no tienes cuenta, ir a registrarse -->
+                    <div class="text-center mt-4" id="link-registro">
+                        <small>¿No tienes cuenta? 
+                            <a href="#" onclick="showSection('register-section'); return false;">Regístrate aquí</a>
+                        </small>
                     </div>
-                </div>
+                </div> 
+                
 
-                <!-- Contraseña -->
-                <div class="mb-3">
-                    <label for="login_password" class="form-label">Contraseña</label>
-                    <div class="field-wrapper">
-                        <i class="bi bi-lock-fill field-icon-left"></i>
-                        <input type="password"
-                            class="form-control form-control-lg"
-                            id="login_password"
-                            name="login_password"
-                            placeholder="********"
-                            required>
-                        <button type="button" class="toggle-password" onclick="togglePassword()">
-                        <i id="toggleIcon" class="bi bi-eye-fill"></i>
-                        </button>
+
+                <!-- ***** Sign_up ***** -->
+                <div id="register-section">
+                    <form action="#" method="POST">
+                        
+                        <!-- Nombre -->
+                        <div class="mb-3">
+                            <label for="register_name" class="form-label">Nombre</label>
+                            <div class="field-wrapper">
+                                <i class="bi bi-person-fill field-icon-left"></i>
+                                <input type="text" class="form-control form-control-lg" id="register_name" name="register_name" placeholder="Tu nombre" required>
+                            </div>
+                        </div>
+
+                        <!-- Correo electrónico -->
+                        <div class="mb-3">
+                            <label for="register_email" class="form-label">Correo electrónico</label>
+                            <div class="field-wrapper">
+                                <i class="bi bi-envelope-fill field-icon-left"></i>
+                                <input type="email" class="form-control form-control-lg" id="register_email" name="register_email" placeholder="ejemplo@correo.com" required>
+                            </div>
+                        </div>
+
+                        <!-- Contraseña -->
+                        <div class="mb-3">
+                            <label for="register_password" class="form-label">Contraseña</label>
+                            <div class="field-wrapper">
+                                <i class="bi bi-lock-fill field-icon-left"></i>
+                                <input type="password" class="form-control form-control-lg" id="register_password" name="register_password" placeholder="********" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('register_password', 'toggleIconReg')">
+                                    <i id="toggleIconReg" class="bi bi-eye-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Repetir contraseña -->
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
+                            <div class="field-wrapper">
+                                <i class="bi bi-key-fill field-icon-left"></i>
+                                <input type="password" class="form-control form-control-lg" id="confirm_password" name="confirm_password" placeholder="********" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('confirm_password', 'toggleIconConf')">
+                                    <i id="toggleIconConf" class="bi bi-eye-fill"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Botón submit -->
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-success btn-lg">Registrarse</button>
+                        </div>
+                    </form>
+
+                    <!-- Si ya tienes cuenta, ir a logearte -->
+                    <div class="text-center mt-4" id="link-login">
+                        <small>¿Ya tienes cuenta? 
+                            <a href="#" onclick="showSection('login-section'); return false;">Inicia Sesión</a>
+                        </small>
                     </div>
-                </div>
 
-                <!-- Botón login -->
-                <div class="d-grid mt-4">
-                    <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
-                </div>
-            </form>
-
-            <!-- Enlace registro -->
-            <div class="text-center mt-4">
-                <small>¿No tienes cuenta? <a href="registro.php">Regístrate aquí</a></small>
-            </div>
+                </div> 
             </div>
         </div>
 
-        
-        <!-- Script para mostrar/ocultar contraseña -->
-        <script>
-            function togglePassword() 
-            {
-                const input = document.getElementById("login_password");
-                const icon = document.getElementById("toggleIcon");
-
-                if (input.type === "password") 
-                {
-                    input.type = "text";
-                    icon.classList.remove("bi-eye-fill");
-                    icon.classList.add("bi-eye-slash-fill");
-
-                } else 
-                {
-                    input.type = "password";
-                    icon.classList.remove("bi-eye-slash-fill");
-                    icon.classList.add("bi-eye-fill");
-                }
-            }
-        </script>
 
 
+        <!-- ***** Importamos scripts propios ***** -->
+        <script src="./js/togglePassword.js"></script>
+        <script src="./js/showSection.js"></script>
+        <script src="./js/dark-mode.js"></script>
 
-
-
-        <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
