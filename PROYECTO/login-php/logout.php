@@ -29,4 +29,4 @@ session_destroy();
 
 
 /* Redirigimos al index.php para volver a logearse */
-header("Location:./test.php"); /* Cambiar el nombre del sitio */
+header("Location: ./index.php");

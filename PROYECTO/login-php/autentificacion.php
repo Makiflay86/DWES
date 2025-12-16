@@ -82,7 +82,7 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
         } catch (PDOException $e) 
         {
             $_SESSION['error'] = "No se puede comprobar usuario, vuelva a intentarlo en unos minutos.";
-            header("Location:./test.php"); /* Cambiar el nombre del sitio */
+            header("Location: ./index.php");
             exit;
         }
 
@@ -107,7 +107,7 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
         {
             $_SESSION['login_attempts']++;
             $_SESSION['error'] = "Usuario incorrecto.";
-            header("Location:./test.php"); /* Cambiar el nombre del sitio */
+            header("Location: ./index.php");
             exit;
 
         } else /* El usuario ha sido encontrado */
@@ -133,7 +133,7 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
             {
                 $_SESSION['login_attempts']++;
                 $_SESSION['error'] = "Contraseña incorrecta.";
-                header("Location:./test.php"); /* Cambiar el nombre del sitio */
+                header("Location: ./index.php");
                 exit;
             }
 
@@ -148,13 +148,13 @@ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_toke
     } else 
     {
         $_SESSION['error'] = "Debes de hacer login para acceder.";
-        header("Location:./test.php"); /* Cambiar el nombre del sitio */
+        header("Location: ./index.php");
         exit;
     }
 
 } else 
 {
     $_SESSION['error'] = "No se puede comprobar usuario, vuelva a intentarlo en unos minutos.";
-    header("Location:./test.php"); /* Cambiar el nombre del sitio */
+    header("Location: ./index.php");
     exit;
 }
