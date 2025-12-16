@@ -62,11 +62,3 @@ function limpiarError(identificador)
     document.getElementById(identificador + 'Help').style.visibility="hidden";
     document.getElementById(identificador).style.borderColor="#dee2e6";
 }
-
-
-/* Poder elegir en ver o no la contraseña */
-function togglePassword() 
-{
-  const input = document.getElementById("password");
-  input.type = input.type === "password" ? "text" : "password";
-}
