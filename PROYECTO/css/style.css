@@ -148,6 +148,12 @@ body {
     z-index: 1; 
 }
 
+/* Establece como hidden las alerts de validaciones del js */
+.form-text 
+{
+    visibility: hidden;
+}
+
 
 /* --- GESTIÓN DE VISTAS (LOGIN VS REGISTRO) --- */
 

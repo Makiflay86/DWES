@@ -1,3 +1,7 @@
+<?php
+    include "establecer-sesion.php";
+?>
+
 <!doctype html>
 <html lang="es-ES">
     <head>
@@ -54,23 +58,35 @@
 
 
                 <!-- ***** Alert, los errores de la app ***** -->
-                <div class="alert alert-danger" role="alert">
-                    Usuario incorrecto, esto con php
-                </div>
+                <?php
+                    if (isset($_SESSION['error']))
+                    {
+                        echo '<div class="alert alert-danger" role="alert">';
+                        echo $_SESSION['error'];
+                        echo '</div>';
+
+                        /* $_SESSION["error"] = ""; contenido vacío, pero la variable sigue "set" */
+                        unset($_SESSION['error']);
+                    }
+                ?>
 
 
 
                 <!-- ***** LOGIN ***** -->
                 <div id="login-section">
-                    <form action="#" method="POST"> 
+                    <form id="form1" action="autentificacion.php" method="POST"> 
+
+                        <!-- Generar token csrf -->
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
                         <!-- Correo electrónico -->
                         <div class="mb-3">
                             <label for="login_email" class="form-label">Correo electrónico</label>
                             <div class="field-wrapper">
                                 <i class="bi bi-envelope-fill field-icon-left"></i>
-                                <input type="email" class="form-control form-control-lg" id="login_email" name="login_email" placeholder="ejemplo@correo.com" required>
+                                <input type="text" class="form-control form-control-lg" id="login_email" name="login_email" placeholder="ejemplo@email.com">
                             </div>
+                            <div id="login_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
                         </div>
 
                         <!-- Contraseña -->
@@ -78,11 +94,12 @@
                             <label for="login_password" class="form-label">Contraseña</label>
                             <div class="field-wrapper">
                                 <i class="bi bi-lock-fill field-icon-left"></i>
-                                <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" placeholder="********" required>
+                                <input type="password" class="form-control form-control-lg" id="login_password" name="login_password" placeholder="********">
                                 <button type="button" class="toggle-password" onclick="togglePassword('login_password', 'toggleIconLogin')">
                                     <i id="toggleIconLogin" class="bi bi-eye-fill"></i>
                                 </button>
                             </div>
+                            <div id="login_passwordHelp" class="form-text text-danger">La contraseña es obligatorio.</div>
                         </div>
 
                         <!-- Botón submit -->
@@ -103,15 +120,19 @@
 
                 <!-- ***** Sign_up ***** -->
                 <div id="register-section">
-                    <form action="#" method="POST">
+                    <form id="form2" action="#" method="POST">
+
+                        <!-- Generar token csrf -->
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         
                         <!-- Nombre -->
                         <div class="mb-3">
                             <label for="register_name" class="form-label">Nombre</label>
                             <div class="field-wrapper">
                                 <i class="bi bi-person-fill field-icon-left"></i>
-                                <input type="text" class="form-control form-control-lg" id="register_name" name="register_name" placeholder="Tu nombre" required>
+                                <input type="text" class="form-control form-control-lg" id="register_name" name="register_name" placeholder="Tu nombre">
                             </div>
+                            <div id="register_nameHelp" class="form-text text-danger">El nombre es obligatorio.</div>
                         </div>
 
                         <!-- Correo electrónico -->
@@ -121,6 +142,7 @@
                                 <i class="bi bi-envelope-fill field-icon-left"></i>
                                 <input type="email" class="form-control form-control-lg" id="register_email" name="register_email" placeholder="ejemplo@correo.com" required>
                             </div>
+                            <div id="register_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
                         </div>
 
                         <!-- Contraseña -->
@@ -133,6 +155,7 @@
                                     <i id="toggleIconReg" class="bi bi-eye-fill"></i>
                                 </button>
                             </div>
+                            <div id="register_passwordHelp" class="form-text text-danger">La contraseña es obligatorio.</div>
                         </div>
 
                         <!-- Repetir contraseña -->
@@ -145,6 +168,7 @@
                                     <i id="toggleIconConf" class="bi bi-eye-fill"></i>
                                 </button>
                             </div>
+                            <div id="confirm_passwordHelp" class="form-text text-danger">La confirmación de contraseña es obligatorio.</div>
                         </div>
 
                         <!-- Botón submit -->
@@ -170,6 +194,7 @@
         <script src="./js/toggle-password.js"></script>
         <script src="./js/show-section.js"></script>
         <script src="./js/dark-mode.js"></script>
+        <script src="./js/validaciones.js"></script>
 
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
