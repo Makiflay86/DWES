@@ -97,6 +97,15 @@ body {
     height: 48px;
 }
 
+#theme-toggle {
+    /* Fondo del botón: Negro sólido */
+    background-color: #000000 !important; 
+    /* Borde: Sutilmente gris oscuro */
+    border-color: gray !important;
+    /* Color del icono (el sol o la luna) para asegurar el contraste */
+    color: #ffffff !important; 
+}
+
 
 /* --- ESTILOS DE LA TARJETA DE LOGIN/REGISTRO --- */
 

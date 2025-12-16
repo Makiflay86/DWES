@@ -23,15 +23,17 @@
     <body class="bg-light">
         
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            
-            <button class="btn btn-secondary position-absolute top-0 end-0 m-3" id="theme-toggle" onclick="toggleTheme()">
-                <i class="bi bi-moon-fill" id="theme-icon"></i> 
-            </button>
-            
             <div class="card shadow p-5 login-card">  
                 <h2 class="text-center mb-4" id="form-title">Iniciar Sesión</h2>
                 
+
                 
+                <!-- ***** Dark-Mode ***** -->
+                <button class="btn btn-secondary position-absolute top-0 end-0 m-3" id="theme-toggle" onclick="toggleTheme()">
+                    <i class="bi bi-moon-fill" id="theme-icon"></i> 
+                </button>
+
+
 
                 <!-- ***** Alert, los errores de la app ***** -->
                 <div class="alert alert-danger" role="alert">
@@ -147,8 +149,8 @@
 
 
         <!-- ***** Importamos scripts propios ***** -->
-        <script src="./js/togglePassword.js"></script>
-        <script src="./js/showSection.js"></script>
+        <script src="./js/toggle-password.js"></script>
+        <script src="./js/show-section.js"></script>
         <script src="./js/dark-mode.js"></script>
 
         <script
