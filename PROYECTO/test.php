@@ -1,13 +1,31 @@
 <!doctype html>
 <html lang="es-ES">
     <head>
-        <title>LOGIN & REGISTRO</title>
+        <title>Iniciar Sesión o Registro | Tu Aplicación</title>
         <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+        <meta name="description" content="Accede a tu cuenta o regístrate para empezar a usar la aplicación. Inicio de sesión seguro y rápido." />
+        <meta name="keywords" content="login, registro, formulario, acceso, cuenta, seguridad, iniciar sesión" />
+        <meta name="author" content="Francisco Aybar Romero" />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="theme-color" content="#343a40" />
+        <meta property="og:locale" content="es_ES" />
+
+        <meta property="og:title" content="Iniciar Sesión | Tu Aplicación" />
+        <meta property="og:description" content="Accede a tu cuenta o regístrate en la plataforma." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="./img/favicon2.ico" /> 
+        <meta property="og:url" content="./test.php" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Iniciar Sesión | Tu Aplicación" />
+        <meta name="twitter:description" content="Accede a tu cuenta o regístrate en la plataforma." />
+        <meta name="twitter:image" content="./img/favicon2.ico" />
+
+        <link rel="icon" href="./img/favicon2.ico" type="image/x-icon">
         <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
