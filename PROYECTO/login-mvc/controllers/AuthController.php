@@ -19,18 +19,21 @@ class AuthController                                   // la clase AuthControlle
     public function authenticate()                    // aquí confronta con la base de datos
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['idusuario'];
-            $password = $_POST['password'];
-
-            if ($this->userModel->login($username, $password)) {
+            $idusuario = $_POST['login_email'];
+            $password = $_POST['login_password'];
+            
+            if ($this->userModel->login($idusuario, $password)) 
+            {
                 // Autenticación exitosa, iniciar sesión y redirigir al enrutador para que éste envíe al dashboard-inicio
-                $_SESSION['idusuario'] = $username;
+                $_SESSION['idusuario'] = $idusuario;
                 header('Location: index.php?action=dashboard');
                 exit();
-            } else {
+
+            } else 
+            {
                 // Autenticación fallida, recargar login con error que mostraría mensaje
-                $_GET['error'] = "Usuario o contraseña incorrectos.";
-                include 'views/login.php?action=login&error=si';
+                $_SESSION['error'] = "Usuario o contraseña incorrectos.";
+                include 'views/login.php';
             }
         }
     }
@@ -38,7 +41,8 @@ class AuthController                                   // la clase AuthControlle
     public function dashboard()
     {
         // Verificar si el usuario ha iniciado sesión
-        if (!isset($_SESSION['idusuario'])) {
+        if (!isset($_SESSION['idusuario'])) 
+        {
             header('Location: index.php?action=login');
             exit();
         }

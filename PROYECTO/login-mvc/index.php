@@ -1,10 +1,11 @@
 <?php
 
+require_once './config/config.php';
 require_once 'controllers/AuthController.php';  // el controlador de autentificación y
 require_once 'models/Usuario.php';                 // el modelo de usuarios son cargados al empezar
 												// ambos son declaraciones de clases -> orientación a objetos pura
 // Iniciar sesión
-session_start();
+include "./config/establecer-sesion.php";
 
 $controller = new AuthController();  // se crea una instancia de controlador de usuario (que incluye conexión, tabla, y operatoria con usuarios)
 
