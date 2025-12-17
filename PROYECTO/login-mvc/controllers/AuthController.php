@@ -27,6 +27,38 @@ class AuthController                                   // la clase AuthControlle
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') 
         {
+            /* Contador de intentos */
+            /* Inicializo el contador de intentos, si llega a >= 5 se bloquea (un rato claro) */
+            if (!isset($_SESSION['login_attempts'])) 
+            {
+                $_SESSION['login_attempts'] = 0;
+            }
+
+            /* Definir cooldown en segundos (ejemplo: 5 minutos == 300) */
+            $cooldown = 300;
+            $minutos = $cooldown / 60;
+
+            /* Comprobar si está bloqueado */
+            if ($_SESSION['login_attempts'] >= 5) 
+            {
+                $tiempo_transcurrido = time() - ($_SESSION['lock_time'] ?? 0);
+                if ($tiempo_transcurrido < $cooldown) 
+                {
+                    $restante = $cooldown - $tiempo_transcurrido;
+                    $_SESSION['error'] = "<b>Acceo bloqueado</b>.<br> Intenta de nuevo en $restante segundos.";
+                    header("Location: index.php?action=login");
+                    exit();
+
+                } else 
+                {
+                    // El tiempo pasó, reseteamos para dejarle intentar
+                    $_SESSION['login_attempts'] = 0;
+                    unset($_SESSION['lock_time']);
+                } 
+            }
+            
+
+
             /* Validamos el CSRF */
             if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) 
             {
@@ -34,6 +66,8 @@ class AuthController                                   // la clase AuthControlle
                 header("Location: index.php?action=login");
                 exit();
             }
+
+
 
             $idusuario = $_POST['login_email'];
             $password = $_POST['login_password'];
@@ -46,13 +80,28 @@ class AuthController                                   // la clase AuthControlle
                 $_SESSION['nombre_usuario'] = $user['nombre'];
                 $_SESSION['apellidos_usuario'] = $user['apellidos'];
                 $_SESSION['usuario_logueado'] = true;
+
+                $_SESSION['login_attempts'] = 0;
+                unset($_SESSION['lock_time']);
+
                 header('Location: index.php?action=dashboard');
                 exit();
 
             } else 
             {
                 // Autenticación fallida, recargar login con error que mostraría mensaje
-                $_SESSION['error'] = "Usuario o contraseña incorrectos.";
+                $_SESSION['login_attempts']++;
+                if ($_SESSION['login_attempts'] >= 5) 
+                {
+                    $_SESSION['lock_time'] = time();
+                    $_SESSION['error'] = "Has superado los intentos. Bloqueado por " . $minutos . " min.";
+
+                } else 
+                {
+                    $_SESSION['error'] = "Usuario o contraseña incorrectos.";
+                }
+
+                /* Lo redirigimos al login */
                 header('Location: index.php?action=login');
                 exit();
             }
