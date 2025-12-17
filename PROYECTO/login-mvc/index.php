@@ -2,18 +2,22 @@
 
 require_once './config/config.php';
 require_once 'controllers/AuthController.php';  // el controlador de autentificación y
-require_once 'models/Usuario.php';                 // el modelo de usuarios son cargados al empezar
+require_once 'models/Usuario.php';              // el modelo de usuarios son cargados al empezar
 												// ambos son declaraciones de clases -> orientación a objetos pura
 // Iniciar sesión
 include "./config/establecer-sesion.php";
 
-$controller = new AuthController();  // se crea una instancia de controlador de usuario (que incluye conexión, tabla, y operatoria con usuarios)
+$controller = new AuthController();             // se crea una instancia de controlador de usuario (que incluye conexión, tabla, y operatoria con usuarios)
 
-												// Simple enrutamiento basado en la URL. Se concentra aquí todo el redireccionamiento
-if (!isset($_REQUEST['action'])) {              // la primera vez, entramos para hacer login y no hay en la URL action definida
+                                                // Simple enrutamiento basado en la URL. Se concentra aquí todo el redireccionamiento
+if (!isset($_REQUEST['action']))                // la primera vez, entramos para hacer login y no hay en la URL action definida
+{
     $controller->login();
-} else {
-    switch ($_REQUEST['action']) {              // más adelante, podemos venir desde el interior con una action particular en la url
+
+} else 
+{
+    switch ($_REQUEST['action']) 
+    {                                           // más adelante, podemos venir desde el interior con una action particular en la url
         case 'login':
             $controller->login();               // si la action fuera login
             break;

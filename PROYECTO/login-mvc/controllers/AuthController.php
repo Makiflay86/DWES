@@ -12,20 +12,40 @@ class AuthController                                   // la clase AuthControlle
 
     public function login()                           // aquí ejecuta el login (en realidad, la vista login)
     {
-        // Carga la vista del formulario de login
+        /* Si ya está logueado, lo mandamos al dashboard directamente */
+        if (isset($_SESSION['usuario_logueado']) && $_SESSION['usuario_logueado'] === true) 
+        {
+            header("Location: index.php?action=dashboard");
+            exit();
+        }
+
+        /* Si no está logueado, cargamos la vista normal */
         include 'views/login.php';
     }
 
     public function authenticate()                    // aquí confronta con la base de datos
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+        {
+            /* Validamos el CSRF */
+            if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) 
+            {
+                $_SESSION['error'] = "Error de seguridad CSRF.";
+                header("Location: index.php?action=login");
+                exit();
+            }
+
             $idusuario = $_POST['login_email'];
             $password = $_POST['login_password'];
             
-            if ($this->userModel->login($idusuario, $password)) 
+            $user = $this->userModel->login($idusuario, $password);
+            if ($user) 
             {
                 // Autenticación exitosa, iniciar sesión y redirigir al enrutador para que éste envíe al dashboard-inicio
                 $_SESSION['idusuario'] = $idusuario;
+                $_SESSION['nombre_usuario'] = $user['nombre'];
+                $_SESSION['apellidos_usuario'] = $user['apellidos'];
+                $_SESSION['usuario_logueado'] = true;
                 header('Location: index.php?action=dashboard');
                 exit();
 
@@ -33,7 +53,8 @@ class AuthController                                   // la clase AuthControlle
             {
                 // Autenticación fallida, recargar login con error que mostraría mensaje
                 $_SESSION['error'] = "Usuario o contraseña incorrectos.";
-                include 'views/login.php';
+                header('Location: index.php?action=login');
+                exit();
             }
         }
     }
