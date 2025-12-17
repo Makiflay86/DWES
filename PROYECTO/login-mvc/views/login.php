@@ -93,7 +93,7 @@
                                 <i class="bi bi-envelope-fill field-icon-left"></i>
                                 <input type="text" class="form-control form-control-lg" id="login_email" name="login_email" placeholder="ejemplo@email.com">
                             </div>
-                            <div id="login_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
+                            <div id="login_emailHelp" class="form-text text-danger"></div>
                         </div>
 
                         <!-- Contraseña -->
@@ -106,7 +106,7 @@
                                     <i id="toggleIconLogin" class="bi bi-eye-fill"></i>
                                 </button>
                             </div>
-                            <div id="login_passwordHelp" class="form-text text-danger">La contraseña es obligatorio.</div>
+                            <div id="login_passwordHelp" class="form-text text-danger"></div>
                         </div>
 
                         <!-- Botón submit -->
@@ -147,7 +147,7 @@
                             <label for="register_email" class="form-label">Correo electrónico</label>
                             <div class="field-wrapper">
                                 <i class="bi bi-envelope-fill field-icon-left"></i>
-                                <input type="email" class="form-control form-control-lg" id="register_email" name="register_email" placeholder="ejemplo@correo.com" required>
+                                <input type="email" class="form-control form-control-lg" id="register_email" name="register_email" placeholder="ejemplo@email.com" required>
                             </div>
                             <div id="register_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
                         </div>

@@ -28,14 +28,22 @@ function validarFormulario()
 
     var correcto = true; 
 
-    if (login_email == "" )
+    /* Validar email */
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (login_email == "" || !regexEmail.test(login_email))
     {
+        document.getElementById('login_emailHelp').innerText = "Introduce un correo electrónico válido.";
         marcarError('login_email');
         correcto = false;
     }
 
-    if (login_password == "")
+    /* Validar password */
+    /* 8-15 caracteres, 1 minúscula, 1 mayúscula, 1 símbolo (#$%&*) */
+    /* Bloquea: ' " \ / < > = ( ) */
+    const regexClave = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[#$%\&*])[^'\"\\\/<>=()]{8,15}$/;
+    if (login_password == "" || !regexClave.test(login_password))
     {
+        document.getElementById('login_passwordHelp').innerText = "La clave debe tener 8-15 caracteres, incluir mayúsculas, minúsculas, un símbolo (#$%&*) y no usar caracteres prohibidos (' \" \\ / < > = ( ) ).";
         marcarError('login_password');
         correcto = false;
     }

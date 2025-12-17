@@ -69,8 +69,8 @@ class AuthController                                   // la clase AuthControlle
 
 
 
-            $idusuario = $_POST['login_email'];
-            $password = $_POST['login_password'];
+            $idusuario = htmlspecialchars($_POST['login_email']);
+            $password = htmlspecialchars($_POST['login_password']);
             
             $user = $this->userModel->login($idusuario, $password);
             if ($user) 
@@ -123,6 +123,17 @@ class AuthController                                   // la clase AuthControlle
     public function logout()
     {
         session_unset();
+
+        /* Borramos las cookies de sesión del navegador */
+        if (ini_get("session.use_cookies")) 
+        {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+
         session_destroy();
         header('Location: index.php?action=login');
         exit();
