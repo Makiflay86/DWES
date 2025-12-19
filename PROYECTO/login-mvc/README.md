@@ -1,8 +1,11 @@
-# Sistema de Login MVC
+<h1 align="center" style="font-size: 50px;">Sistema de Login MVC</h1>
 
-![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-MariaDB-4479A1?logo=mysql&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)
+<p align="center">
+  <img src="https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/MySQL-MariaDB-4479A1?logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white" alt="Bootstrap">
+</p>
+
 
 Este proyecto es una implementación de un sistema de autenticación de usuarios utilizando el patrón de diseño **Modelo-Vista-Controlador (MVC)** en PHP. El objetivo es separar la lógica de negocio de la interfaz de usuario para crear un código más limpio y mantenible.
 
@@ -98,7 +101,7 @@ login-mvc/
 Es la puerta de entrada única al sistema que orquesta el flujo MVC y asegura la carga de dependencias críticas antes de cualquier ejecución.
 
 ![Captura: Enrutamiento en index.php](img-readme/captura-index.png)
-
+---
 
 
 
@@ -111,6 +114,7 @@ Esta carpeta constituye el núcleo técnico del sistema, gestionando la portabil
 Define la constante global `BASE_URL`. Esto es crítico para el patrón MVC, ya que permite que todas las redirecciones y las rutas de los archivos CSS/JS sean dinámicas, evitando errores de carga al mover el proyecto entre diferentes directorios del servidor.
 
 ![Captura: Definición de BASE_URL](img-readme/captura-config.png)
+---
 
 #### 2. Persistencia con PDO (`Database.php`)
 Gestiona la comunicación con la base de datos mediante una clase orientada a objetos.
@@ -118,6 +122,7 @@ Gestiona la comunicación con la base de datos mediante una clase orientada a ob
 * **Robustez:** Activa `ERRMODE_EXCEPTION`, lo que garantiza que cualquier fallo en el SQL sea detectado durante el desarrollo sin exponer errores crudos al usuario final.
 
 ![Captura: Clase Database y conexión PDO](img-readme/captura-database.png)
+---
 
 #### 3. Motor de Seguridad de Sesión (`establecer-sesion.php`)
 Es el archivo encargado del "hardening" (endurecimiento) de la seguridad del sitio mediante tres capas:
@@ -127,6 +132,7 @@ Es el archivo encargado del "hardening" (endurecimiento) de la seguridad del sit
 * **Generador de Token CSRF:** Crea un token criptográfico de 64 bytes altamente seguro utilizando `openssl_random_pseudo_bytes`, el cual es validado por el controlador en cada petición `POST`.
 
 ![Captura: Lógica de Sesiones y Token CSRF](img-readme/captura-sesion.png)
+---
 
 
 
@@ -140,26 +146,31 @@ El `AuthController.php` centraliza toda la inteligencia del sistema. A continuac
 El sistema monitoriza los fallos de inicio de sesión. Si un usuario falla más de 5 veces, se activa un "cooldown" de 5 minutos. El controlador calcula el tiempo restante y bloquea el acceso hasta que el tiempo expire, protegiendo el sistema de ataques automatizados.
 
 ![Captura: Control de Intentos](img-readme/control-intentos.png)
+---
 
 #### 2. Validación de Seguridad CSRF
 Para cada petición de autenticación, el controlador compara el `csrf_token` enviado por el formulario con el almacenado en la sesión. Si no coinciden, la petición se aborta, evitando que atacantes externos realicen acciones en nombre del usuario.
 
 ![Captura: Validación CSRF](img-readme/validacion-csrf.png)
+---
 
 #### 3. Autenticación y Sanitización
 Antes de consultar la base de datos, los datos recibidos mediante `POST` se limpian con `htmlspecialchars`. Una vez validados, se invoca al modelo para verificar las credenciales y, en caso de éxito, se inicializan las variables de sesión del usuario.
 
 ![Captura: Proceso de Autenticación](img-readme/autenticacion-logic.png)
+---
 
 #### 4. Protección de Rutas (Middleware de Sesión)
 Al invocar la función `dashboard()`, el controlador realiza una comprobación de seguridad inmediata: verifica si existe la variable de sesión `idusuario`. Si el usuario no está autenticado (la sesión no existe), el sistema bloquea el acceso y lo redirige automáticamente al formulario de login; en caso contrario, permite la carga de la vista privada. Esta lógica impide que cualquier persona acceda al panel de control simplemente escribiendo la URL en el navegador.
 
 ![Captura: Protección de Rutas](img-readme/proteccion-rutas.png)
+---
 
 #### 5. Cierre de Sesión Seguro (Logout)
 No solo destruye la sesión con `session_destroy()`. El código limpia las variables de sesión (`session_unset`) y elimina físicamente la cookie de sesión del navegador del usuario, garantizando que nadie pueda reutilizar la sesión anterior.
 
 ![Captura: Cierre de Sesión](img-readme/logout-logic.png)
+---
 
 
 
@@ -171,16 +182,19 @@ El modelo es el componente encargado de interactuar con la base de datos, abstra
 Al instanciar la clase `Usuario`, su constructor invoca automáticamente a la clase `Database` para establecer una conexión segura a través de **PDO**. Esto garantiza que cada objeto de usuario tenga acceso a las herramientas necesarias para realizar consultas.
 
 ![Captura: Constructor y Conexión](img-readme/modelo-conexion.png)
+---
 
 #### 2. Consultas Preparadas (Protección SQL Injection)
 Para verificar las credenciales, el modelo utiliza **sentencias preparadas** (`prepare` y `execute`). Esta técnica es vital para la seguridad, ya que evita ataques de **Inyección SQL** al separar la estructura de la consulta de los datos proporcionados por el usuario.
 
 ![Captura: Consultas Preparadas](img-readme/consultas-preparadas.png)
+---
 
 #### 3. Verificación Segura de Contraseñas (`password_verify`)
 El sistema no almacena ni compara contraseñas en texto plano. En su lugar, recupera el hash almacenado en la base de datos y utiliza la función nativa `password_verify()` para comprobar si la contraseña introducida coincide con el hash, cumpliendo con los estándares modernos de seguridad.
 
 ![Captura: Verificación de Hash](img-readme/password-verify.png)
+---
 
 
 
@@ -204,6 +218,8 @@ Una vez autenticado, el usuario accede a un panel privado que muestra sus datos 
     ![Captura: Vista del Dashboard](img-readme/captura-dashboard-final.png)
 </video>
 
+---
+
 
 
 
@@ -216,36 +232,44 @@ La vista de acceso ha sido diseñada con **Bootstrap 5**, priorizando la usabili
 La vista utiliza sesiones de PHP para mostrar mensajes de error en tiempo real (como fallos de autenticación o bloqueos). Estas alertas se renderizan automáticamente y se eliminan de la sesión tras mostrarse para evitar repeticiones innecesarias.
 
 ![Captura: Mensajes de Error](img-readme/vista-alertas.png)
+---
 
 #### 2. Formulario Dual (Login/Registro)
 Mediante manipulación del DOM con JavaScript, la vista permite alternar entre el formulario de inicio de sesión y el de registro sin recargar la página, mejorando la fluidez de la aplicación.
 
 ![Captura: Cambio entre Login y Registro](img-readme/interfaz-dual.png)
+---
 
 #### 3. Seguridad Visual: Ver Contraseña
 Se ha implementado una funcionalidad que permite al usuario alternar la visibilidad de su contraseña mediante un icono de ojo. Esto reduce errores de escritura y mejora la accesibilidad del formulario.
 
 ![Captura: Toggle Password](img-readme/ver-password.png)
+---
 
 #### 4. Modo Oscuro (Dark Mode)
 El sistema incluye un botón flotante para alternar entre temas claro y oscuro. Esta preferencia se gestiona mediante JavaScript, adaptando los colores de la tarjeta y el fondo para mayor comodidad visual.
 
 ![Captura: Modo Oscuro](img-readme/modo-oscuro.png)
+---
 
 #### 5. Meta-Etiquetas y SEO
 El archivo incluye una configuración exhaustiva de etiquetas `<meta>` para **Open Graph** y **Twitter Cards**, lo que permite que el enlace del proyecto se visualice con una tarjeta rica en información y favicon personalizado al ser compartido en redes sociales.
 
 ![Captura: Vista de Favicon y Metas](img-readme/meta-tags.png)
+---
 
 #### 6. Control de Acceso Preventivo (Redirección Automática)
 Al inicio del archivo `login.php`, el código verifica inmediatamente si ya existe una sesión activa (`usuario_logueado`). Si es así, redirige al usuario al dashboard de forma automática, evitando que un usuario ya autenticado vuelva a ver el formulario de acceso innecesariamente.
 
 ![Captura: Redirección Preventiva](img-readme/check-sesion.png)
+---
 
 #### 7. Implementación de Token CSRF (Hidden Input)
 Dentro de cada formulario (`form1` y `form2`), se incluye un campo de tipo `hidden` que inyecta el `csrf_token` generado en el servidor. Este token es invisible para el usuario pero fundamental para que el controlador valide que la petición es legítima y proviene de nuestro propio sitio, bloqueando cualquier intento de falsificación externa.
 
 ![Captura: Input Hidden CSRF](img-readme/hidden-csrf.png)
+---
+
 
 
 
@@ -261,6 +285,7 @@ Antes de renderizar el HTML, el archivo ejecuta tres comprobaciones críticas:
 * **Integridad de Sesión (CSRF):** Valida que el `csrf_token` esté presente, garantizando que la sesión es legítima y no ha sido manipulada.
 
 ![Captura: Lógica de validación en Dashboard](img-readme/dashboard-auth.png)
+---
 
 #### 2. Interfaz Dinámica y Experiencia de Usuario (UX)
 Una vez superados los filtros de seguridad, la vista ofrece una experiencia personalizada mediante:
@@ -291,6 +316,7 @@ La tabla cuenta con una clave primaria autoincremental y campos optimizados para
 | 5 | **apellidos** | `varchar(60)` | NOT NULL | Apellidos del usuario. |
 
 ![Captura: Estructura real en phpMyAdmin](img-readme/estructura-db.png)
+---
 
 ### 2. Proceso de Importación
 Para configurar el entorno de datos correctamente en **XAMPP**:
@@ -300,6 +326,7 @@ Para configurar el entorno de datos correctamente en **XAMPP**:
 3. **Verificar:** Una vez finalizado, la tabla `usuarios` aparecerá con la estructura mostrada arriba.
 
 ![Captura: Importación del script SQL](img-readme/importacion-sql.png)
+---
 
 ### 3. Usuarios de Prueba y Acceso
 
