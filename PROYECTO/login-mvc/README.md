@@ -81,10 +81,8 @@ login-mvc/
 ├── login-php.sql                  # Script SQL para crear la BD
 │
 ├── img-readme/                    # Capturas para README
-│   ├── 
-│   ├── 
-│   ├── 
-│   └── 
+│   ├── vista-alertas.png
+│   └── ...
 │
 └── README.md                      # Este archivo
 ```
@@ -94,6 +92,36 @@ login-mvc/
 
 
 ## Explicación del Código
+
+
+### Configuración y Seguridad Centralizada (`config/`)
+
+Esta carpeta constituye el núcleo técnico del sistema, gestionando la portabilidad, la persistencia de datos y la protección proactiva de la sesión antes de entrar al flujo MVC.
+
+#### 1. Portabilidad y Rutas (`config.php`)
+Define la constante global `BASE_URL`. Esto es crítico para el patrón MVC, ya que permite que todas las redirecciones y las rutas de los archivos CSS/JS sean dinámicas, evitando errores de carga al mover el proyecto entre diferentes directorios del servidor.
+
+![Captura: Definición de BASE_URL](img-readme/captura-config.png)
+
+#### 2. Persistencia con PDO (`Database.php`)
+Gestiona la comunicación con la base de datos mediante una clase orientada a objetos.
+* **Seguridad:** Utiliza **PDO** con bloques `try-catch` para capturar excepciones de conexión.
+* **Robustez:** Activa `ERRMODE_EXCEPTION`, lo que garantiza que cualquier fallo en el SQL sea detectado durante el desarrollo sin exponer errores crudos al usuario final.
+
+![Captura: Clase Database y conexión PDO](img-readme/captura-database.png)
+
+#### 3. Motor de Seguridad de Sesión (`establecer-sesion.php`)
+Es el archivo encargado del "hardening" (endurecimiento) de la seguridad del sitio mediante tres capas:
+
+* **Protección de Cookies:** Configura parámetros estrictos como `httponly` (bloquea el acceso a la sesión desde JavaScript) y `samesite => Strict` (defensa principal contra ataques CSRF).
+* **Prevención de Session Hijacking:** Implementa una regeneración automática del ID de sesión cada 20 minutos (`1200s`) mediante `session_regenerate_id(true)`, invalidando cualquier identificador antiguo.
+* **Generador de Token CSRF:** Crea un token criptográfico de 64 bytes altamente seguro utilizando `openssl_random_pseudo_bytes`, el cual es validado por el controlador en cada petición `POST`.
+
+![Captura: Lógica de Sesiones y Token CSRF](img-readme/captura-sesion.png)
+
+
+
+
 
 ### Lógica del Controlador
 
@@ -191,6 +219,30 @@ Dentro de cada formulario (`form1` y `form2`), se incluye un campo de tipo `hidd
 
 
 
+### Panel de Control (`views/dashboard.php`)
+
+El dashboard es el área protegida del sistema. No es solo una interfaz visual, sino que actúa como una capa final de seguridad que verifica la integridad de la sesión antes de mostrar cualquier dato sensible.
+
+#### 1. Triple Validación de Acceso
+Antes de renderizar el HTML, el archivo ejecuta tres comprobaciones críticas:
+* **Origen del Tráfico:** Verifica que la constante `BASE_URL` esté definida para asegurar que el usuario ha pasado por el `index.php` (Front Controller) y no está intentando cargar el archivo directamente.
+* **Estado de Autenticación:** Comprueba la existencia de `usuario_logueado` en la sesión. Si no existe, redirige al login con un mensaje de error.
+* **Integridad de Sesión (CSRF):** Valida que el `csrf_token` esté presente, garantizando que la sesión es legítima y no ha sido manipulada.
+
+![Captura: Lógica de validación en Dashboard](img-readme/dashboard-auth.png)
+
+#### 2. Interfaz Dinámica y Experiencia de Usuario (UX)
+Una vez superados los filtros de seguridad, la vista ofrece una experiencia personalizada mediante:
+* **Visualización de Datos de Sesión:** Saluda al usuario utilizando su nombre y apellidos almacenados en las variables de sesión (`$_SESSION`), recuperadas previamente del modelo.
+* **Diseño Responsivo con Bootstrap 5:** Utiliza una estructura de tarjetas (`cards`) y contenedores fluidos para adaptarse a cualquier dispositivo.
+* **Estética Avanzada (CSS Animation):** Incluye una barra de navegación (`navbar-fondo`) con un degradado animado mediante `@keyframes`, lo que proporciona una estética moderna y profesional al panel de control.
+* **Logout Seguro:** Proporciona un acceso directo al método de cierre de sesión, asegurando que el usuario pueda finalizar su actividad de forma inmediata y protegida.
+
+![Captura: Interfaz del Dashboard animado](img-readme/dashboard-ui.png)
+
+
+
+
 
 ## Base de Datos y Persistencia (phpMyAdmin)
 
@@ -218,6 +270,19 @@ Para configurar el entorno de datos correctamente en **XAMPP**:
 
 ![Captura: Importación del script SQL](img-readme/importacion-sql.png)
 
+### 3. Usuarios de Prueba y Acceso
+
+El archivo `login-php.sql` incluye la estructura necesaria y **dos usuarios preconfigurados** para validar el funcionamiento del sistema inmediatamente. Es importante destacar que el sistema utiliza el **correo electrónico** como identificador de acceso.
+
+| Correo (Login) | Contraseña |
+| :--- | :--- |
+| `fran@fran.com` | **Contraseña123#** |
+| `aitor@aitor.com` | **Password123#** |
+
+> **Nota de Seguridad:** Aunque la contraseña para las pruebas es `Contraseña123# o Password123#`, en la base de datos se almacenan mediante hashes de **BCRYPT**, lo que garantiza que las credenciales reales nunca sean visibles en texto plano dentro de las tablas.
+
+![Captura: Usuarios de prueba en phpMyAdmin](img-readme/usuarios-db.png)
+
 
 
 
@@ -230,6 +295,23 @@ Para garantizar la seguridad y eficiencia de este sistema, se han integrado las 
 * **Seguridad de Acceso:** Implementación de **BCRYPT** para el hash de contraseñas y validación de **CSRF Tokens** para prevenir ataques de falsificación.
 * **Diseño y UI:** Interfaz construida con **Bootstrap 5.3** y **Bootstrap Icons** para asegurar un entorno responsivo y moderno.
 * **Gestión de Sesiones:** Configuración de cookies seguras (`httponly` y `Samesite`) y regeneración de ID para mitigar el secuestro de sesiones.
+
+
+
+
+
+## Guía de Pruebas Rápidas
+
+Para verificar el correcto funcionamiento de las medidas de seguridad implementadas, puedes realizar las siguientes pruebas:
+
+1. **Prueba de Autenticación:** Regístrate con un usuario nuevo y verifica que la contraseña se guarda como un hash en la tabla `usuarios` de phpMyAdmin.
+2. **Prueba de Fuerza Bruta:** Intenta loguearte con una contraseña errónea 5 veces seguidas. El sistema debe mostrar un mensaje de bloqueo y un contador de tiempo restante.
+3. **Prueba de Acceso Directo:** Intenta entrar a `views/dashboard.php` escribiendo la URL directamente en el navegador sin haber iniciado sesión; el sistema debería redirigirte al login automáticamente.
+4. **Prueba de Cierre de Sesión:** Tras cerrar sesión, intenta usar el botón "Atrás" del navegador; el sistema debe impedir que vuelvas a ver el contenido del dashboard.
+
+> **IMPORTANTE**
+>---
+> **Nota sobre el Registro:** Actualmente, el sistema está diseñado exclusivamente para la fase de **Autenticación (Login)**. La funcionalidad de creación de usuarios desde la interfaz web no está habilitada por motivos de seguridad y control de acceso. Los usuarios deben ser dados de alta manualmente de forma directa en la base de datos.
 
 
 
