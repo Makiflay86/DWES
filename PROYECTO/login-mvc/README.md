@@ -207,20 +207,12 @@ A continuación se muestra el resultado final de la interfaz de usuario, donde s
 #### 1. Formulario de Acceso (Login)
 La vista de inicio incluye validaciones en tiempo real, alternancia de visibilidad de contraseña y soporte para modo oscuro.
 
-<p align="center">
-  <video src="https://raw.githubusercontent.com/Makiflay86/DWES/main/PROYECTO/login-mvc/img-readme/video-login.mp4" width="100%" controls autoplay loop muted>
-    <img src="img-readme/captura-login-final.png" alt="Captura de respaldo">
-  </video>
-</p>
+![Demostración del login](img-readme/video-login.gif)
 
 #### 2. Panel de Control (Dashboard)
 Una vez autenticado, el usuario accede a un panel privado que muestra sus datos personales y cuenta con una estética profesional mediante fondos animados.
 
-<p align="center">
-  <video src="https://raw.githubusercontent.com/Makiflay86/DWES/main/PROYECTO/login-mvc/img-readme/video-dashboard.mp4" width="100%" controls autoplay loop muted>
-    <img src="img-readme/captura-dashboard-final.png" alt="Captura de respaldo">
-  </video>
-</p>
+![Demostración del dashboard](img-readme/video-dashboard.gif)
 
 ---
 
