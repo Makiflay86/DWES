@@ -93,6 +93,15 @@ login-mvc/
 
 ## Explicación del Código
 
+### Front Controller (`index.php`)
+
+Es la puerta de entrada única al sistema que orquesta el flujo MVC y asegura la carga de dependencias críticas antes de cualquier ejecución.
+
+![Captura: Enrutamiento en index.php](img-readme/captura-index.png)
+
+
+
+
 
 ### Configuración y Seguridad Centralizada (`config/`)
 
@@ -172,6 +181,28 @@ Para verificar las credenciales, el modelo utiliza **sentencias preparadas** (`p
 El sistema no almacena ni compara contraseñas en texto plano. En su lugar, recupera el hash almacenado en la base de datos y utiliza la función nativa `password_verify()` para comprobar si la contraseña introducida coincide con el hash, cumpliendo con los estándares modernos de seguridad.
 
 ![Captura: Verificación de Hash](img-readme/password-verify.png)
+
+
+
+
+
+### Interfaz del Sistema
+
+A continuación se muestra el resultado final de la interfaz de usuario, donde se combina la potencia de Bootstrap 5 con estilos personalizados y animaciones CSS.
+
+#### 1. Formulario de Acceso (Login)
+La vista de inicio incluye validaciones en tiempo real, alternancia de visibilidad de contraseña y soporte para modo oscuro.
+
+<video src="img-readme/video-login.mp4" width="100%" controls autoplay loop muted>
+    ![Captura: Vista del Login](img-readme/captura-login-final.png)
+</video>
+
+#### 2. Panel de Control (Dashboard)
+Una vez autenticado, el usuario accede a un panel privado que muestra sus datos personales y cuenta con una estética profesional mediante fondos animados.
+
+<video src="img-readme/video-dashboard.mp4" width="100%" controls autoplay loop muted>
+    ![Captura: Vista del Dashboard](img-readme/captura-dashboard-final.png)
+</video>
 
 
 
@@ -274,12 +305,12 @@ Para configurar el entorno de datos correctamente en **XAMPP**:
 
 El archivo `login-php.sql` incluye la estructura necesaria y **dos usuarios preconfigurados** para validar el funcionamiento del sistema inmediatamente. Es importante destacar que el sistema utiliza el **correo electrónico** como identificador de acceso.
 
+> **Nota de Seguridad:** Aunque la contraseña para las pruebas es `Contraseña123# o Password123#`, en la base de datos se almacenan mediante hashes de **BCRYPT**, lo que garantiza que las credenciales reales nunca sean visibles en texto plano dentro de las tablas.
+
 | Correo (Login) | Contraseña |
 | :--- | :--- |
 | `fran@fran.com` | **Contraseña123#** |
 | `aitor@aitor.com` | **Password123#** |
-
-> **Nota de Seguridad:** Aunque la contraseña para las pruebas es `Contraseña123# o Password123#`, en la base de datos se almacenan mediante hashes de **BCRYPT**, lo que garantiza que las credenciales reales nunca sean visibles en texto plano dentro de las tablas.
 
 ![Captura: Usuarios de prueba en phpMyAdmin](img-readme/usuarios-db.png)
 
@@ -300,18 +331,25 @@ Para garantizar la seguridad y eficiencia de este sistema, se han integrado las 
 
 
 
+## Solución de Problemas Comunes
+
+Si encuentras dificultades al instalar o ejecutar el proyecto, revisa los siguientes puntos:
+
+* **Error de Conexión (PDOException):** Verifica en `config/Database.php` que las credenciales coincidan con el usuario específico configurado en tu base de datos. En este entorno, por seguridad, no se utiliza el usuario `root`, sino un perfil con privilegios limitados exclusivamente a sentencias `SELECT`.
+* **Base de Datos no encontrada:** Asegúrate de haber creado la base de datos con el nombre exacto `login-php` antes de importar el archivo `.sql`.
+* **Error 404 en Estilos/Scripts:** Si el diseño no se ve bien, confirma que la constante `BASE_URL` en `config/config.php` apunte a la carpeta correcta donde clonaste el proyecto.
+* **Sesión bloqueada:** Si el sistema te indica que estás bloqueado por intentos fallidos, espera 5 minutos o limpia las cookies de tu navegador para reiniciar el contador.
+
+
+
+
+
 ## Guía de Pruebas Rápidas
 
-Para verificar el correcto funcionamiento de las medidas de seguridad implementadas, puedes realizar las siguientes pruebas:
-
-1. **Prueba de Autenticación:** Regístrate con un usuario nuevo y verifica que la contraseña se guarda como un hash en la tabla `usuarios` de phpMyAdmin.
-2. **Prueba de Fuerza Bruta:** Intenta loguearte con una contraseña errónea 5 veces seguidas. El sistema debe mostrar un mensaje de bloqueo y un contador de tiempo restante.
-3. **Prueba de Acceso Directo:** Intenta entrar a `views/dashboard.php` escribiendo la URL directamente en el navegador sin haber iniciado sesión; el sistema debería redirigirte al login automáticamente.
-4. **Prueba de Cierre de Sesión:** Tras cerrar sesión, intenta usar el botón "Atrás" del navegador; el sistema debe impedir que vuelvas a ver el contenido del dashboard.
-
-> **IMPORTANTE**
->---
-> **Nota sobre el Registro:** Actualmente, el sistema está diseñado exclusivamente para la fase de **Autenticación (Login)**. La funcionalidad de creación de usuarios desde la interfaz web no está habilitada por motivos de seguridad y control de acceso. Los usuarios deben ser dados de alta manualmente de forma directa en la base de datos.
+1. **Verificación de Datos:** Accede a phpMyAdmin y confirma que los usuarios de prueba aparecen con la contraseña cifrada (hash). Intenta loguearte con `fran@fran.com` y la clave `Contraseña123#`.
+2. **Prueba de Fuerza Bruta:** Intenta loguearte con una contraseña errónea 5 veces seguidas para validar el bloqueo de seguridad.
+3. **Prueba de Acceso Directo:** Intenta entrar a `views/dashboard.php` sin sesión activa para comprobar la redirección automática al login.
+4. **Cierre de Sesión:** Tras pulsar "Cerrar Sesión", intenta volver atrás en el navegador; el sistema debe impedirte ver el dashboard nuevamente.so. Los usuarios deben ser dados de alta manualmente de forma directa en la base de datos.
 
 
 
