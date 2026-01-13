@@ -23,7 +23,7 @@
 
 
         <h2>Crear Nuevo Coche</h2>
-        <form method="POST" action="index.php?action=create">
+        <form class="form" method="POST" action="index.php?action=create">
             <label>Marca: <input type="text" name="marca" required></label><br>
             <label>Modelo: <input type="text" name="modelo" required></label><br>
             <label>Fecha de Fabricación: <input type="date" name="fechaFabricacion" required></label><br>
