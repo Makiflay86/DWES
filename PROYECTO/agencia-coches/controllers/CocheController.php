@@ -32,7 +32,16 @@ class CocheController
             $this->coche->kilometros = $_POST['kilometros'];
             $this->coche->combustible = $_POST['combustible'];
             $this->coche->color = $_POST['color'];
-            $this->coche->imagen = $_POST['imagen'];
+
+            if (!empty($_FILES['imagen']['tmp_name'])) 
+            {
+                $this->coche->imagen = file_get_contents($_FILES['imagen']['tmp_name']);
+
+            } else 
+            {
+                $this->coche->imagen = null;
+            }
+
 
             if ($this->coche->create()) 
             {
@@ -51,7 +60,8 @@ class CocheController
 
     public function edit()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") 
+        {
             // Lógica de actualización (UPDATE)
             $this->coche->idCoche = $_POST['idCoche'];
             $this->coche->marca = $_POST['marca'];
@@ -60,12 +70,25 @@ class CocheController
             $this->coche->kilometros = $_POST['kilometros'];
             $this->coche->combustible = $_POST['combustible'];
             $this->coche->color = $_POST['color'];
-            $this->coche->imagen = $_POST['imagen'];
 
-            if ($this->coche->update()) {
+            if (!empty($_FILES['imagen']['tmp_name'])) 
+            {
+                $imagen = file_get_contents($_FILES['imagen']['tmp_name']);
+
+            } else 
+            {
+                $imagen = base64_decode($_POST['imagen_actual']);
+            }
+            $this->coche->imagen = $imagen;
+
+
+            if ($this->coche->update()) 
+            {
                 header("Location: index.php?action=index&message=updated");
                 exit();
-            } else {
+
+            } else 
+            {
                 $error = "Error al actualizar.";
             }
         }

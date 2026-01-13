@@ -77,7 +77,7 @@ class Coches
     // Método para actualizar un coche
     public function update()
     {
-        $query = "UPDATE " . $this->table_name . " SET marca=:marca, modelo=:modelo, fechaFabricacion=:fechaFabricacion, kilometros=:kilometros, combustible=:combustible, color=:color, imagen=:imagen";
+        $query = "UPDATE " . $this->table_name . " SET marca=:marca, modelo=:modelo, fechaFabricacion=:fechaFabricacion, kilometros=:kilometros, combustible=:combustible, color=:color, imagen=:imagen WHERE idCoche=:idCoche";
         $stmt = $this->conn->prepare($query);
 
         // Limpiar y enlazar parámetros
@@ -92,6 +92,7 @@ class Coches
         $stmt->bindParam(":combustible", $this->combustible);
         $stmt->bindParam(":color", $this->color);
         $stmt->bindParam(":imagen", $this->imagen);
+        $stmt->bindParam(":idCoche", $this->idCoche, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
             return true;

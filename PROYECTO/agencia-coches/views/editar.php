@@ -10,8 +10,10 @@
 <body>
     <h2>Editar Coche</h2>
     <!-- Usamos $coche_data que viene del controlador -->
-    <form method="POST" action="index.php?action=edit&id=<?php echo $coche_data->idCoche; ?>">
+    <form method="POST" action="index.php?action=edit&id=<?php echo $coche_data->idCoche; ?>" enctype="multipart/form-data">
         <input type="hidden" name="idCoche" value="<?php echo $coche_data->idCoche; ?>">
+        <input type="hidden" name="imagen_actual" value="<?php echo base64_encode($coche_data->imagen); ?>">
+
         <label>Marca: <input type="text" name="marca" value="<?php echo htmlspecialchars($coche_data->marca); ?>" required></label><br>
         <label>Modelo: <input type="text" name="modelo" value="<?php echo htmlspecialchars($coche_data->modelo); ?>" required></label><br>
         <label>Fecha de Fabricación: <input type="date" name="fechaFabricacion" value="<?php echo htmlspecialchars($coche_data->fechaFabricacion); ?>" required></label><br>
