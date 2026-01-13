@@ -14,15 +14,35 @@
         crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="stylesheet" href="./views/src/css/style.css">
     
 </head>
 
 <body>
     <div class="container-fluid w-75">
 
+        <!-- nav -->
 
-        <h2>Listado de Coches</h2>
+
+        <!-- Encabezado -->
+        <div class="row text-center py-5">
+            <!-- Título -->
+            <div class="col-lg-6 col-sm-12">
+                <h2>Listado de Coches</h2>
+            </div>
+
+            <!-- Icon añadir coche -->
+            <div class="col-lg-6 col-sm-12">
+                <button class="btn btn-primary">
+                    <a href="index.php?action=create">
+                        <svg class="bi bi-plus-circle-fill" xmlns="http://www.w3.org/2000/svg" width="30" fill="white" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+                        </svg>
+                    </a>
+                    <span class="ps-1">Añadir coche</span>
+                </button>
+            </div>
+        </div>
     
         <?php if (isset($_GET['message'])): ?>
             <div class="w-25 mx-auto">
@@ -43,19 +63,11 @@
             </div>
         <?php endif; ?>
     
-        <div class="svg-add">
-            <a href="index.php?action=create">
-                <svg class="bi bi-plus-circle-fill" xmlns="http://www.w3.org/2000/svg" width="30" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
-                </svg>
-                add
-            </a>
-        </div>
-    
-        <table class="table">
-            <thead>
+
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
                 <tr>
-                    <th>idCoche</th>
+                    <!-- <th scope="col">idCoche</th> -->
                     <th>Marca</th>
                     <th>Modelo</th>
                     <th>Fecha Fabricación</th>
@@ -69,7 +81,7 @@
             <tbody>
                 <?php foreach ($coches as $coche): ?><!-- coche es una colección de filas de la tabla -->
                     <tr>
-                        <td><?php echo $coche['idCoche']; ?></td>
+                        <!-- <td><?php echo $coche['idCoche']; ?></td> -->
                         <td><?php echo htmlspecialchars($coche['marca']); ?></td>
                         <td><?php echo htmlspecialchars($coche['modelo']); ?></td>
                         <td><?php echo htmlspecialchars($coche['fechaFabricacion']); ?></td>
@@ -79,16 +91,32 @@
                         <td>
                             <?php if (!empty($coche['imagen'])): ?>
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($coche['imagen']); ?>" 
-                                    alt="Imagen del coche" width="100">
+                                    alt="Imagen del coche" width="128" height="auto">
                             <?php else: ?>
                                 Sin imagen
                             <?php endif; ?>
                         </td>
     
                         <td>
-                            <!-- en la última celda incluimos los botones para ir a borrar o editar una fila -->
-                            <a href="index.php?action=edit&id=<?php echo $coche['idCoche']; ?>">Editar</a> |
-                            <a href="index.php?action=delete&id=<?php echo $coche['idCoche']; ?>" onclick="return confirm('¿Estás seguro?');">Eliminar</a>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12">
+                                    <a href="index.php?action=edit&id=<?php echo $coche['idCoche']; ?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="50" fill="rgb(214, 214, 41)" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+
+                                <div class="col-lg-6 col-sm-12">
+                                    <a href="index.php?action=delete&id=<?php echo $coche['idCoche']; ?>" onclick="return confirm('¿Estás seguro?');">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="60" fill="red" class="bi bi-x" viewBox="0 0 16 16">
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -99,6 +127,10 @@
     </div>
 
 
+    <!-- Footer -->
+    <footer class="mt-5">
+        
+    </footer>
 
 
     <!-- Bootstrap Scripts -->
