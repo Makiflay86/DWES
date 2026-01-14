@@ -120,7 +120,7 @@
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($coche['imagen']); ?>" 
                                     alt="Ver galeria del coche" width="128" height="auto"
                                     class="img-expandir" style="cursor: pointer;"
-                                    onclick="abrirGaleria(<?php echo $coche['idCoche']; ?>)">
+                                    onclick="abrirGaleria(<?php echo $coche['idCoche']; ?>, 'data:image/jpeg;base64,<?= base64_encode($coche['imagen']); ?>')">
                             <?php else: ?>
                                 Sin imagen
                             <?php endif; ?>
@@ -152,28 +152,26 @@
             </tbody>
         </table>
 
+
         <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content bg-transparent border-0">
-                    <div class="modal-body p-0 text-center position-relative">
-                        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-                        
-                        <img src="" id="modalImg" class="img-fluid rounded">
-                        
-                        <div id="carruselCoches" class="carousel slide d-none">
-                            <div class="carousel-inner" id="carouselContent"></div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carruselCoches" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carruselCoches" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            </button>
+                <div class="modal-content border-0 shadow-lg">
+                    <div class="modal-header border-0 pb-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body pt-0 text-center">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <img src="" id="mainGalleryImg" class="img-fluid rounded" style="max-height: 450px; object-fit: contain;">
+                            </div>
+                            <div class="col-12">
+                                <div id="thumbContainer" class="d-flex justify-content-center flex-wrap gap-2"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         
     </div>
 
