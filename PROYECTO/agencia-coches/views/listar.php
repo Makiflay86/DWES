@@ -151,14 +151,26 @@
             </tbody>
         </table>
 
-        <div id="carruselCoches" class="carousel slide">
-            <div class="carousel-inner" id="carouselContent"></div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carruselCoches" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carruselCoches" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content bg-transparent border-0">
+                    <div class="modal-body p-0 text-center position-relative">
+                        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                        
+                        <img src="" id="modalImg" class="img-fluid rounded">
+                        
+                        <div id="carruselCoches" class="carousel slide d-none">
+                            <div class="carousel-inner" id="carouselContent"></div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carruselCoches" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carruselCoches" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         

@@ -1,6 +1,6 @@
 <!-- views/crear.php -->
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-ES">
 
 <head>
     <meta charset="UTF-8">
@@ -29,7 +29,7 @@
             <label>Combustible: <input type="text" name="combustible" required class="form-control"></label><br>
             <label>Color: <input type="text" name="color" required class="form-control"></label><br>
             
-            <label>Imágenes: <input type="file" name="imagenes[]" accept="image/*" multiple required class="form-control"></label><br>
+            <label>Imágenes: <input type="file" name="imagenes[]" accept="image/*" multiple class="form-control"></label><br>
             
             <button type="submit" class="btn btn-primary">Crear Coche</button>
         </form>

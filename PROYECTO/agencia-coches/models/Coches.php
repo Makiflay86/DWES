@@ -34,11 +34,6 @@ class Coches
         $query = "INSERT INTO " . $this->table_name . " SET marca=:marca, modelo=:modelo, fechaFabricacion=:fechaFabricacion, kilometros=:kilometros, combustible=:combustible, color=:color, imagen=:imagen";
         $stmt = $this->conn->prepare($query);
 
-        // Limpiar y enlazar parámetros
-        $this->marca = $this->marca;
-        $this->modelo = $this->modelo;
-        // ... validaciones si fueran necesarias
-
         $stmt->bindParam(":marca", $this->marca);
         $stmt->bindParam(":modelo", $this->modelo);
         $stmt->bindParam(":fechaFabricacion", $this->fechaFabricacion);
@@ -47,8 +42,9 @@ class Coches
         $stmt->bindParam(":color", $this->color);
         $stmt->bindParam(":imagen", $this->imagen, PDO::PARAM_LOB);
 
-        if ($stmt->execute()) {
-            return true;
+        if ($stmt->execute()) 
+        {
+            return $this->conn->lastInsertId();
         }
         return false;
     }
