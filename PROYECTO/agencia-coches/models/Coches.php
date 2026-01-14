@@ -120,4 +120,12 @@ class Coches
         
         return $stmt->execute();
     }
+
+    public function getGaleria($idCoche) {
+        $query = "SELECT imagen FROM coche_imagenes WHERE idCoche = :idCoche";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idCoche', $idCoche);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

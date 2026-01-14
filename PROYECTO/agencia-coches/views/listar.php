@@ -14,7 +14,7 @@
         crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="./views/src/css/style.css">
+    <link rel="stylesheet" href="views/src/css/style.css">
     
 </head>
 
@@ -118,8 +118,9 @@
                         <td>
                             <?php if (!empty($coche['imagen'])): ?>
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($coche['imagen']); ?>" 
-                                    alt="Imagen del coche" width="128" height="auto"
-                                    class="img-expandir" style="cursor: pointer;">
+                                    alt="Ver galeria del coche" width="128" height="auto"
+                                    class="img-expandir" style="cursor: pointer;"
+                                    onclick="abrirGaleria(<?php echo $coche['idCoche']; ?>)">
                             <?php else: ?>
                                 Sin imagen
                             <?php endif; ?>
@@ -197,6 +198,7 @@
     ></script>
 
     <script src="./views/src/js/modal.js"></script>
+    <script src="./views/src/js/abrir-galeria.js"></script>
 
 </body>
 

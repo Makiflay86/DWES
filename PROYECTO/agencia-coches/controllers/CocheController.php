@@ -138,4 +138,22 @@ class CocheController
             }
         }
     }
+
+    public function getGaleriaJson() 
+    {
+        $id = $_GET['id'] ?? null;
+        $imagenes = [];
+        if ($id) 
+        {
+            $res = $this->coche->getGaleria($id);
+            foreach ($res as $row) 
+            {
+                $imagenes[] = ['imagen' => base64_encode($row['imagen'])];
+            }
+        }
+        
+        header('Content-Type: application/json');
+        echo json_encode($imagenes);
+        exit(); // Importante para que no cargue el resto de la página
+    }
 }
