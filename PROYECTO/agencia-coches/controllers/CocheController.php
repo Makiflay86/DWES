@@ -33,9 +33,9 @@ class CocheController
             $this->coche->combustible = $_POST['combustible'];
             $this->coche->color = $_POST['color'];
 
-            if (!empty($_FILES['imagen']['tmp_name'])) 
+            if (!empty($_FILES['imagenes']['tmp_name'][0])) 
             {
-                $this->coche->imagen = file_get_contents($_FILES['imagen']['tmp_name']);
+                $this->coche->imagen = file_get_contents($_FILES['imagen']['tmp_name'][0]);
 
             } else 
             {
@@ -45,6 +45,20 @@ class CocheController
 
             if ($this->coche->create()) 
             {
+                $idCoche = $this->db->lastInsertId();
+                // Recorremos todas las imágenes subidas para la galería
+                if (!empty($_FILES['imagenes']['tmp_name'][0])) 
+                {
+                    foreach ($_FILES['imagenes']['tmp_name'] as $key => $tmp_name) 
+                    {
+                        if ($_FILES['imagenes']['error'][$key] === 0) 
+                        {
+                            $contenido = file_get_contents($tmp_name);
+                            $this->coche->guardarImagenGaleria($idCoche, $contenido);
+                        }
+                    }
+                }
+
                 header("Location: index.php?action=index&message=created");
                 exit();
 

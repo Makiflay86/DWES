@@ -49,7 +49,7 @@
 
 
         <!-- Espacio parar no tapar el contenido con el nav -->
-        <div class="my-5"></div>
+        <div class="my-5 pb-1"></div>
 
 
 
@@ -57,19 +57,17 @@
         <div class="row text-center py-5">
             <!-- Título -->
             <div class="col-lg-6 col-sm-12">
-                <h2>Listado de Coches</h2>
+                <h2>Agencia de coches S.L.</h2>
             </div>
 
             <!-- Icon añadir coche -->
             <div class="col-lg-6 col-sm-12">
-                <button class="btn btn-primary">
-                    <a href="index.php?action=create">
-                        <svg class="bi bi-plus-circle-fill" xmlns="http://www.w3.org/2000/svg" width="30" fill="white" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
-                        </svg>
-                        <span class="ps-1 text-black">Añadir coche</span>
-                    </a>
-                </button>
+                <a href="index.php?action=create" class="btn btn-primary">
+                    <svg class="bi bi-plus-circle-fill" xmlns="http://www.w3.org/2000/svg" width="30" fill="white" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+                    </svg>
+                    <span class="ps-1 text-white">Añadir coche</span>
+                </a>
             </div>
         </div>
     
@@ -120,7 +118,8 @@
                         <td>
                             <?php if (!empty($coche['imagen'])): ?>
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($coche['imagen']); ?>" 
-                                    alt="Imagen del coche" width="128" height="auto">
+                                    alt="Imagen del coche" width="128" height="auto"
+                                    class="img-expandir" style="cursor: pointer;">
                             <?php else: ?>
                                 Sin imagen
                             <?php endif; ?>
@@ -152,6 +151,16 @@
             </tbody>
         </table>
 
+        <div id="carruselCoches" class="carousel slide">
+            <div class="carousel-inner" id="carouselContent"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carruselCoches" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carruselCoches" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+
         
     </div>
 
@@ -174,6 +183,8 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"
     ></script>
+
+    <script src="./views/src/js/modal.js"></script>
 
 </body>
 

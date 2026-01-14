@@ -112,4 +112,16 @@ class Coches
         }
         return false;
     }
+
+    public function guardarImagenGaleria($idCoche, $imagenContenido) 
+    {
+        $query = "INSERT INTO coche_imagenes (idCoche, imagen) VALUES (:idCoche, :imagen)";
+        $stmt = $this->conn->prepare($query);
+        
+        $stmt->bindParam(':idCoche', $idCoche);
+        // Usamos PDO::PARAM_LOB para datos binarios grandes
+        $stmt->bindParam(':imagen', $imagenContenido, PDO::PARAM_LOB);
+        
+        return $stmt->execute();
+    }
 }
