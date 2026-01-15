@@ -19,6 +19,9 @@
                     </div>
                     <div class="card-body p-4">
                         <form method="POST" action="index.php?action=edit&id=<?php echo $coche_data->idCoche; ?>" enctype="multipart/form-data">
+                            <!-- Recordar de donde viene, si de cards o de table -->
+                            <input type="hidden" name="view" value="<?php echo isset($_GET['view']) ? $_GET['view'] : 'cards'; ?>">
+
                             <input type="hidden" name="idCoche" value="<?php echo $coche_data->idCoche; ?>">
                             <input type="hidden" name="imagen_actual" value="<?php echo base64_encode($coche_data->imagen); ?>">
 
@@ -117,7 +120,9 @@
                                 <button type="submit" name="update" class="btn btn-warning px-4 py-2">
                                     <i class="bi bi-check-circle me-1"></i> Guardar Cambios
                                 </button>
-                                <a href="index.php?action=index" class="btn btn-outline-danger px-4 py-2">
+
+                                <?php $vista_retorno = isset($_GET['view']) ? $_GET['view'] : 'cards'; ?>
+                                <a href="index.php?action=index&view=<?php echo $vista_retorno; ?>" class="btn btn-outline-danger px-4 py-2">
                                     <i class="bi bi-arrow-left me-1"></i> Cancelar
                                 </a>
                             </div>

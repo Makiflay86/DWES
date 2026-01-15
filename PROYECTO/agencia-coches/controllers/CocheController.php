@@ -58,7 +58,8 @@ class CocheController
                     }
                 }
 
-                header("Location: index.php?action=index&message=created");
+                $vista = $_POST['view'] ?? 'cards'; // Captura la vista del formulario
+                header("Location: index.php?action=index&view=$vista&message=created");
                 exit();
 
             } else 
@@ -97,10 +98,13 @@ class CocheController
 
             if ($this->coche->update()) 
             {
-                if (!empty($_FILES['imagenes_galeria']['tmp_name'][0])) {
-                    foreach ($_FILES['imagenes_galeria']['tmp_name'] as $index => $tmp_name) {
+                if (!empty($_FILES['imagenes_galeria']['tmp_name'][0])) 
+                {
+                    foreach ($_FILES['imagenes_galeria']['tmp_name'] as $index => $tmp_name) 
+                    {
                         // Validar que no haya errores en la subida y que el archivo exista
-                        if ($_FILES['imagenes_galeria']['error'][$index] == 0) {
+                        if ($_FILES['imagenes_galeria']['error'][$index] == 0) 
+                        {
                             $contenido = file_get_contents($tmp_name);
                             // Usamos el método de tu modelo Coches.php
                             $this->coche->guardarImagenGaleria($this->coche->idCoche, $contenido);
@@ -108,7 +112,8 @@ class CocheController
                     }
                 }
 
-                header("Location: index.php?action=index&message=updated");
+                $vista = $_POST['view'] ?? 'cards'; // Captura la vista del formulario
+                header("Location: index.php?action=index&view=$vista&message=updated");
                 exit();
 
             } else 
@@ -151,7 +156,8 @@ class CocheController
 
             } else 
             {
-                header("Location: index.php?action=index&message=error_delete");
+                $vista = $_POST['view'] ?? 'cards'; // Captura la vista del formulario
+                header("Location: index.php?action=index&view=$vista&message=error_delete");
                 exit();
             }
         }
@@ -175,13 +181,16 @@ class CocheController
         exit(); // Importante para que no cargue el resto de la página
     }
 
-    public function deleteFoto() {
+    public function deleteFoto() 
+    {
         $idFoto = $_GET['idFoto'] ?? null;
         $idCoche = $_GET['idCoche'] ?? null;
 
-        if ($idFoto && $idCoche) {
+        if ($idFoto && $idCoche) 
+        {
             // Llamamos al modelo para borrar
-            if ($this->coche->eliminarFotoGaleria($idFoto)) {
+            if ($this->coche->eliminarFotoGaleria($idFoto)) 
+            {
                 // Volvemos a la edición del coche donde estábamos
                 header("Location: index.php?action=edit&id=$idCoche&message=photo_deleted");
                 exit();

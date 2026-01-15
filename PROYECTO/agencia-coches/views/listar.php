@@ -23,6 +23,11 @@
 
     <?php include 'views/template/navbar.php'; ?>
 
+     <?php 
+        // Detectamos la vista actual (por defecto cards)
+        $vista = isset($_GET['view']) ? $_GET['view'] : 'cards'; 
+    ?>
+
     <div class="container-fluid w-75">
 
         <!-- Encabezado -->
@@ -34,7 +39,7 @@
 
             <!-- Icon añadir coche -->
             <div class="col-lg-6 col-sm-12">
-                <a href="index.php?action=create" class="btn btn-primary">
+                <a href="index.php?action=create&view=<?php echo $vista; ?>" class="btn btn-primary">
                     <svg class="bi bi-plus-circle-fill" xmlns="http://www.w3.org/2000/svg" width="30" fill="white" viewBox="0 0 16 16">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
                     </svg>
@@ -63,11 +68,6 @@
         <?php endif; ?>
     
 
-        <?php 
-            // Detectamos la vista actual (por defecto cards)
-            $vista = isset($_GET['view']) ? $_GET['view'] : 'cards'; 
-        ?>
-
         <?php if ($vista === 'table'): ?>
             <table class="table table-bordered table-striped text-center align-middle shadow-sm">
                 <thead class="table-dark">
@@ -88,7 +88,7 @@
                             <td><?php echo htmlspecialchars($coche['marca']); ?></td>
                             <td><?php echo htmlspecialchars($coche['modelo']); ?></td>
                             <td><?php echo htmlspecialchars($coche['fechaFabricacion']); ?></td>
-                            <td><?php echo htmlspecialchars($coche['kilometros']); ?></td>
+                            <td><?php echo number_format($coche['kilometros'], 0, ',', '.'); ?> km</td>
                             <td><?php echo htmlspecialchars($coche['combustible']); ?></td>
                             <td><?php echo htmlspecialchars($coche['color']); ?></td>
                             <td>
@@ -102,10 +102,11 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="index.php?action=edit&id=<?php echo $coche['idCoche']; ?>" class="btn btn-sm btn-outline-warning">
+                                    <a href="index.php?action=edit&id=<?php echo $coche['idCoche']; ?>&view=<?php echo $vista; ?>" 
+                                    class="btn btn-sm btn-outline-warning">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a href="index.php?action=delete&id=<?php echo $coche['idCoche']; ?>" 
+                                    <a href="index.php?action=delete&id=<?php echo $coche['idCoche']; ?>&view=<?php echo $vista; ?>" 
                                     class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro?');">
                                         <i class="bi bi-trash"></i>
                                     </a>
@@ -137,8 +138,9 @@
                                 </p>
                             </div>
                             <div class="card-footer bg-white border-0 d-flex justify-content-between pb-3">
-                                <a href="index.php?action=edit&id=<?php echo $coche['idCoche']; ?>" class="btn btn-sm btn-primary px-3">Editar</a>
-                                <a href="index.php?action=delete&id=<?php echo $coche['idCoche']; ?>" 
+                                <a href="index.php?action=edit&id=<?php echo $coche['idCoche']; ?>&view=<?php echo $vista; ?>"
+                                class="btn btn-sm btn-primary px-3">Editar</a>
+                                <a href="index.php?action=delete&id=<?php echo $coche['idCoche']; ?>&view=<?php echo $vista; ?>"
                                 class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar?');">Eliminar</a>
                             </div>
                         </div>

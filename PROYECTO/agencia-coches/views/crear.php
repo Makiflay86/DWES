@@ -21,6 +21,9 @@
                     </div>
                     <div class="card-body p-4">
                         <form method="POST" action="index.php?action=create" enctype="multipart/form-data">
+                            <!-- Recordar de donde viene, si de cards o de table -->
+                            <input type="hidden" name="view" value="<?php echo isset($_GET['view']) ? $_GET['view'] : 'cards'; ?>">
+
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold">Marca</label>
@@ -47,12 +50,6 @@
                                     <input type="text" name="color" class="form-control" placeholder="Ej: Blanco" required>
                                 </div>
                                 
-
-                                <!-- <div class="col-12 mt-4">
-                                    <label class="form-label fw-bold">Seleccionar Imágenes (La primera será la portada)</label>
-                                    <input type="file" name="imagenes[]" id="input-galeria" class="form-control" accept="image/*" multiple required>
-                                    <div id="preview-galeria" class="preview-container mt-3 d-flex flex-wrap"></div>
-                                </div> -->
 
                                 <div class="col-12 mt-4">
                                     <hr>
@@ -86,7 +83,9 @@
                                 <button type="submit" class="btn btn-primary px-4 py-2">
                                     <i class="bi bi-save me-1"></i> Crear Coche
                                 </button>
-                                <a href="index.php?action=index" class="btn btn-outline-danger px-4 py-2">
+
+                                <?php $vista_origen = isset($_GET['view']) ? $_GET['view'] : 'cards'; ?>
+                                <a href="index.php?action=index&view=<?php echo $vista_origen; ?>" class="btn btn-outline-danger px-4 py-2">
                                     <i class="bi bi-arrow-left me-1"></i> Cancelar
                                 </a>
                             </div>
