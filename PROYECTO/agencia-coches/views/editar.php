@@ -8,17 +8,13 @@
 </head>
 <body class="bg-light">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
-        <div class="container">
-            <a class="navbar-brand" href="index.php"><i class="bi bi-car-front-fill me-2"></i>Agencia de Coches</a>
-        </div>
-    </nav>
+    <?php include 'views/template/navbar.php'; ?>
 
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow-sm border-0">
-                    <div class="card-header bg-primary text-white py-3">
+                    <div class="card-header bg-warning text-black py-3">
                         <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i>Editar Información del Vehículo</h4>
                     </div>
                     <div class="card-body p-4">
@@ -80,10 +76,10 @@
                             </div>
 
                             <div class="d-flex gap-2 mt-5">
-                                <button type="submit" name="update" class="btn btn-success px-4 py-2">
+                                <button type="submit" name="update" class="btn btn-warning px-4 py-2">
                                     <i class="bi bi-check-circle me-1"></i> Guardar Cambios
                                 </button>
-                                <a href="index.php?action=index" class="btn btn-outline-secondary px-4 py-2">
+                                <a href="index.php?action=index" class="btn btn-outline-danger px-4 py-2">
                                     <i class="bi bi-arrow-left me-1"></i> Cancelar
                                 </a>
                             </div>
@@ -95,5 +91,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="views/src/js/img-time-real.js"></script>
 </body>
 </html>
