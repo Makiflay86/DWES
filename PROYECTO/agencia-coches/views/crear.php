@@ -98,6 +98,7 @@
 
     
     <script src="./views/src/js/crear-preview.js"></script>
+    <script src="./views/src/js/nav-scroll.js"></script>
     
 </body>
 </html>

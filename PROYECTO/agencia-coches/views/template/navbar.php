@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
+<nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow">
     <div class="container-fluid px-5">
         <a class="navbar-brand d-flex align-items-center" href="index.php">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-car-front-fill me-2" viewBox="0 0 16 16">

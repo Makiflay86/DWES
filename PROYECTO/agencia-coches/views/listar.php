@@ -194,6 +194,7 @@
     ></script>
 
     <script src="./views/src/js/abrir-galeria.js"></script>
+    <script src="./views/src/js/nav-scroll.js"></script>
 
 </body>
 
