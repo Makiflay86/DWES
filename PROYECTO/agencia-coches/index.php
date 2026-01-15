@@ -26,6 +26,9 @@ switch ($action)
     case 'getGaleriaJson':
         $controller->getGaleriaJson(); // se invoca al método getGaleriaJson() de CocheController
         break;
+    case 'deleteFoto':
+        $controller->deleteFoto();     // se invoca al método deleteFoto() de CocheController
+        break;
     default:
         $controller->index();          // por defecto, se invoca a index()
         break;

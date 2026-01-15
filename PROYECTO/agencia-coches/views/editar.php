@@ -53,6 +53,8 @@
                                     <input type="text" name="color" class="form-control" value="<?php echo htmlspecialchars($coche_data->color); ?>">
                                 </div>
 
+
+                                <!-- Imagen de portada -->
                                 <div class="col-12 mt-4">
                                     <hr>
                                     <label class="form-label fw-bold d-block">Imagen del Vehículo</label>
@@ -73,7 +75,43 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- Imagenes extras -->
+                                <div class="col-12 mt-4">
+                                    <hr>
+                                    <label class="form-label fw-bold"><i class="bi bi-images me-2"></i>Galería de Imágenes Adicionales</label>
+                                    
+                                    <div id="existing-gallery" class="d-flex flex-wrap gap-3 mb-3">
+                                        <?php if (isset($galeria_data) && !empty($galeria_data)): ?>
+                                            <?php foreach ($galeria_data as $foto): ?>
+                                                <div class="position-relative">
+                                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($foto['imagen']); ?>" 
+                                                        class="img-thumbnail" style="width: 100px; height: 75px; object-fit: cover;">
+                                                    
+                                                    <a href="index.php?action=deleteFoto&idFoto=<?php echo $foto['id']; ?>&idCoche=<?php echo $coche_data->idCoche; ?>" 
+                                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light"
+                                                    onclick="return confirm('¿Eliminar esta foto de la galería?')">
+                                                        <i class="bi bi-x"></i>
+                                                    </a>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <p class="text-muted small italic">No hay fotos adicionales.</p>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <div class="bg-light p-3 rounded border-dashed">
+                                        <label class="small text-muted mb-2">Añadir más fotos a la galería (puedes seleccionar varias):</label>
+                                        <input type="file" name="imagenes_galeria[]" id="input-galeria-edit" class="form-control" accept="image/*" multiple>
+                                        <div id="preview-galeria-edit" class="d-flex flex-wrap gap-2 mt-3"></div>
+                                    </div>
+                                </div>
+
+
+
                             </div>
+
+
 
                             <div class="d-flex gap-2 mt-5">
                                 <button type="submit" name="update" class="btn btn-warning px-4 py-2">

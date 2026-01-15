@@ -122,10 +122,19 @@ class Coches
     }
 
     public function getGaleria($idCoche) {
-        $query = "SELECT imagen FROM coche_imagenes WHERE idCoche = :idCoche";
+        // Usamos 'id' que es como aparece en tu imagen
+        $query = "SELECT id, imagen FROM coche_imagenes WHERE idCoche = :idCoche";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':idCoche', $idCoche);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function eliminarFotoGaleria($idFoto) {
+        // Aquí el parámetro debe coincidir con la columna 'id'
+        $query = "DELETE FROM coche_imagenes WHERE id = :idFoto";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':idFoto', $idFoto);
+        return $stmt->execute();
     }
 }

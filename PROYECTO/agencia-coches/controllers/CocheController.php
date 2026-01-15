@@ -95,6 +95,17 @@ class CocheController
 
             if ($this->coche->update()) 
             {
+                if (!empty($_FILES['imagenes_galeria']['tmp_name'][0])) {
+                    foreach ($_FILES['imagenes_galeria']['tmp_name'] as $index => $tmp_name) {
+                        // Validar que no haya errores en la subida y que el archivo exista
+                        if ($_FILES['imagenes_galeria']['error'][$index] == 0) {
+                            $contenido = file_get_contents($tmp_name);
+                            // Usamos el método de tu modelo Coches.php
+                            $this->coche->guardarImagenGaleria($this->coche->idCoche, $contenido);
+                        }
+                    }
+                }
+
                 header("Location: index.php?action=index&message=updated");
                 exit();
 
@@ -109,9 +120,14 @@ class CocheController
         {
             $this->coche->idCoche = $_GET['id'];
             $this->coche->readOne();
+
             if ($this->coche->marca) 
             {
                 $coche_data = (object)['idCoche' => $this->coche->idCoche, 'marca' => $this->coche->marca, 'modelo' => $this->coche->modelo, 'fechaFabricacion' => $this->coche->fechaFabricacion, 'kilometros' => $this->coche->kilometros, 'combustible' => $this->coche->combustible, 'color' => $this->coche->color, 'imagen' => $this->coche->imagen];
+
+                /* Método para obtener las fotos extras */
+                $galeria_data = $this->coche->getGaleria($_GET['id']);
+
                 include 'views/editar.php';
 
             } else 
@@ -155,5 +171,19 @@ class CocheController
         header('Content-Type: application/json');
         echo json_encode($imagenes);
         exit(); // Importante para que no cargue el resto de la página
+    }
+
+    public function deleteFoto() {
+        $idFoto = $_GET['idFoto'] ?? null;
+        $idCoche = $_GET['idCoche'] ?? null;
+
+        if ($idFoto && $idCoche) {
+            // Llamamos al modelo para borrar
+            if ($this->coche->eliminarFotoGaleria($idFoto)) {
+                // Volvemos a la edición del coche donde estábamos
+                header("Location: index.php?action=edit&id=$idCoche&message=photo_deleted");
+                exit();
+            }
+        }
     }
 }
