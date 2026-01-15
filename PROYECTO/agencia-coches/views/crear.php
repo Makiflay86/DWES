@@ -47,11 +47,39 @@
                                     <input type="text" name="color" class="form-control" placeholder="Ej: Blanco" required>
                                 </div>
                                 
-                                <div class="col-12 mt-4">
+
+                                <!-- <div class="col-12 mt-4">
                                     <label class="form-label fw-bold">Seleccionar Imágenes (La primera será la portada)</label>
                                     <input type="file" name="imagenes[]" id="input-galeria" class="form-control" accept="image/*" multiple required>
                                     <div id="preview-galeria" class="preview-container mt-3 d-flex flex-wrap"></div>
+                                </div> -->
+
+                                <div class="col-12 mt-4">
+                                    <hr>
+                                    <label class="form-label fw-bold d-block"><i class="bi bi-image me-2"></i>Imagen de Portada Principal</label>
+                                    <div class="d-flex align-items-center gap-4 bg-light p-3 rounded border">
+                                        <div class="text-center">
+                                            <p class="small text-muted mb-1">Vista previa</p>
+                                            <img id="preview-img" src="https://via.placeholder.com/120x80?text=Portada" 
+                                                class="rounded shadow-sm border" width="120" height="80" style="object-fit: cover;">
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <label class="small text-muted mb-1">Esta foto aparecerá en el listado principal</label>
+                                            <input type="file" name="imagen_portada" id="input-foto" class="form-control" accept="image/*" required>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <div class="col-12 mt-4">
+                                    <label class="form-label fw-bold"><i class="bi bi-images me-2"></i>Galería de Imágenes Adicionales</label>
+                                    <div class="bg-white p-3 rounded border border-dashed">
+                                        <label class="small text-muted mb-2">Puedes seleccionar varias fotos para los detalles:</label>
+                                        <input type="file" name="imagenes_galeria[]" id="input-galeria-edit" class="form-control" accept="image/*" multiple>
+                                        <div id="preview-galeria-edit" class="d-flex flex-wrap gap-2 mt-3"></div>
+                                    </div>
+                                </div>
+
+
                             </div>
 
                             <div class="d-flex gap-2 mt-5">
@@ -71,5 +99,6 @@
 
     
     <script src="./views/src/js/crear-preview.js"></script>
+    
 </body>
 </html>

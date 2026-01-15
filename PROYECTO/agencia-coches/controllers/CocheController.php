@@ -24,7 +24,8 @@ class CocheController
 
     public function create()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") 
+        {
             // 1. Asignar datos básicos
             $this->coche->marca = $_POST['marca'];
             $this->coche->modelo = $_POST['modelo'];
@@ -33,34 +34,35 @@ class CocheController
             $this->coche->combustible = $_POST['combustible'];
             $this->coche->color = $_POST['color'];
 
-            // 2. Preparar imagen principal (opcional)
-            $this->coche->imagen = null; 
-            if (!empty($_FILES['imagenes']['tmp_name'][0]) && $_FILES['imagenes']['error'][0] == 0) {
-                $this->coche->imagen = file_get_contents($_FILES['imagenes']['tmp_name'][0]);
+            /* Imagen de Portada */
+            if (!empty($_FILES['imagen_portada']['tmp_name'])) 
+            {
+                $this->coche->imagen = file_get_contents($_FILES['imagen_portada']['tmp_name']);
             }
 
-            // 3. Crear el coche y obtener el ID
+            /* Crear el coche y obtener el ID */
             $idNuevoCoche = $this->coche->create();
 
-            if ($idNuevoCoche) {
-                // 4. Procesar la galería
-                if (!empty($_FILES['imagenes']['tmp_name'][0])) {
-                    foreach ($_FILES['imagenes']['tmp_name'] as $index => $tmp_name) {
-                        // VALIDACIÓN DE TAMAÑO ANTES QUE NADA
-                        if ($_FILES['imagenes']['size'][$index] > 5000000) {
-                            // Nota: El coche ya se creó, podrías redirigir con un aviso de "Coche creado pero algunas fotos fallaron"
-                            continue; // Saltamos esta foto por ser muy pesada
-                        }
-
-                        if ($_FILES['imagenes']['error'][$index] == 0) {
+            if ($idNuevoCoche) 
+            {
+                /* Procesar Galería Extra */
+                if (!empty($_FILES['imagenes_galeria']['tmp_name'][0])) 
+                {
+                    foreach ($_FILES['imagenes_galeria']['tmp_name'] as $index => $tmp_name) 
+                    {
+                        if ($_FILES['imagenes_galeria']['error'][$index] == 0) 
+                        {
                             $contenido = file_get_contents($tmp_name);
                             $this->coche->guardarImagenGaleria($idNuevoCoche, $contenido);
                         }
                     }
                 }
+
                 header("Location: index.php?action=index&message=created");
                 exit();
-            } else {
+
+            } else 
+            {
                 $error = "Error al crear el coche en la base de datos.";
                 include 'views/crear.php';
             }
