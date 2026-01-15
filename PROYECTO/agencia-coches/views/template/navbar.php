@@ -7,9 +7,19 @@
             <span class="fw-bold">Agencia de Coches S.L.</span>
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
+
+        <div class="d-flex gap-2 ms-auto text-white">
+            <a href="index.php?action=index&view=cards" class="btn btn-outline-light btn-sm">
+                <i class="bi bi-grid-3x3-gap-fill"></i> Vista Tarjetas
+            </a>
+            <a href="index.php?action=index&view=table" class="btn btn-outline-light btn-sm">
+                <i class="bi bi-table"></i> Vista Tabla
+            </a>
+        </div>
+
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="ms-auto d-flex align-items-center">

@@ -13,6 +13,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
         crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="views/src/css/style.css">
     
@@ -62,66 +63,90 @@
         <?php endif; ?>
     
 
-        <table class="table table-bordered table-striped text-center">
-            <thead class="table-dark">
-                <tr>
-                    <!-- <th scope="col">idCoche</th> -->
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Fecha Fabricación</th>
-                    <th>Kilometros</th>
-                    <th>Combustible</th>
-                    <th>Color</th>
-                    <th>Imagen</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($coches as $coche): ?><!-- coche es una colección de filas de la tabla -->
+        <?php 
+            // Detectamos la vista actual (por defecto cards)
+            $vista = isset($_GET['view']) ? $_GET['view'] : 'cards'; 
+        ?>
+
+        <?php if ($vista === 'table'): ?>
+            <table class="table table-bordered table-striped text-center align-middle shadow-sm">
+                <thead class="table-dark">
                     <tr>
-                        <!-- <td><?php echo $coche['idCoche']; ?></td> -->
-                        <td><?php echo htmlspecialchars($coche['marca']); ?></td>
-                        <td><?php echo htmlspecialchars($coche['modelo']); ?></td>
-                        <td><?php echo htmlspecialchars($coche['fechaFabricacion']); ?></td>
-                        <td><?php echo htmlspecialchars($coche['kilometros']); ?></td>
-                        <td><?php echo htmlspecialchars($coche['combustible']); ?></td>
-                        <td><?php echo htmlspecialchars($coche['color']); ?></td>
-                        <td>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Fecha Fabricación</th>
+                        <th>Kilometros</th>
+                        <th>Combustible</th>
+                        <th>Color</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($coches as $coche): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($coche['marca']); ?></td>
+                            <td><?php echo htmlspecialchars($coche['modelo']); ?></td>
+                            <td><?php echo htmlspecialchars($coche['fechaFabricacion']); ?></td>
+                            <td><?php echo htmlspecialchars($coche['kilometros']); ?></td>
+                            <td><?php echo htmlspecialchars($coche['combustible']); ?></td>
+                            <td><?php echo htmlspecialchars($coche['color']); ?></td>
+                            <td>
+                                <?php if (!empty($coche['imagen'])): ?>
+                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($coche['imagen']); ?>" 
+                                        alt="Ver galeria" width="100" height="60" style="object-fit: cover; cursor: pointer;"
+                                        onclick="abrirGaleria(<?php echo $coche['idCoche']; ?>, this.src)">
+                                <?php else: ?>
+                                    <span class="text-muted small">Sin imagen</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="index.php?action=edit&id=<?php echo $coche['idCoche']; ?>" class="btn btn-sm btn-outline-warning">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="index.php?action=delete&id=<?php echo $coche['idCoche']; ?>" 
+                                    class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro?');">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+        <?php else: ?>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <?php foreach ($coches as $coche): ?>
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0 card-hover">
                             <?php if (!empty($coche['imagen'])): ?>
                                 <img src="data:image/jpeg;base64,<?php echo base64_encode($coche['imagen']); ?>" 
-                                    alt="Ver galeria del coche" width="128" height="auto"
-                                    class="img-expandir" style="cursor: pointer;"
-                                    onclick="abrirGaleria(<?php echo $coche['idCoche']; ?>, 'data:image/jpeg;base64,<?= base64_encode($coche['imagen']); ?>')">
+                                    class="card-img-top" style="height: 200px; object-fit: cover; cursor: pointer;"
+                                    onclick="abrirGaleria(<?php echo $coche['idCoche']; ?>, this.src)">
                             <?php else: ?>
-                                Sin imagen
+                                <img src="https://via.placeholder.com/400x250?text=Sin+Imagen" class="card-img-top" style="height: 200px; object-fit: cover;">
                             <?php endif; ?>
-                        </td>
-    
-                        <td>
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-12">
-                                    <a href="index.php?action=edit&id=<?php echo $coche['idCoche']; ?>">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="50" fill="rgb(214, 214, 41)" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                        </svg>
-                                    </a>
-                                </div>
-
-                                <div class="col-lg-6 col-sm-12">
-                                    <a href="index.php?action=delete&id=<?php echo $coche['idCoche']; ?>" onclick="return confirm('¿Estás seguro?');">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="60" fill="red" class="bi bi-x" viewBox="0 0 16 16">
-                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
                             
-                        </td>
-                    </tr>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($coche['marca'] . ' ' . $coche['modelo']); ?></h5>
+                                <p class="card-text text-muted small">
+                                    <span class="badge bg-light text-dark border"><?php echo htmlspecialchars($coche['combustible']); ?></span>
+                                    <span class="ms-2"><?php echo number_format($coche['kilometros'], 0, ',', '.'); ?> km</span>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-white border-0 d-flex justify-content-between pb-3">
+                                <a href="index.php?action=edit&id=<?php echo $coche['idCoche']; ?>" class="btn btn-sm btn-primary px-3">Editar</a>
+                                <a href="index.php?action=delete&id=<?php echo $coche['idCoche']; ?>" 
+                                class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar?');">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
-            </tbody>
-        </table>
+            </div>
+        <?php endif; ?>
+        
 
 
         <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
