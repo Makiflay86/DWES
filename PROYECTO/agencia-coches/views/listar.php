@@ -133,7 +133,7 @@
                     <div class="modal-body pt-0 text-center">
                         <div class="row">
                             <div class="col-12 mb-3">
-                                <img src="" id="mainGalleryImg" class="img-fluid rounded" style="max-height: 450px; object-fit: contain;">
+                                <img src="" id="mainGalleryImg" class="img-fluid rounded shadow">
                             </div>
                             <div class="col-12">
                                 <div id="thumbContainer" class="d-flex justify-content-center flex-wrap gap-2"></div>
@@ -166,7 +166,6 @@
         crossorigin="anonymous"
     ></script>
 
-    <script src="./views/src/js/modal.js"></script>
     <script src="./views/src/js/abrir-galeria.js"></script>
 
 </body>

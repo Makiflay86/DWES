@@ -20,10 +20,12 @@ function abrirGaleria(idCoche, fotoPortada) {
                 // Añadimos el resto de fotos de la tabla de galería
                 data.forEach((img) => {
                     const imgSrc = "data:image/jpeg;base64," + img.imagen;
+
                     thumbContainer.innerHTML += `
                         <img src="${imgSrc}" class="img-thumbnail" 
                              style="width: 60px; height: 60px; object-fit: cover; cursor: pointer;"
-                             onmouseover="document.getElementById('mainGalleryImg').src='${imgSrc}'">`;
+                             onmouseover = "document.getElementById('mainGalleryImg').src='${imgSrc}'; this.style.borderColor='#0d6efd';" 
+                             onmouseout = "this.style.borderColor='#dee2e6';">`;
                 });
             }
 
