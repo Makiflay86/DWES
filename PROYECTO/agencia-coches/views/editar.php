@@ -1,3 +1,6 @@
+<?php require_once '../config/seguridad.php'; ?>
+
+<!-- views/editar.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>

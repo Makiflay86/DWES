@@ -1,3 +1,5 @@
+<?php require_once '../config/seguridad.php'; ?>
+
 <!-- views/listar.php -->
 <!DOCTYPE html>
 <html lang="es-ES">

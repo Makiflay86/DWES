@@ -1,5 +1,22 @@
 <?php
-    /* include "./config/establecer-sesion.php"; */ /* Solo hace falta poner esto en el index.php */
+    // views/login.php
+    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+
+
+    // 1. Si no existe BASE_URL, significa que han entrado directo a la carpeta views
+    if (!defined('BASE_URL')) {
+        // Redirigimos al index real en la raíz
+        $_SESSION['error'] = "Acceso directo no permitido.";
+        header("Location: ../index.php?action=login");
+        exit();
+    }
+
+
+    // 2. Generar el token CSRF si no existe (para que el formulario pueda usarlo)
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(openssl_random_pseudo_bytes(64));
+    }
+    
 
     if (isset($_SESSION['usuario_logueado'])) // si el usuario estuviera ya logeado, lo derivamos al inicio interno
     {  
@@ -35,7 +52,7 @@
         <meta name="twitter:description" content="Accede a tu cuenta o regístrate en la plataforma." />
         <meta name="twitter:image" content="./views/img/favicon2.ico" />
 
-        <link rel="icon" href="./views/img/favicon2.ico" type="image/x-icon">
+        <link rel="icon" href="<?php echo BASE_URL; ?>views/src/img/favicon2.ico" type="image/x-icon">
         
         <!-- Bootstrap -->
         <link
@@ -216,21 +233,3 @@
         ></script>
     </body>
 </html>
-
-
-
-
-<!-- 
-<h1>Iniciar Sesión</h1>
-    <?php
-    if (isset($_GET['error'])) {
-        echo '<p style="color: red;">' . $_GET['error'] . "</p>";       
-        unset($_GET['error']);
-    }
-    ?>
-    <form action="index.php?action=authenticate" method="POST">
-        <input type="idusuario" name="idusuario" placeholder="Identificador Usuario" required><br><br>
-        <input type="password" name="password" placeholder="Contraseña" required><br><br>
-        <button type="submit" name="login">Ingresar</button>
-    </form>
--->

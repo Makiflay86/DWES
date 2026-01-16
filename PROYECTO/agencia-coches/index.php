@@ -1,5 +1,6 @@
 <?php
 // 1. Carga de configuraciones y modelos de seguridad
+require_once 'config/config.php';
 require_once 'models/Usuario.php';
 include "./config/establecer-sesion.php"; // Esto suele contener session_start()
 
