@@ -1,35 +1,60 @@
 <?php
-// index.php (controlador de rutas)
+// 1. Carga de configuraciones y modelos de seguridad
+require_once 'models/Usuario.php';
+include "./config/establecer-sesion.php"; // Esto suele contener session_start()
 
-require_once 'controllers/CocheController.php'; // incluimos la declaración de la Clase CocheController
+// 2. Inclusión de controladores
+require_once 'controllers/LoginController.php';
+require_once 'controllers/CocheController.php';
 
-$controller = new CocheController();            // creamos una instancia del controlador de coche
+// 3. Instancia de controladores
+$auth = new LoginController();
+$coche = new CocheController();
 
-// Determina qué acción se solicita, si no hubiera ninguna, por defecto adoptamos index
-$action = isset($_GET['action']) ? $_GET['action'] : 'index';
+// 4. Determinamos la acción
+$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'login';
 
-// Llama al método correspondiente del controlador
-switch ($action) 
-{
-    case 'index':
-        $controller->index();          // se invoca al método index() de CocheController
-        break;
-    case 'create':
-        $controller->create();         // se invoca al método create() de CocheController
-        break;
-    case 'edit':
-        $controller->edit();           // se invoca al método edit() de CocheController
-        break;
-    case 'delete':
-        $controller->delete();         // se invoca al método delete() de CocheController
-        break;
-    case 'getGaleriaJson':
-        $controller->getGaleriaJson(); // se invoca al método getGaleriaJson() de CocheController
-        break;
-    case 'deleteFoto':
-        $controller->deleteFoto();     // se invoca al método deleteFoto() de CocheController
-        break;
-    default:
-        $controller->index();          // por defecto, se invoca a index()
-        break;
+// 5. Verificación de sesión (Ajusta 'usuario' según lo que guardes en tu AuthController)
+$isLoggedIn = isset($_SESSION['usuario_logueado']) || isset($_SESSION['usuario_logueado']);
+
+if (!$isLoggedIn) {
+    // RUTA PARA USUARIOS NO LOGUEADOS
+    switch ($action) {
+        case 'authenticate':
+            $auth->authenticate();
+            break;
+        case 'login':
+        default:
+            $auth->login();
+            break;
+    }
+} else {
+    // RUTA PARA USUARIOS AUTENTICADOS
+    switch ($action) {
+        case 'dashboard':
+        case 'index':
+            $coche->index();
+            break;
+        case 'create':
+            $coche->create();
+            break;
+        case 'edit':
+            $coche->edit();
+            break;
+        case 'delete':
+            $coche->delete();
+            break;
+        case 'getGaleriaJson':
+            $coche->getGaleriaJson();
+            break;
+        case 'deleteFoto':
+            $coche->deleteFoto();
+            break;
+        case 'logout':
+            $auth->logout();
+            break;
+        default:
+            $coche->index();
+            break;
+    }
 }

@@ -25,7 +25,7 @@
             <div class="ms-auto d-flex align-items-center">
                 <span class="navbar-text text-white me-3">
                     <i class="bi bi-person-circle me-1"></i> 
-                    Hola, <strong>Admin</strong> <!-- Aquí el codigo php ( <?php echo $_SESSION['nombre_usuario']; ?> ) -->
+                    Hola, <strong><?php echo $_SESSION['nombre_usuario']; ?></strong>
                 </span>
                 <a href="index.php?action=logout" class="btn btn-danger btn-sm border-0">
                     <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
