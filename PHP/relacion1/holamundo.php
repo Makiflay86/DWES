@@ -12,7 +12,7 @@
         Hola Mundo en PHP
     </h1>
     <?php 
-        echo "<h3 style= "color:red">Hola mundo</h3>"
+        echo "<h3 style= 'color:red'>Hola mundo</h3>"
     ?>
 
 </body>
