@@ -1,4 +1,4 @@
-<?php require_once '../config/seguridad.php'; ?>
+<?php require_once __DIR__ . '/../config/seguridad.php'; ?>
 
 <!-- views/editar.php -->
 <!DOCTYPE html>
