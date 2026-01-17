@@ -97,4 +97,57 @@ class LoginController {
         header('Location: index.php?action=login');
         exit();
     }
+
+    public function register() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // 1. Validar CSRF
+            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+                $_SESSION['error'] = "Error de seguridad. Inténtelo de nuevo.";
+                header("Location: index.php?action=login");
+                exit();
+            }
+
+            // 2. Recoger datos
+            $email = trim($_POST['register_email']);
+            $pass = $_POST['register_password'];
+            $confirm = $_POST['confirm_password'];
+            $nombre = trim($_POST['register_name']);
+            $apellidos = trim($_POST['register_apellidos']);
+
+            // 3. Validaciones básicas
+            if ($pass !== $confirm) {
+                $_SESSION['error'] = "Las contraseñas no coinciden.";
+                header("Location: index.php?action=login"); 
+                exit();
+            }
+
+            // Si el nombre está vacío, redirigimos con error y no insertamos
+            if (empty($nombre) | empty($apellidos) | empty($email) | empty($pass)) 
+            {
+                $_SESSION['error'] = "Los datos del formulario son obligatorios.";
+                header("Location: index.php?action=login");
+                exit();
+            }
+
+            // 4. Cifrar y Guardar
+            $passwordHash = password_hash($pass, PASSWORD_BCRYPT);
+            $userModel = new Usuario(); 
+
+            // Definimos apellidos (aunque esté vacío por ahora) para cumplir con el Modelo
+            $apellidos = ""; 
+
+            // IMPORTANTE: El orden debe ser: email, passwordHash, nombre, apellidos
+            if ($userModel->insertar($email, $passwordHash, $nombre, $apellidos)) 
+            {
+                $_SESSION['success'] = "¡Cuenta creada! Ya puedes entrar.";
+                header("Location: index.php?action=login");
+
+            } else 
+            {
+                $_SESSION['error'] = "Ese correo ya está registrado o hubo un error.";
+                header("Location: index.php?action=login");
+            }
+            exit();
+        }
+    }
 }
