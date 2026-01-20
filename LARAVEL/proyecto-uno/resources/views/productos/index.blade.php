@@ -3,6 +3,9 @@
 @section('title')
 <title>Lista de productos</title>    
 @endsection
+@section('favicon')
+<link rel="shortcut icon" href="{{ asset('img/favicon-productos.svg') }}" type="image/svg+xml">    
+@endsection
 
 @section('content')
     <div class="container-flud w-50 mx-auto my-5">

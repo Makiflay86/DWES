@@ -8,6 +8,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        @yield('favicon')
 
         <!-- Bootstrap CSS v5.2.1 -->
         <link
