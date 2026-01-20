@@ -94,6 +94,18 @@
                     }
                 ?>
 
+                <!-- ***** Alert, exito al registrarse ***** -->
+                <?php if (isset($_SESSION['success'])): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        <?php 
+                            echo $_SESSION['success']; 
+                            unset($_SESSION['success']); 
+                        ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+
 
 
                 <!-- ***** LOGIN ***** -->
@@ -144,7 +156,7 @@
 
                 <!-- ***** Sign_up ***** -->
                 <div id="register-section">
-                    <form id="form2" action="#" method="POST">
+                    <form id="form2" action="index.php?action=register" method="POST">
 
                         <!-- Generar token csrf -->
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
@@ -156,7 +168,17 @@
                                 <i class="bi bi-person-fill field-icon-left"></i>
                                 <input type="text" class="form-control form-control-lg" id="register_name" name="register_name" placeholder="Tu nombre">
                             </div>
-                            <div id="register_nameHelp" class="form-text text-danger">El nombre es obligatorio.</div>
+                            <div id="register_nameHelp" class="form-text text-danger"></div>
+                        </div>
+
+                        <!-- Apellidos -->
+                        <div class="mb-3">
+                            <label for="register_apellidos" class="form-label">Apellidos</label>
+                            <div class="field-wrapper">
+                                <i class="bi bi-person-fill field-icon-left"></i>
+                                <input type="text" class="form-control form-control-lg" id="register_apellidos" name="register_apellidos" placeholder="Tu/s apellido/s">
+                            </div>
+                            <div id="register_apellidosHelp" class="form-text text-danger"></div>
                         </div>
 
                         <!-- Correo electrónico -->
@@ -164,9 +186,9 @@
                             <label for="register_email" class="form-label">Correo electrónico</label>
                             <div class="field-wrapper">
                                 <i class="bi bi-envelope-fill field-icon-left"></i>
-                                <input type="email" class="form-control form-control-lg" id="register_email" name="register_email" placeholder="ejemplo@email.com" required>
+                                <input type="text" class="form-control form-control-lg" id="register_email" name="register_email" placeholder="ejemplo@email.com">
                             </div>
-                            <div id="register_emailHelp" class="form-text text-danger">El correo electrónico es obligatorio.</div>
+                            <div id="register_emailHelp" class="form-text text-danger"></div>
                         </div>
 
                         <!-- Contraseña -->
@@ -174,12 +196,12 @@
                             <label for="register_password" class="form-label">Contraseña</label>
                             <div class="field-wrapper">
                                 <i class="bi bi-lock-fill field-icon-left"></i>
-                                <input type="password" class="form-control form-control-lg" id="register_password" name="register_password" placeholder="********" required>
+                                <input type="password" class="form-control form-control-lg" id="register_password" name="register_password" placeholder="********">
                                 <button type="button" class="toggle-password" onclick="togglePassword('register_password', 'toggleIconReg')">
                                     <i id="toggleIconReg" class="bi bi-eye-fill"></i>
                                 </button>
                             </div>
-                            <div id="register_passwordHelp" class="form-text text-danger">La contraseña es obligatorio.</div>
+                            <div id="register_passwordHelp" class="form-text text-danger"></div>
                         </div>
 
                         <!-- Repetir contraseña -->
@@ -187,17 +209,17 @@
                             <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
                             <div class="field-wrapper">
                                 <i class="bi bi-key-fill field-icon-left"></i>
-                                <input type="password" class="form-control form-control-lg" id="confirm_password" name="confirm_password" placeholder="********" required>
+                                <input type="password" class="form-control form-control-lg" id="confirm_password" name="confirm_password" placeholder="********">
                                 <button type="button" class="toggle-password" onclick="togglePassword('confirm_password', 'toggleIconConf')">
                                     <i id="toggleIconConf" class="bi bi-eye-fill"></i>
                                 </button>
                             </div>
-                            <div id="confirm_passwordHelp" class="form-text text-danger">La confirmación de contraseña es obligatorio.</div>
+                            <div id="confirm_passwordHelp" class="form-text text-danger"></div>
                         </div>
 
                         <!-- Botón submit -->
                         <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-success btn-lg">Registrarse</button>
+                            <button onclick="validarFormularioSignUp()" type="submit" class="btn btn-success btn-lg">Registrarse</button>
                         </div>
                     </form>
 

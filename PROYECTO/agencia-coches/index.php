@@ -24,6 +24,9 @@ if (!$isLoggedIn) {
         case 'authenticate':
             $auth->authenticate();
             break;
+        case 'register';
+            $auth->register();
+            break;
         case 'login':
         default:
             $auth->login();

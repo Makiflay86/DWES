@@ -30,4 +30,17 @@ class Usuario
 
         return false; // Usuario no encontrado
     }
+
+    public function insertar($email, $passwordHash, $nombre, $apellidos) {
+        try {
+            // Dejamos que coduser se autoincremente solo
+            $sql = "INSERT INTO usuarios (idusuario, password, nombre, apellidos) VALUES (?, ?, ?, ?)";
+            $stmt = $this->PDO->prepare($sql);
+            
+            return $stmt->execute([$email, $passwordHash, $nombre, $apellidos]);
+        } catch (PDOException $e) {
+            // Si el email ya existe y es UNIQUE en la DB, saltará aquí
+            return false;
+        }
+    }
 }
