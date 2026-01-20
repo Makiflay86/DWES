@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SumaController;
 use App\Http\Controllers\CalculadoraController;
+use App\Http\Controllers\ProductoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,3 +37,6 @@ Route::post('/suma', [SumaController::class, 'suma']);
 Route::get('/calculadora', [CalculadoraController::class, 'index']);
 // extraigo la operatoria y la paso al controlador
 Route::post('/calculadora', [CalculadoraController::class, 'calculadora']);
+
+
+Route::get('/productos', [ProductoController::class, 'index']);
