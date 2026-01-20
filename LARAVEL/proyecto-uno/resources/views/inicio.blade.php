@@ -1,65 +1,67 @@
-<!doctype html>
-<html lang="es-ES">
-    <head>
-        <title>Mi vista hola mundo</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+@extends('layouts.app')
 
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-    </head>
+@section('title')
+<title>Mi vista hola mundo</title>    
+@endsection
 
-    <body>
+@section('content')
+<div class="container-fluid w-50 mx-auto text-center my-5">
 
-        <div class="container-fluid w-25 mx-auto text-center my-5">
+    <div class="mb-4">
+        <h1>Laravel vs PHP Nativo</h1>
+    </div>
+    <table class="table table-bordered">
+        <tr class="table-dark">
+            <th>Aspecto</td>
+            <th>Ventajas de Laravel</th>
+            <th>Ventajas de PHP Nativo</th>
+        </tr>
+        <tr>
+            <th>Productividad</th>
+            <td>
+                Ofrece herramientas listas (ORM, rutas, colas, migraciones) que aceleran el desarrollo.
+            </td>
+            <td>
+                Permite escribir solo lo necesario, sin cargar componentes adicionales.
+            </td>
+        </tr>
+        <tr>
+            <th>Estructura del código</th>
+            <td>
+                Sigue el patrón MVC, lo que facilita mantener y escalar proyectos.
+            </td>
+            <td>
+                Libertad total para organizar el código como quieras.
+            </td>
+        </tr>
+        <tr>
+            <th>Seguridad</th>
+            <td>
+                Incluye protección contra CSRF, XSS, SQL Injection y hashing de contraseñas.
+            </td>
+            <td>
+                Control absoluto sobre la seguridad, sin capas adicionales.
+            </td>
+        </tr>
+        <tr>
+            <th>Comunidad y ecosistema</th>
+            <td>
+                Gran comunidad, paquetes oficiales, documentación extensa.
+            </td>
+            <td>
+                No depende de frameworks; funciona en cualquier entorno con PHP.
+            </td>
+        </tr>
+        <tr>
+            <th>Curva de aprendizaje</th>
+            <td>
+                Estandariza buenas prácticas, lo que ayuda a aprender desarrollo moderno.
+            </td>
+            <td>
+                Más fácil para principiantes que empiezan desde cero con PHP
+            </td>
+        </tr>
+    </table>
 
-            <table class="table table-bordered border-primary align-middle">
-                <tr>
-                    <td>
-                        <h1>Hola Mundo</h1>
-                    </td>
-                    <td>
-                        <h1>Hola Mundo</h1>
-                    </td>
-                    <td>
-                        <h1>Hola Mundo</h1>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h1>Hola Mundo Mundo Mundo</h1>
-                    </td>
-                    <td>
-                        <h1>Hola Mundo</h1>
-                    </td>
-                    <td>
-                        <h1>Hola Mundo</h1>
-                    </td>
-                </tr>
-            </table>
-
-        </div>
-        
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
-
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-    </body>
-</html>
+</div>
+@endsection
