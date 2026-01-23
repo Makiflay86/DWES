@@ -96,46 +96,6 @@
             </div>
         </div>
 
-        <script>
-            function toggleTheme() 
-            {
-                const body = document.body;
-                const card = document.getElementById('login-card');
-                const icon = document.getElementById('theme-icon');
-                const toggleIconLogin = document.getElementById("toggleIconLogin");
-
-                body.classList.toggle('bg-dark');
-                body.classList.toggle('text-light');
-
-                card.classList.toggle('bg-dark');
-                card.classList.toggle('text-light');
-                card.classList.toggle('border-light');
-
-                toggleIconLogin.classList.toggle("text-light");
-
-                if (icon.classList.contains('bi-moon-fill')) 
-                {
-                    icon.classList.replace('bi-moon-fill', 'bi-sun-fill');
-
-                } else 
-                {
-                    icon.classList.replace('bi-sun-fill', 'bi-moon-fill');
-                }
-            }
-
-            function togglePassword() 
-            {
-                const input = document.getElementById('password');
-                const icon = document.getElementById('toggleIconLogin');
-
-                const isPassword = input.type === "password";
-                input.type = isPassword ? "text" : "password";
-
-                icon.classList.toggle("bi-eye-fill", !isPassword);
-                icon.classList.toggle("bi-eye-slash-fill", isPassword);
-            }
-        </script>
-
 
         <!-- Bootstrap JavaScript Libraries -->
         <script
@@ -149,5 +109,9 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
+
+        <!-- Scripts necesarios -->
+        <script src="{{ asset('js/togglePassword.js') }}"></script>
+        <script src="{{ asset('js/toggleTheme.js') }}"></script>
     </body>
 </html>
