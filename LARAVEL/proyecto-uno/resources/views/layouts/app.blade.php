@@ -26,6 +26,7 @@
 
         <nav class="navbar navbar-expand-lg bg-warning fixed-top ps-2">
             <div class="container-fluid">
+                
                 <a class="navbar-brand" href="/inicio">LARAVEL</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     {{-- <span class="navbar-toggler-icon"></span> --}}
@@ -66,7 +67,22 @@
                             <a class="nav-link" href="/productos">Productos</a>
                         </li>
                     </ul>
+
+                    <div class="d-flex align-items-center ms-lg-3 py-2 py-lg-0">
+                        <form action="/logout" method="POST">
+                            @csrf
+                            <span class="navbar-text text-white me-3">
+                                <i class="bi bi-person-circle me-1"></i> 
+                                Hola, <strong>{{-- <?php echo $_SESSION['nombre_usuario']; ?> --}}</strong>
+                            </span>
+                            <button type="submit" class="btn btn-danger btn-sm border-0">
+                                <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
+
             </div>
         </nav>
 

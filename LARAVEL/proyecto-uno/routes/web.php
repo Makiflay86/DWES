@@ -5,10 +5,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\SumaController;
 use App\Http\Controllers\CalculadoraController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\AuthController; /* Login / Logout */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
 
 Route::get('/inicio', function () {
     return view('inicio');
@@ -40,3 +41,17 @@ Route::post('/calculadora', [CalculadoraController::class, 'calculadora']);
 
 
 Route::get('/productos', [ProductoController::class, 'index']);
+
+
+/* Login / Logout */
+Route::get('/', function () {
+    return view('index');
+});
+
+Route::get('/login', [AuthController::class, 'showLoginForm']) -> name('login'); /* Alias (  -> name('login') ) */
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
+
+Route::get('/dashboard', function() {
+    return view('inicio');
+}) -> middleware('auth');
