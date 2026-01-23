@@ -1,0 +1,32 @@
+body {
+    font-size: 1.15rem; /* Aumenta tamaño general del texto */
+}
+
+#login-card {
+    max-width: 520px; /* Más ancho */
+    padding: 2.5rem !important; /* Más espacio interno */
+    transform: scale(1.05); /* Sutil ampliación */
+}
+
+.form-control {
+    height: 3rem; /* Inputs más altos */
+    font-size: 1.1rem;
+}
+
+.btn {
+    height: 3.2rem; /* Botón más grande */
+    font-size: 1.15rem;
+}
+
+h3 {
+    font-size: 2rem; /* Título más grande */
+}
+
+.toggle-password-btn i {
+    font-size: 1.4rem; /* Icono más grande */
+}
+
+.toggle-password-btn { 
+    border: none; 
+    background: transparent; 
+}

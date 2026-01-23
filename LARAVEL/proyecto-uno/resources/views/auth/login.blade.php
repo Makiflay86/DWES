@@ -19,37 +19,7 @@
         <!-- Bootstrap ICON v1.13.1 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-        <style> .toggle-password-btn { border: none; background: transparent; } </style>
-        <style>
-            body {
-                font-size: 1.15rem; /* Aumenta tamaño general del texto */
-            }
-
-            #login-card {
-                max-width: 520px; /* Más ancho */
-                padding: 2.5rem !important; /* Más espacio interno */
-                transform: scale(1.05); /* Sutil ampliación */
-            }
-
-            .form-control {
-                height: 3rem; /* Inputs más altos */
-                font-size: 1.1rem;
-            }
-
-            .btn {
-                height: 3.2rem; /* Botón más grande */
-                font-size: 1.15rem;
-            }
-
-            h3 {
-                font-size: 2rem; /* Título más grande */
-            }
-
-            .toggle-password-btn i {
-                font-size: 1.4rem; /* Icono más grande */
-            }
-        </style>
-
+        <link rel="stylesheet" href="{{ asset('css/style-login.css') }}">
     </head>
 
     <body>
