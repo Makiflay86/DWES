@@ -18,18 +18,50 @@
         />
         <!-- Bootstrap ICON v1.13.1 -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+        <style> .toggle-password-btn { border: none; background: transparent; } </style>
+        <style>
+            body {
+                font-size: 1.15rem; /* Aumenta tamaño general del texto */
+            }
+
+            #login-card {
+                max-width: 520px; /* Más ancho */
+                padding: 2.5rem !important; /* Más espacio interno */
+                transform: scale(1.05); /* Sutil ampliación */
+            }
+
+            .form-control {
+                height: 3rem; /* Inputs más altos */
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                height: 3.2rem; /* Botón más grande */
+                font-size: 1.15rem;
+            }
+
+            h3 {
+                font-size: 2rem; /* Título más grande */
+            }
+
+            .toggle-password-btn i {
+                font-size: 1.4rem; /* Icono más grande */
+            }
+        </style>
+
     </head>
 
     <body>
         
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            <div class="card p-4 shadow" id="login-card">
-                
+            <div class="card p-4 shadow-lg" id="login-card" style="max-width: 420px; width: 100%;">
+
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2 class="m-0">Iniciar Sesión</h2>
+                    <h3 class="mx-auto">Iniciar Sesión</h3>
 
                     <!-- Botón Dark Mode -->
-                    <button class="btn btn-secondary" id="theme-toggle" onclick="toggleTheme()">
+                    <button class="btn btn-outline-secondary" id="theme-toggle" onclick="toggleTheme()">
                         <i class="bi bi-moon-fill" id="theme-icon"></i>
                     </button>
                 </div>
@@ -39,34 +71,38 @@
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo Electrónico</label>
-                        <input type="email" name="email" class="form-control" placeholder="email@email.com">
+                        <input id="email" type="email" name="email" class="form-control" placeholder="email@email.com" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" name="password" class="form-control" placeholder="********">
-                        <button type="button" class="toggle-password" onclick="togglePassword('password', 'toggleIconLogin')">
-                            <i id="toggleIconLogin" class="bi bi-eye-fill"></i>
-                        </button>
+
+                        <div class="input-group">
+                            <input id="password" type="password" name="password" class="form-control" placeholder="********" required>
+
+                            <button type="button" class="toggle-password-btn" onclick="togglePassword()">
+                                <i id="toggleIconLogin" class="bi bi-eye-fill fs-5"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Acceder</button>
                 </form>
 
-                <div class="text-center mt-4" id="link-registro">
-                    <small>
-                        ¿No tienes cuenta? 
-                        <a href="/register">Regístrate aquí</a>
-                    </small>
+                <div class="text-center mt-3">
+                    <small>¿No tienes cuenta? <a href="/register">Regístrate aquí</a></small>
                 </div>
+
             </div>
         </div>
 
         <script>
-            function toggleTheme() {
+            function toggleTheme() 
+            {
                 const body = document.body;
                 const card = document.getElementById('login-card');
                 const icon = document.getElementById('theme-icon');
+                const toggleIconLogin = document.getElementById("toggleIconLogin");
 
                 body.classList.toggle('bg-dark');
                 body.classList.toggle('text-light');
@@ -75,30 +111,28 @@
                 card.classList.toggle('text-light');
                 card.classList.toggle('border-light');
 
-                if (icon.classList.contains('bi-moon-fill')) {
+                toggleIconLogin.classList.toggle("text-light");
+
+                if (icon.classList.contains('bi-moon-fill')) 
+                {
                     icon.classList.replace('bi-moon-fill', 'bi-sun-fill');
-                } else {
+
+                } else 
+                {
                     icon.classList.replace('bi-sun-fill', 'bi-moon-fill');
                 }
             }
 
-            function togglePassword(inputId, iconId) 
+            function togglePassword() 
             {
-                const input = document.getElementById(inputId);
-                const icon = document.getElementById(iconId);
+                const input = document.getElementById('password');
+                const icon = document.getElementById('toggleIconLogin');
 
-                if (input.type === "password") 
-                {
-                    input.type = "text";
-                    icon.classList.remove("bi-eye-fill");
-                    icon.classList.add("bi-eye-slash-fill");
+                const isPassword = input.type === "password";
+                input.type = isPassword ? "text" : "password";
 
-                } else 
-                {
-                    input.type = "password";
-                    icon.classList.remove("bi-eye-slash-fill");
-                    icon.classList.add("bi-eye-fill");
-                }
+                icon.classList.toggle("bi-eye-fill", !isPassword);
+                icon.classList.toggle("bi-eye-slash-fill", isPassword);
             }
         </script>
 
