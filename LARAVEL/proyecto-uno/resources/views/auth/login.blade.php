@@ -23,7 +23,7 @@
     <body>
         
         <div class="container d-flex justify-content-center align-items-center min-vh-100">
-            <div class="card p-5 shadow" id="login-card">
+            <div class="card p-4 shadow" id="login-card">
                 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 class="m-0">Iniciar Sesión</h2>
