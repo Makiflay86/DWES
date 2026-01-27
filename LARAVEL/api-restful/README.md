@@ -12,7 +12,7 @@ Asegúrate de tener instalado lo siguiente:
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 *   **PHP 8.x**
 *   **Laravel Framework**
