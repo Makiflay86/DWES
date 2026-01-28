@@ -12,8 +12,10 @@ Route::get('/user', function (Request $request) {
 
 // Rutas protegidas
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/pokemons', [PokemonController::class, 'index']);    // Listar
-    Route::post('/pokemons', [PokemonController::class, 'store']);   // Guardar
+    Route::get('/pokemons', [PokemonController::class, 'index']);           // Listar
+    Route::post('/pokemons', [PokemonController::class, 'store']);          // Guardar
+    Route::put('/pokemons/{id}', [PokemonController::class, 'update']);     // Actualizar
+    Route::delete('/pokemons/{id}', [PokemonController::class, 'destroy']); // Eliminar
 });
 
 

@@ -74,6 +74,10 @@ El controlador gestiona las peticiones HTTP. Hemos implementado dos métodos cla
 
 * **store()**: Recibe los datos de Postman a través del objeto `$request`, crea el registro en la BD y retorna el nuevo objeto con su ID y un código **201 Created**.
 
+* **update()**: Localiza un Pokémon por su ID mediante `findOrFail()` y actualiza los campos recibidos.
+
+* **destroy(**): Elimina permanentemente el registro tras validar su existencia.
+
 ```php
     public function store(Request $request) {
         $pokemon = Pokemon::create($request->all());
@@ -82,6 +86,17 @@ El controlador gestiona las peticiones HTTP. Hemos implementado dos métodos cla
 
     public function index() {
         return response()->json(Pokemon::all());
+    }
+
+    public function update(Request $request, $id) {
+        $pokemon = Pokemon::findOrFail($id);
+        $pokemon->update($request->all());
+        return response()->json($pokemon, 200);
+    }
+
+    public function destroy($id) {
+        Pokemon::destroy($id);
+        return response()->json(['message' => 'Pokémon eliminado correctamente'], 200);
     }
 ```
 
@@ -93,8 +108,10 @@ En el archivo `routes/api.php`, hemos envuelto nuestras rutas dentro de un grupo
 
 ```php
     Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/pokemons', [PokemonController::class, 'index']);    // Listar
-        Route::post('/pokemons', [PokemonController::class, 'store']);   // Guardar
+        Route::get('/pokemons', [PokemonController::class, 'index']);           // Listar
+        Route::post('/pokemons', [PokemonController::class, 'store']);          // Guardar
+        Route::put('/pokemons/{id}', [PokemonController::class, 'update']);     // Actualizar
+        Route::delete('/pokemons/{id}', [PokemonController::class, 'destroy']); // Eliminar
     });
 ```
 
@@ -175,6 +192,7 @@ Realiza una petición POST a `/api/login` con el email y contraseña. El sistema
 
 ![Captura de Login en Postman](img/obtener-token.png)
 
+
 **Paso 2: Crear un Pokémon (POST)** <br>
 Usa el token obtenido en la pestaña Authorization (Bearer Token) y envía un JSON en el Body con los campos: `name`, `type`, `level`, `hp`, `is_legendary` y `captured`.
 
@@ -182,14 +200,42 @@ Usa el token obtenido en la pestaña Authorization (Bearer Token) y envía un JS
 
 ![Captura de Crear Pokémon](img/crear-pokemon.png)
 
+
 **Paso 3: Listar Pokémon (GET)** <br>
 Realiza una petición GET a `/api/pokemons` con el token activo para ver todos los registros almacenados.
 
-> **Nota:** Recuerda configurar en los **Headers** la `Key: Accept` con `Value: application/json` y en **Authorization** el token. Para mostrar todos los pokémons **no tienes que poner nada en el Body**.
+> **Nota:** Recuerda configurar en los **Headers** la `Key: Accept` con `Value: application/json` y en **Authorization** el token.
 
 ![Captura de Listado de Pokémon](img/todos-los-pokemons.png)
+
 
 **Paso 4: Prueba de Seguridad** <br>
 Si intentas acceder a las rutas sin el token, la API devolverá un error `401 Unauthorized`, confirmando que la protección de Sanctum funciona.
 
 ![Captura de Error de Autenticación](img/sin-token.png)
+
+
+**Paso 5: Modificar un Pokémon (PUT)**
+
+Para actualizar datos, usa el método PUT y añade el ID del Pokémon al final de la URL (ej. `/api/pokemons/1`). En el Body, selecciona raw/JSON y envía los campos a cambiar:
+
+>**Nota**: Es obligatorio incluir el ID en la URL para que el controlador sepa qué registro editar.
+
+```json
+    {
+        "level": 99
+    }
+```
+
+![Captura de Modificación de Pokémon](img/modificar-pokemon.png)
+
+![Captura de Modificación de Pokémon antes y depués](img/modificado-antes-despues.png)
+
+
+**Paso 6: Eliminar un Pokémon (DELETE)**
+
+Usa el método DELETE hacia la URL con el ID (ej. `/api/pokemons/1`). 
+
+> **Nota**: No necesitas enviar nada en el Body, solo el token en Authorization.
+
+![Captura de Eliminación de Pokémon](img/eliminar-pokemon.png)
