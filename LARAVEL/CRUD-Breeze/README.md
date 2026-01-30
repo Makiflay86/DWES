@@ -50,7 +50,7 @@ A continuación se detallan los componentes clave desarrollados para este CRUD:
 1. **Base de Datos** (`database/migrations/`): Se creó la migración para la tabla `videojuegos` definiendo campos como `titulo`, `genero`, `precio`, `stock`, `fecha_lanzamiento` y `en_oferta`.
 
 ![Base de datos](img/bd.png)
-![Estructura de la base de datos](bd-estructura)
+![Estructura de la base de datos](img/bd-estructura.png)
 
 
 2. **Modelos** (`app/Models/Videojuego.php`): Se definió la propiedad `$fillable` para permitir la asignación masiva de datos desde los formularios.
