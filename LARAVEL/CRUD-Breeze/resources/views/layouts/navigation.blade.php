@@ -24,11 +24,25 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('videojuegos.*') ? 'active fw-bold' : '' }}"
-                       href="{{ route('videojuegos.index') }}">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {{ request()->routeIs('videojuegos.*') ? 'active fw-bold' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ __('Videojuegos') }}
                     </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="nav-link dropdown-item {{ request()->routeIs('videojuegos.*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('videojuegos.index') }}">
+                                <i class="bi bi-grid-3x3-gap-fill"></i>{{ __(' Vista Card') }}{{-- Cards --}}
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="nav-link dropdown-item {{ request()->routeIs('videojuegos.*') ? 'active fw-bold' : '' }}"
+                            href="{{ route('videojuegos.index') }}">
+                                <i class="bi bi-table"></i>{{ __(' Vista Table') }}{{-- Tables --}}
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
             </ul>

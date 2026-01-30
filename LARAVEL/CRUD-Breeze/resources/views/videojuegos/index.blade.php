@@ -10,9 +10,12 @@
             <div class="card shadow-sm">
                 <div class="card-body">
 
-                    <a href="{{ route('videojuegos.create') }}" class="btn btn-primary mb-3">
-                        Añadir Juego
-                    </a>
+                    <div class="text-center">
+                        <a href="{{ route('videojuegos.create') }}" class="btn btn-primary mb-3">
+                            <i class="bi bi-controller"></i>
+                            Añadir Juego
+                        </a>
+                    </div>
 
                     <table class="table table-bordered table-striped align-middle">
                         <thead class="table-light">
@@ -32,7 +35,7 @@
                                 <td>{{ $juego->precio }}€</td>
                                 <td>
                                     <a href="{{ route('videojuegos.edit', $juego) }}" class="btn btn-sm btn-success">
-                                        Editar
+                                        <i class="bi bi-pencil-square"></i>
                                     </a>
 
                                     <form action="{{ route('videojuegos.destroy', $juego) }}" 
@@ -42,7 +45,7 @@
                                         @method('DELETE')
 
                                         <button type="submit" class="btn btn-sm btn-danger ms-1">
-                                            Eliminar
+                                            <i class="bi bi-x-square"></i>
                                         </button>
                                     </form>
                                 </td>
