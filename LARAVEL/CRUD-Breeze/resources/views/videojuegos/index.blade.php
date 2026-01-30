@@ -1,41 +1,58 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="fw-semibold fs-4 text-dark">
             {{ __('Lista de Videojuegos') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <a href="{{ route('videojuegos.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">Añadir Juego</a>
-                
-                <table class="min-w-full mt-4">
-                    <thead>
-                        <tr>
-                            <th class="border px-4 py-2">Título</th>
-                            <th class="border px-4 py-2">Género</th>
-                            <th class="border px-4 py-2">Precio</th>
-                            <th class="border px-4 py-2">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($videojuegos as $juego)
-                        <tr>
-                            <td class="border px-4 py-2">{{ $juego->titulo }}</td>
-                            <td class="border px-4 py-2">{{ $juego->genero }}</td>
-                            <td class="border px-4 py-2">{{ $juego->precio }}€</td>
-                            <td class="border px-4 py-2">
-                                <a href="{{ route('videojuegos.edit', $juego) }}" class="text-green-600">Editar</a>
-                                <form action="{{ route('videojuegos.destroy', $juego) }}" method="POST" class="inline">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="text-red-600 ml-2">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+    <div class="py-4">
+        <div class="container">
+            <div class="card shadow-sm">
+                <div class="card-body">
+
+                    <a href="{{ route('videojuegos.create') }}" class="btn btn-primary mb-3">
+                        Añadir Juego
+                    </a>
+
+                    <table class="table table-bordered table-striped align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Título</th>
+                                <th>Género</th>
+                                <th>Precio</th>
+                                <th style="width: 160px;">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach ($videojuegos as $juego)
+                            <tr>
+                                <td>{{ $juego->titulo }}</td>
+                                <td>{{ $juego->genero }}</td>
+                                <td>{{ $juego->precio }}€</td>
+                                <td>
+                                    <a href="{{ route('videojuegos.edit', $juego) }}" class="btn btn-sm btn-success">
+                                        Editar
+                                    </a>
+
+                                    <form action="{{ route('videojuegos.destroy', $juego) }}" 
+                                          method="POST" 
+                                          class="d-inline">
+                                        @csrf 
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn btn-sm btn-danger ms-1">
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+
+                    </table>
+
+                </div>
             </div>
         </div>
     </div>
