@@ -15,7 +15,7 @@ Este proyecto es una aplicación web desarrollada con **Laravel 12** y **Breeze*
    ```bash
         git clone https://github.com/Makiflay86/DWES.git
     ```
-    >**Nota:** Tienes que dirigirte a LARAVEL>CRUD-Breeze donde se encontarar este CRUD.
+    >**Nota:** Tienes que dirigirte a `LARAVEL>CRUD-Breeze` donde se encontarar este CRUD.
 
 2. Instalar dependencias de PHP y JS:
 
