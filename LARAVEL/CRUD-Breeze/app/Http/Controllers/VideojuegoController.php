@@ -41,14 +41,6 @@ class VideojuegoController extends Controller
         return redirect()->route('videojuegos.index')->with('success', 'Juego creado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Videojuego $videojuego)
-    {
-        //
-    }
-
     public function edit(Videojuego $videojuego) 
     {
         return view('videojuegos.edit', compact('videojuego'));
