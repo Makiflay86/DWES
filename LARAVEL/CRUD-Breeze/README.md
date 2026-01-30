@@ -13,7 +13,7 @@ Este proyecto es una aplicación web desarrollada con **Laravel 12** y **Breeze*
 
 1. Clonar el repositorio:
    ```bash
-        git clone [URL_DE_TU_REPOSITORIO]
+        git clone https://github.com/Makiflay86/DWES.git
     ```
 
 2. Instalar dependencias de PHP y JS:
@@ -49,6 +49,7 @@ A continuación se detallan los componentes clave desarrollados para este CRUD:
 1. **Base de Datos** (`database/migrations/`): Se creó la migración para la tabla `videojuegos` definiendo campos como `titulo`, `genero`, `precio`, `stock`, `fecha_lanzamiento` y `en_oferta`.
 
 ![Base de datos](img/bd.png)
+![Estructura de la base de datos](bd-estructura)
 
 
 2. **Modelos** (`app/Models/Videojuego.php`): Se definió la propiedad `$fillable` para permitir la asignación masiva de datos desde los formularios.
