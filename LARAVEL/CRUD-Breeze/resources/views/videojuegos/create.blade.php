@@ -46,9 +46,14 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
-                            Guardar Videojuego
-                        </button>
+                        <div class="d-flex align-items-center gap-3 pt-3 border-top">
+                            <button type="submit" class="btn btn-primary">
+                                Guardar Videojuego
+                            </button>
+                            <a href="{{ route('videojuegos.index') }}" class="btn btn-danger">
+                                Cancelar
+                            </a>
+                        </div>
 
                     </form>
 

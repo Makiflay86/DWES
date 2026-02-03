@@ -54,8 +54,8 @@
                                 Actualizar Datos
                             </button>
 
-                            <a href="{{ route('videojuegos.index') }}" class="text-muted">
-                                Cancelar y volver
+                            <a href="{{ route('videojuegos.index') }}" class="btn btn-danger">
+                                Cancelar
                             </a>
                         </div>
 
