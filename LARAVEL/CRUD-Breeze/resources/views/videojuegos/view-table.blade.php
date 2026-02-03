@@ -13,9 +13,9 @@
         <tr>
             <td>{{ $juego->titulo }}</td>
             <td>{{ $juego->genero }}</td>
-            <td>{{ $juego->precio }}€</td>
+            <td>{{ $juego->precio == 0 ? 'Gratis' : number_format($juego->precio, 2, ',', '.') . " €" }}</td>
             <td>
-                <a href="{{ route('videojuegos.edit', $juego) }}" class="btn btn-sm btn-success">
+                <a href="{{ route('videojuegos.edit', ['videojuego' => $juego->id, 'vista' => $vista]) }}" class="btn btn-sm btn-success">
                     <i class="bi bi-pencil-square"></i>
                 </a>
 

@@ -14,6 +14,8 @@
                         @csrf
                         @method('PUT')
 
+                        <input type="hidden" name="vista" value="{{ $vista }}">
+
                         <div class="mb-3">
                             <label class="form-label">Título</label>
                             <input type="text" name="titulo" value="{{ $videojuego->titulo }}" class="form-control" required>
@@ -54,7 +56,7 @@
                                 Actualizar Datos
                             </button>
 
-                            <a href="{{ route('videojuegos.index') }}" class="btn btn-danger">
+                            <a href="{{ route('videojuegos.index', [ 'vista' => $vista]) }}" class="btn btn-danger">
                                 Cancelar
                             </a>
                         </div>

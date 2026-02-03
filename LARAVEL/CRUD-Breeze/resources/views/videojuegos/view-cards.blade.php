@@ -8,11 +8,11 @@
                     <h5 class="card-title">{{ $juego->titulo }}</h5>
                     <p class="card-text text-muted small">
                         <span class="badge bg-light text-dark border">{{ $juego->genero }}</span>
-                        <span class="ms-2">{{ $juego->precio }} €</span>
+                        <span class="ms-2">{{ $juego->precio == 0 ? 'Gratis' : number_format($juego->precio, 2, ',', '.') . " €" }}</span>
                     </p>
                 </div>
                 <div class="card-footer bg-white border-0 d-flex justify-content-between pb-3">
-                    <a href="{{ route('videojuegos.edit', $juego) }}" class="btn btn-sm btn-success">
+                    <a href="{{ route('videojuegos.edit', ['videojuego' => $juego->id, 'vista' => $vista]) }}" class="btn btn-sm btn-success">
                         Editar
                     </a>
 

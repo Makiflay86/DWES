@@ -19,11 +19,12 @@ class VideojuegoController extends Controller
     }
 
 
-    public function create()
+    public function create(Request $request)
     {
-        // Retornamos la vista del formulario de creación
-        return view('videojuegos.create');
+        $vista = $request->get('vista', 'tabla');
+        return view('videojuegos.create', compact('vista'));
     }
+
 
     public function store(Request $request)
     {
@@ -40,13 +41,15 @@ class VideojuegoController extends Controller
         Videojuego::create($request->all());
 
         // Redirigimos al listado con un mensaje de éxito
-        return redirect()->route('videojuegos.index')->with('success', 'Juego creado correctamente');
+        return redirect()->route('videojuegos.index', ['vista' => $request->vista])->with('success', 'Juego creado correctamente');
     }
 
-    public function edit(Videojuego $videojuego) 
+    public function edit(Request $request, Videojuego $videojuego)
     {
-        return view('videojuegos.edit', compact('videojuego'));
+        $vista = $request->get('vista', 'tabla');
+        return view('videojuegos.edit', compact('videojuego', 'vista'));
     }
+
 
     public function update(Request $request, Videojuego $videojuego) 
     {
@@ -55,12 +58,12 @@ class VideojuegoController extends Controller
             'stock' => 'required|integer', 'fecha_lanzamiento' => 'required|date'
         ]);
         $videojuego->update($request->all());
-        return redirect()->route('videojuegos.index')->with('success', 'Actualizado con éxito');
+        return redirect()->route('videojuegos.index', ['vista' => $request->vista])->with('success', 'Actualizado con éxito');
     }
 
-    public function destroy(Videojuego $videojuego) 
+    public function destroy(Request $request, Videojuego $videojuego) 
     {
         $videojuego->delete();
-        return redirect()->route('videojuegos.index')->with('success', 'Eliminado correctamente');
+        return redirect()->route('videojuegos.index', ['vista' => $request->vista])->with('success', 'Eliminado correctamente');
     }
 }

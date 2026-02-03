@@ -11,7 +11,7 @@
                 <div class="card-body">
 
                     <div class="text-center">
-                        <a href="{{ route('videojuegos.create') }}" class="btn btn-primary mb-3">
+                        <a href="{{ route('videojuegos.create', ['vista' => $vista]) }}" class="btn btn-primary mb-3">
                             <i class="bi bi-controller"></i>
                             Añadir Juego
                         </a>
