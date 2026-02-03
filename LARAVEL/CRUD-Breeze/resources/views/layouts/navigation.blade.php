@@ -1,49 +1,45 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
-    <div class="container">
+<nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow">
+    <div class="container-fluid px-lg-5"> 
+        
 
-        <!-- Logo -->
+
+        {{-- Logo --}}
         <a class="navbar-brand d-flex align-items-center" href="{{ route('dashboard') }}">
             <img src="{{ asset('img/logo.jpg') }}" alt="logo" width="64" height="auto">
         </a>
 
-        <!-- Hamburger -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+
+
+        {{-- Menú --}}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Menu -->
-        <div class="collapse navbar-collapse" id="navbarMain">
 
-            <!-- Left Side -->
-            <ul class="navbar-nav me-auto">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {{ request()->routeIs('videojuegos.*') ? 'active fw-bold' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ __('Videojuegos') }}
+        {{-- Vistas videojuegos --}}
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav ms-auto gap-2 py-2 py-lg-0">
+                <li>
+                    <a class="nav-link dropdown-item {{ request('vista') === 'cards' ? 'active fw-bold' : '' }}"
+                        href="{{ route('videojuegos.index', ['vista' => 'cards']) }}">
+                        <i class="bi bi-grid"></i> Vista Cards
                     </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="nav-link dropdown-item {{ request('vista') === 'cards' ? 'active fw-bold' : '' }}"
-                                href="{{ route('videojuegos.index', ['vista' => 'cards']) }}">
-                                <i class="bi bi-grid"></i> Vista Cards
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="nav-link dropdown-item {{ request('vista') === 'tabla' ? 'active fw-bold' : '' }}"
-                                href="{{ route('videojuegos.index', ['vista' => 'tabla']) }}">
-                                <i class="bi bi-table"></i> Vista Tabla
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
-            </ul>
+                <li>
+                    <a class="nav-link dropdown-item {{ request('vista') === 'tabla' ? 'active fw-bold' : '' }}"
+                        href="{{ route('videojuegos.index', ['vista' => 'tabla']) }}">
+                        <i class="bi bi-table"></i> Vista Tabla
+                    </a>
+                </li>
+            </div>
 
-            <!-- Right Side -->
-            <ul class="navbar-nav ms-auto">
 
-                <!-- User Dropdown -->
+
+            {{-- Usuario --}}
+            <div class="d-flex align-items-center ms-lg-3 py-2 py-lg-0">
+                <i class="bi bi-person-circle me-1"></i>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle"
                        href="#" id="userDropdown" role="button"
@@ -52,7 +48,7 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-
+                        
                         <li>
                             <a class="dropdown-item" href="{{ route('profile.edit') }}">
                                 {{ __('Profile') }}
@@ -73,9 +69,8 @@
 
                     </ul>
                 </li>
-
-            </ul>
-
+            </div>
         </div>
+
     </div>
 </nav>
