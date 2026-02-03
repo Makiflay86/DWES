@@ -3,7 +3,7 @@
 
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('dashboard') }}">
-            <x-application-logo class="h-9 w-auto text-dark" />
+            <img src="{{ asset('img/logo.jpg') }}" alt="logo" width="64" height="auto">
         </a>
 
         <!-- Hamburger -->
@@ -16,13 +16,6 @@
 
             <!-- Left Side -->
             <ul class="navbar-nav me-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active fw-bold' : '' }}"
-                       href="{{ route('dashboard') }}">
-                        {{ __('Dashboard') }}
-                    </a>
-                </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ request()->routeIs('videojuegos.*') ? 'active fw-bold' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -71,7 +64,7 @@
                         <li>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button class="dropdown-item"
+                                <button class="dropdown-item text-danger"
                                         onclick="event.preventDefault(); this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </button>
