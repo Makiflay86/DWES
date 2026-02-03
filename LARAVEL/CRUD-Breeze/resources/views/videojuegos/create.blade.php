@@ -8,7 +8,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
 
-                    <form action="{{ route('videojuegos.store') }}" method="POST">
+                    <form action="{{ route('videojuegos.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <input type="hidden" name="vista" value="{{ $vista }}">
@@ -46,6 +46,10 @@
                                 <option value="0">No</option>
                                 <option value="1">Sí</option>
                             </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="file" name="imagen" class="form-control">
                         </div>
 
                         <div class="d-flex align-items-center gap-3 pt-3 border-top">

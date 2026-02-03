@@ -10,7 +10,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
 
-                    <form action="{{ route('videojuegos.update', $videojuego) }}" method="POST">
+                    <form action="{{ route('videojuegos.update', $videojuego) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -50,6 +50,26 @@
                                 <option value="1" {{ $videojuego->en_oferta == 1 ? 'selected' : '' }}>Sí</option>
                             </select>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Imagen actual</label><br>
+
+                            @if ($videojuego->imagen)
+                                <img src="{{ asset('storage/' . $videojuego->imagen) }}" 
+                                    alt="Imagen de {{ $videojuego->titulo }}" 
+                                    class="img-thumbnail mb-2" 
+                                    style="max-width: 200px;">
+                            @else
+                                <p class="text-muted">No hay imagen subida</p>
+                            @endif
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Subir nueva imagen</label>
+                            <input type="file" name="imagen" class="form-control">
+                        </div>
+
+
 
                         <div class="d-flex align-items-center gap-3 pt-3 border-top">
                             <button type="submit" class="btn btn-primary">

@@ -13,6 +13,7 @@ class Videojuego extends Model
             'precio', 
             'stock', 
             'fecha_lanzamiento', 
-            'en_oferta'
+            'en_oferta',
+            'imagen'
         ];
 }
