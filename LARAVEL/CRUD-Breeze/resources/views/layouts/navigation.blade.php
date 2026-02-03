@@ -1,22 +1,13 @@
 <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light bg-light mb-4 shadow">
     <div class="container-fluid px-lg-5"> 
-        
-
-
         {{-- Logo --}}
         <a class="navbar-brand d-flex align-items-center" href="{{ route('dashboard') }}">
             <img src="{{ asset('img/logo.jpg') }}" alt="logo" width="64" height="auto">
         </a>
-
-
-
         {{-- Menú --}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-
-
         {{-- Vistas videojuegos --}}
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav ms-auto gap-2 py-2 py-lg-0">
@@ -34,9 +25,6 @@
                     </a>
                 </li>
             </div>
-
-
-
             {{-- Usuario --}}
             <div class="d-flex align-items-center ms-lg-3 py-2 py-lg-0">
                 <i class="bi bi-person-circle me-1"></i>

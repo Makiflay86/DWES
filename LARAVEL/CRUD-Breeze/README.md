@@ -50,6 +50,7 @@ A continuación se detallan los componentes clave desarrollados para este CRUD:
 1. **Base de Datos** (`database/migrations/`): Se creó la migración para la tabla `videojuegos` definiendo campos como `titulo`, `genero`, `precio`, `stock`, `fecha_lanzamiento` y `en_oferta`.
 
 ![Base de datos](img/bd.png)
+![Base de datos + imágenes](img/bd-imagen.png)
 ![Estructura de la base de datos](img/bd-estructura.png)
 
 
@@ -74,7 +75,13 @@ A continuación se detallan los componentes clave desarrollados para este CRUD:
 * `index.blade.php`: Tabla dinámica con acciones de gestión.
 
     ![index.blade.php](img/index.blade.php.png)
-    ![index](img/index.png)
+
+* `view-cards.blade.php` y `view-table.blade.php`: Las vistas en modo card y en modo tabla
+    ![view-cards.blade.php](img/view-cards.blade.php.png)
+    ![view-cards](img/view-cards.png)
+    ![view-table.blade.php](img/view-table.blade.php.png)
+    ![view-table](img/view-table.png)
+
 
 
 * `create.blade.php` y `edit.blade.php`: Formularios integrados con los componentes de diseño de Breeze.
