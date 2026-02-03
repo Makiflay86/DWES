@@ -22,6 +22,8 @@
                         @csrf 
                         @method('DELETE')
 
+                        <input type="hidden" name="vista" value="{{ $vista }}">
+
                         <button type="submit" class="btn btn-sm btn-danger ms-1">
                             Eliminar
                         </button>
