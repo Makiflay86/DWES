@@ -30,16 +30,16 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="nav-link dropdown-item {{ request()->routeIs('videojuegos.*') ? 'active fw-bold' : '' }}"
-                            href="{{ route('videojuegos.index') }}">
-                                <i class="bi bi-grid-3x3-gap-fill"></i>{{ __(' Vista Card') }}{{-- Cards --}}
+                            <a class="nav-link dropdown-item {{ request('vista') === 'cards' ? 'active fw-bold' : '' }}"
+                                href="{{ route('videojuegos.index', ['vista' => 'cards']) }}">
+                                <i class="bi bi-grid"></i> Vista Cards
                             </a>
                         </li>
 
                         <li>
-                            <a class="nav-link dropdown-item {{ request()->routeIs('videojuegos.*') ? 'active fw-bold' : '' }}"
-                            href="{{ route('videojuegos.index') }}">
-                                <i class="bi bi-table"></i>{{ __(' Vista Table') }}{{-- Tables --}}
+                            <a class="nav-link dropdown-item {{ request('vista') === 'tabla' ? 'active fw-bold' : '' }}"
+                                href="{{ route('videojuegos.index', ['vista' => 'tabla']) }}">
+                                <i class="bi bi-table"></i> Vista Tabla
                             </a>
                         </li>
                     </ul>

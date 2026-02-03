@@ -9,13 +9,15 @@ use Illuminate\Http\Request;
 
 class VideojuegoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Recuperamos todos los videojuegos de la BD
+        $vista = $request->get('vista', 'tabla');
+
         $videojuegos = Videojuego::all();
-        // Enviamos los datos a la vista index.blade.php
-        return view('videojuegos.index', compact('videojuegos'));
+
+        return view('videojuegos.index', compact('videojuegos', 'vista'));
     }
+
 
     public function create()
     {
